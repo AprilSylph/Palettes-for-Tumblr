@@ -30,5 +30,16 @@
   },
   "dependencies": {
     "webextension-polyfill": "^0.6.0"
+  },
+  "webExt": {
+    "ignoreFiles": [
+      "dev/",
+      ".*",
+      "package*.json",
+      "*.md"
+    ],
+    "build": {
+      "overwriteDest": true
+    }
   }
 }
