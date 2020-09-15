@@ -1,0 +1,21 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "webextensions": true
+  },
+  "extends": [
+    "standard"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 12
+  },
+  "rules": {
+    "comma-dangle": [ "error", "always-multiline" ],
+    "indent": [ "error", 2, { "SwitchCase": 1, "MemberExpression": "off" } ],
+    "semi": [ "error", "always" ]
+  },
+  "ignorePatterns": [
+    "lib/"
+  ]
+}
