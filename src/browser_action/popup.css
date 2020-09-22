@@ -1,4 +1,7 @@
 body {
+  font-size: 100%;
+  -webkit-user-select: none;
+  user-select: none;
   margin: 0;
   padding: 1ch;
 }
@@ -7,6 +10,12 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 label + * {

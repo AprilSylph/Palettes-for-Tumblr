@@ -1,12 +1,13 @@
 {
 	"manifest_version": 2,
 	"name": "Palettes for Tumblr",
-	"version": "0.0.2",
+	"version": "0.0.3",
 
 	"description": "Colour scheme manager for Tumblr",
 	"icons": {},
 
 	"browser_action": {
+    "browser_style": true,
 		"default_popup": "src/browser_action/popup.html"
 	},
 
