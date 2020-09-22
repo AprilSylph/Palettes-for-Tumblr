@@ -1,2 +1,2 @@
-# Tumblr-Palettes
-Create your own colour scheme for Tumblr! (WIP)
+# Palettes for Tumblr
+Colour scheme manager for Tumblr. Work-in-progress.

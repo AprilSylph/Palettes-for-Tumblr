@@ -1,8 +1,8 @@
 {
-  "name": "tumblr-palettes",
+  "name": "palettes-for-tumblr",
   "version": "0.0.1",
-  "description": "Custom colour scheme manager for Tumblr",
-  "main": "src/main.js",
+  "description": "Colour scheme manager for Tumblr",
+  "browser": "src/main.js",
   "scripts": {
     "test": "eslint . && web-ext lint"
   },
