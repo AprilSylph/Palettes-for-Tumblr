@@ -1,6 +1,6 @@
 {
   "name": "palettes-for-tumblr",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Colour scheme manager for Tumblr",
   "browser": "src/main.js",
   "scripts": {
