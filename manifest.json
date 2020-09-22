@@ -1,0 +1,32 @@
+{
+	"manifest_version": 2,
+	"name": "Palettes for Tumblr",
+	"version": "0.0.1",
+
+	"description": "Advanced colour scheme manager for Tumblr",
+	"icons": {},
+
+	"page_action": {
+    "show_matches": [ "*://www.tumblr.com/*" ],
+		"default_popup": "src/page_action/popup.html"
+	},
+
+  "content_scripts": [
+    {
+      "matches": [ "*://www.tumblr.com/*" ],
+      "run_at": "document_idle",
+      "js": [
+        "lib/browser-polyfill.min.js",
+        "src/main.js"
+      ]
+    }
+  ],
+	"homepage_url": "https://github.com/AprilSylph/Tumblr-Palettes",
+  "permissions": [ "storage" ],
+	"minimum_chrome_version": "38",
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "51.0a2"
+    }
+  }
+}

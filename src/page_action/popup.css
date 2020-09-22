@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 1ch;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+label + * {
+  margin-left: 1ch;
+}
