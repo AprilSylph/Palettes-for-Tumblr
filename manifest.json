@@ -14,7 +14,7 @@
   "content_scripts": [
     {
       "matches": [ "*://www.tumblr.com/*" ],
-      "run_at": "document_idle",
+      "run_at": "document_end",
       "js": [
         "lib/browser-polyfill.min.js",
         "src/main.js"
@@ -23,10 +23,12 @@
   ],
 	"homepage_url": "https://github.com/AprilSylph/Tumblr-Palettes",
   "permissions": [ "storage" ],
+  "web_accessible_resources": [ "src/palettes.json", "src/stylesheets/*.css" ],
+
 	"minimum_chrome_version": "38",
   "browser_specific_settings": {
     "gecko": {
-      "strict_min_version": "51.0a2"
+      "strict_min_version": "59.0a2"
     }
   }
 }
