@@ -18,6 +18,10 @@ li {
   align-items: center;
 }
 
+label {
+  white-space: nowrap;
+}
+
 label + * {
   margin-left: 1ch;
 }
