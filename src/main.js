@@ -67,6 +67,8 @@ const onStorageChanged = async function (changes, areaName) {
   }
 };
 
-hideChangePaletteButton();
-applyCurrentPalette();
-browser.storage.onChanged.addListener(onStorageChanged);
+if ([...document.scripts].some(({ src }) => src.match('/pop/'))) {
+  hideChangePaletteButton();
+  applyCurrentPalette();
+  browser.storage.onChanged.addListener(onStorageChanged);
+}
