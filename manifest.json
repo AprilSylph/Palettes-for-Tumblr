@@ -1,13 +1,20 @@
 {
 	"manifest_version": 2,
 	"name": "Palettes for Tumblr",
-	"version": "0.0.3",
+	"version": "0.0.4",
 
 	"description": "Colour scheme manager for Tumblr",
-	"icons": {},
+	"icons": {
+    "48": "img/icon/48.png",
+    "128": "img/icon/128.png"
+  },
 
 	"browser_action": {
     "browser_style": true,
+    "default_icon": {
+      "48": "img/icon/48.png",
+      "128": "img/icon/128.png"
+    },
 		"default_popup": "src/browser_action/popup.html"
 	},
 
