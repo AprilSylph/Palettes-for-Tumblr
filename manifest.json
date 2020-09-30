@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Palettes for Tumblr",
-	"version": "0.0.5",
+	"version": "0.0.6",
 
 	"description": "Colour scheme manager for Tumblr",
 	"icons": {
@@ -32,7 +32,7 @@
     }
   ],
 	"homepage_url": "https://github.com/AprilSylph/Tumblr-Palettes",
-  "permissions": [ "storage" ],
+  "permissions": [ "storage", "*://www.tumblr.com/*" ],
   "web_accessible_resources": [ "src/palettes.json", "src/stylesheets/*.css" ],
 
 	"minimum_chrome_version": "38",
