@@ -50,12 +50,27 @@ const applyCurrentPalette = async function () {
   }
 };
 
+const applyFontFamily = async function () {
+  const { fontFamily } = await browser.storage.local.get('fontFamily');
+
+  if (!fontFamily) {
+    return;
+  }
+
+  const style = Object.assign(document.createElement('style'), {
+    id: 'pft-font-family',
+    textContent: `:root { --font-family: ${fontFamily} !important; }`,
+  });
+
+  document.documentElement.appendChild(style);
+};
+
 const onStorageChanged = async function (changes, areaName) {
   if (areaName !== 'local') {
     return;
   }
 
-  const { currentPalette } = changes;
+  const { currentPalette, fontFamily } = changes;
 
   if (currentPalette) {
     const previousAppliedPalette = document.getElementById('palettes-for-tumblr');
@@ -65,10 +80,20 @@ const onStorageChanged = async function (changes, areaName) {
       previousAppliedPalette.parentNode.removeChild(previousAppliedPalette);
     }
   }
+
+  if (fontFamily) {
+    const previousAppliedFontFamily = document.getElementById('pft-font-family');
+    await applyFontFamily();
+
+    if (previousAppliedFontFamily !== null) {
+      previousAppliedFontFamily.parentNode.removeChild(previousAppliedFontFamily);
+    }
+  }
 };
 
 if ([...document.scripts].some(({ src }) => src.match('/pop/'))) {
   hideChangePaletteButton();
   applyCurrentPalette();
+  applyFontFamily();
   browser.storage.onChanged.addListener(onStorageChanged);
 }

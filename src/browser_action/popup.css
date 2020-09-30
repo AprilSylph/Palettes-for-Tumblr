@@ -3,7 +3,7 @@ body {
   -webkit-user-select: none;
   user-select: none;
   margin: 0;
-  padding: 1ch;
+  padding: 0;
 }
 
 ul {
@@ -15,7 +15,13 @@ ul {
 li {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  padding: 1ch;
+}
+
+li + li {
+  border-top: 1px dotted #444;
 }
 
 label {

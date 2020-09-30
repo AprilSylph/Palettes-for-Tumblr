@@ -39,6 +39,4 @@
   --gray-25: rgba(var(--rgb-black), 0.25);
   --gray-13: rgba(var(--rgb-black), 0.13);
   --gray-7: rgba(var(--rgb-black), 0.07);
-
-  --font-family: "Favorit", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   }
