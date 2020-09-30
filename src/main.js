@@ -65,12 +65,27 @@ const applyFontFamily = async function () {
   document.documentElement.appendChild(style);
 };
 
+const applyFontSize = async function () {
+  const { fontSize } = await browser.storage.local.get('fontSize');
+
+  if (!fontSize) {
+    return;
+  }
+
+  const style = Object.assign(document.createElement('style'), {
+    id: 'pft-font-size',
+    textContent: `:root { --base-font-size: ${fontSize} !important; }`,
+  });
+
+  document.documentElement.appendChild(style);
+};
+
 const onStorageChanged = async function (changes, areaName) {
   if (areaName !== 'local') {
     return;
   }
 
-  const { currentPalette, fontFamily } = changes;
+  const { currentPalette, fontFamily, fontSize } = changes;
 
   if (currentPalette) {
     const previousAppliedPalette = document.getElementById('palettes-for-tumblr');
@@ -89,11 +104,21 @@ const onStorageChanged = async function (changes, areaName) {
       previousAppliedFontFamily.parentNode.removeChild(previousAppliedFontFamily);
     }
   }
+
+  if (fontSize) {
+    const previousAppliedFontSize = document.getElementById('pft-font-size');
+    await applyFontSize();
+
+    if (previousAppliedFontSize !== null) {
+      previousAppliedFontSize.parentNode.removeChild(previousAppliedFontSize);
+    }
+  }
 };
 
 if ([...document.scripts].some(({ src }) => src.match('/pop/'))) {
   hideChangePaletteButton();
   applyCurrentPalette();
   applyFontFamily();
+  applyFontSize();
   browser.storage.onChanged.addListener(onStorageChanged);
 }
