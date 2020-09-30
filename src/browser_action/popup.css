@@ -31,3 +31,8 @@ label {
 label + * {
   margin-left: 1ch;
 }
+
+a {
+  font-weight: bold;
+  text-decoration: none;
+}
