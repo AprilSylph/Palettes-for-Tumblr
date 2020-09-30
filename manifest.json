@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Palettes for Tumblr",
-	"version": "0.0.4",
+	"version": "0.0.5",
 
 	"description": "Colour scheme manager for Tumblr",
 	"icons": {
@@ -25,6 +25,9 @@
       "js": [
         "lib/browser-polyfill.min.js",
         "src/main.js"
+      ],
+      "css": [
+        "src/peepr_shadow.css"
       ]
     }
   ],

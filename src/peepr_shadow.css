@@ -1,0 +1,8 @@
+#glass-container button span[style="background-color: rgba(0, 25, 53, 0.95);"],
+#glass-container button span[style="background-color: rgba(0, 0, 0, 0.95);"],
+#glass-container button span[style="background-color: rgba(26, 39, 53, 0.95);"],
+#glass-container button span[style="background-color: rgba(247, 247, 247, 0.95);"],
+#glass-container button span[style="background-color: rgba(255, 255, 232, 0.95);"] {
+  background-color: var(--navy) !important;
+  opacity: 0.95;
+}
