@@ -8,7 +8,7 @@ A colour scheme manager for Tumblr!
 - Change the base font size used by Tumblr
 
 ## Installation
-Coming soon!
+- For Firefox: [Palettes for Tumblr on addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/palettes-for-tumblr/)
 
 ## Usage
 Once you've installed the addon, click the addon icon to open its configuration. The addon can be configured from any page, but will only affect [www.tumblr.com](https://www.tumblr.com/).
