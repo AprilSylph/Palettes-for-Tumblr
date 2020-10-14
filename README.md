@@ -13,12 +13,7 @@ A colour scheme manager for Tumblr!
 ## Usage
 Once you've installed the addon, click the addon icon to open its configuration. The addon can be configured from any page, but will only affect [www.tumblr.com](https://www.tumblr.com/).
 
-This addon only affects pages updated to use [Tumblr's new web interface](https://tumblr.zendesk.com/hc/articles/360045642454). Right now, this means these Tumblr pages won't be affected:
-- Explore
-- Inbox
-- Following
-- Followers
-- Settings
+This addon only affects pages updated to use [Tumblr's new web interface](https://tumblr.zendesk.com/hc/articles/360045642454). This means Tumblr pages that do not usually offer the "Change Palette" button will not be affected.
 
 #### Change Palette
 This dropdown allows you to override Tumblr's colour scheme. You can choose a palette provided by Tumblr, or a palette provided by the addon.
