@@ -1,21 +1,21 @@
 {
 	"manifest_version": 2,
 	"name": "Palettes for Tumblr",
-	"version": "0.0.6",
+	"version": "0.1.0",
 
 	"description": "Colour scheme manager for Tumblr",
 	"icons": {
-    "48": "img/icon/48.png",
-    "128": "img/icon/128.png"
+    "48": "icons/48.png",
+    "128": "icons/128.png"
   },
 
 	"browser_action": {
     "browser_style": true,
     "default_icon": {
-      "48": "img/icon/48.png",
-      "128": "img/icon/128.png"
+      "48": "icons/48.png",
+      "128": "icons/128.png"
     },
-		"default_popup": "src/browser_action/popup.html"
+		"default_popup": "browser_action/popup.html"
 	},
 
   "content_scripts": [
@@ -24,16 +24,16 @@
       "run_at": "document_end",
       "js": [
         "lib/browser-polyfill.min.js",
-        "src/main.js"
+        "main.js"
       ],
       "css": [
-        "src/peepr_shadow.css"
+        "peepr_shadow.css"
       ]
     }
   ],
 	"homepage_url": "https://github.com/AprilSylph/Tumblr-Palettes",
   "permissions": [ "storage", "*://www.tumblr.com/*" ],
-  "web_accessible_resources": [ "src/palettes.json", "src/stylesheets/*.css" ],
+  "web_accessible_resources": [ "palettes.json", "stylesheets/*.css" ],
 
 	"minimum_chrome_version": "38",
   "browser_specific_settings": {

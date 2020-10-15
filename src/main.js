@@ -16,7 +16,7 @@ const hideChangePaletteButton = function () {
 };
 
 const getProvidedPalettes = async function () {
-  const url = browser.runtime.getURL('/src/palettes.json');
+  const url = browser.runtime.getURL('/palettes.json');
   const file = await fetch(url);
   const data = await file.json();
 
@@ -43,7 +43,7 @@ const applyCurrentPalette = async function () {
     const stylesheet = Object.assign(document.createElement('link'), {
       id: 'palettes-for-tumblr',
       rel: 'stylesheet',
-      href: browser.runtime.getURL(`/src/stylesheets/${currentPalette}.css`),
+      href: browser.runtime.getURL(`/stylesheets/${currentPalette}.css`),
     });
 
     document.documentElement.appendChild(stylesheet);

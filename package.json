@@ -1,6 +1,6 @@
 {
   "name": "palettes-for-tumblr",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Colour scheme manager for Tumblr",
   "browser": "src/main.js",
   "scripts": {
@@ -33,12 +33,7 @@
     "webextension-polyfill": "^0.6.0"
   },
   "webExt": {
-    "ignoreFiles": [
-      "dev/",
-      ".*",
-      "package*.json",
-      "*.md"
-    ],
+    "sourceDir": "src/",
     "build": {
       "overwriteDest": true
     }

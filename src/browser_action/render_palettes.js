@@ -1,5 +1,5 @@
 const getInstalledPalettes = async function () {
-  const url = browser.runtime.getURL('/src/palettes.json');
+  const url = browser.runtime.getURL('/palettes.json');
   const file = await fetch(url);
   const data = await file.json();
 
