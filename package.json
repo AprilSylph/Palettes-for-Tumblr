@@ -1,25 +1,9 @@
 {
-  "name": "palettes-for-tumblr",
-  "version": "0.1.1",
-  "description": "Colour scheme manager for Tumblr",
-  "browser": "src/main.js",
+  "license": "GPL-3.0",
+  "repository": "github:AprilSylph/Palettes-for-Tumblr",
   "scripts": {
     "test": "eslint . && web-ext lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AprilSylph/Tumblr-Palettes.git"
-  },
-  "keywords": [
-    "tumblr"
-  ],
-  "author": "April Sylph <april@sylph.tech> (https://april.tumblr.com/)",
-  "license": "GPL-3.0",
-  "private": true,
-  "bugs": {
-    "url": "https://github.com/AprilSylph/Tumblr-Palettes/issues"
-  },
-  "homepage": "https://github.com/AprilSylph/Tumblr-Palettes#readme",
   "devDependencies": {
     "eslint": "^7.13.0",
     "eslint-config-standard": "^16.0.1",
