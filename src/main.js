@@ -1,8 +1,12 @@
 const hideChangePaletteButton = function () {
+  if (document.getElementById('pft-hide-change-palette') !== null) {
+    return;
+  }
+
   const toRunInPageContext = function () {
     const changePaletteLabel = window.tumblr.languageData.translations['Change Palette'] || 'Change Palette';
     const textContent = `button[aria-label="${changePaletteLabel}"] { display: none !important; }`;
-    const style = Object.assign(document.createElement('style'), { textContent });
+    const style = Object.assign(document.createElement('style'), { textContent, id: 'pft-hide-change-palette' });
     document.documentElement.appendChild(style);
   };
 
@@ -15,6 +19,13 @@ const hideChangePaletteButton = function () {
   document.documentElement.removeChild(script);
 };
 
+const showChangePaletteButton = function () {
+  const style = document.getElementById('pft-hide-change-palette');
+  if (style && style.parentNode) {
+    style.parentNode.removeChild(style);
+  }
+};
+
 const getProvidedPalettes = async function () {
   const url = browser.runtime.getURL('/palettes.json');
   const file = await fetch(url);
@@ -24,13 +35,14 @@ const getProvidedPalettes = async function () {
 };
 
 const applyCurrentPalette = async function () {
-  const { currentPalette } = await browser.storage.local.get('currentPalette');
-  const tumblrSelectedPalette = getComputedStyle(document.documentElement).getPropertyValue('--palette').trim();
+  const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
 
   if (!currentPalette) {
-    browser.storage.local.set({ currentPalette: tumblrSelectedPalette });
+    showChangePaletteButton();
     return;
   }
+
+  hideChangePaletteButton();
 
   const providedPalettes = await getProvidedPalettes();
   const providedPalettesList = [];
@@ -116,7 +128,6 @@ const onStorageChanged = async function (changes, areaName) {
 };
 
 if ([...document.scripts].some(({ src }) => src.match('/pop/'))) {
-  hideChangePaletteButton();
   applyCurrentPalette();
   applyFontFamily();
   applyFontSize();
