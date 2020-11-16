@@ -1,27 +1,30 @@
 body {
   font-size: 100%;
+  line-height: 1.5;
   -webkit-user-select: none;
   user-select: none;
   margin: 0;
   padding: 0;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
-li {
+main > div {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   padding: 1ch;
 }
 
-li + li {
+main > div + div {
   border-top: 1px dotted #444;
+}
+
+h4 {
+  margin: 0;
 }
 
 label {
@@ -29,10 +32,10 @@ label {
 }
 
 label + * {
-  margin-left: 1ch;
+  margin-top: 0.5ch;
 }
 
-a {
-  font-weight: bold;
-  text-decoration: none;
+ul {
+  margin: 0;
+  padding-left: 20px;
 }

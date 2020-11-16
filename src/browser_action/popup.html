@@ -2,49 +2,50 @@
   <head>
     <meta charset="utf-8">
     <title>Palettes for Tumblr</title>
+    <link rel="stylesheet" href="/lib/normalize.min.css">
     <link rel="stylesheet" href="popup.css">
   </head>
   <body>
     <main>
-      <ul>
-        <li>
-          <label for="palette">Change Palette</label>
-          <select id="palette">
-            <option value="">Default (unset)</option>
-          </select>
-        </li>
-        <li>
-          <label for="font-family">Change Font</label>
-          <select id="font-family">
-            <option value="">Default (Favorit)</option>
-            <option value="'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif">Helvetica Neue</option>
-            <option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif;">Palatino Linotype</option>
-            <option value="Georgia, Times, 'Times New Roman', serif">Georgia</option>
-            <optgroup label="System fonts">
-              <option value="sans-serif">Sans Serif</option>
-              <option value="serif">Serif</option>
-              <option value="monospace">Monospace</option>
-              <option value="cursive">Cursive</option>
-              <option value="fantasy">Fantasy</option>
-            </optgroup>
-          </select>
-        </li>
-        <li>
-          <label for="font-size">Change Base Font Size</label>
-          <select id="font-size">
-            <option value="12px">12px</option>
-            <option value="14px">14px</option>
-            <option value="">Default (16px)</option>
-            <option value="18px">18px</option>
-            <option value="20px">20px</option>
-          </select>
-        </li>
-        <li>
-          <span>Links</span>
-          <span>
-            <a href="https://github.com/AprilSylph/Palettes-for-Tumblr/issues" target="_blank">Issue tracker</a>&ensp;&bull;&ensp;<a href="https://github.com/AprilSylph/Palettes-for-Tumblr" target="_blank">Source code</a>
-          </span>
-      </ul>
+      <div>
+        <label for="palette"><h4>Change Palette</h4></label>
+        <select id="palette">
+          <option value="">Default (unmodified)</option>
+        </select>
+      </div>
+      <div>
+        <label for="font-family"><h4>Change Font</h4></label>
+        <select id="font-family">
+          <option value="">Default (unmodified)</option>
+          <option value="'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif">Helvetica Neue</option>
+          <option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif;">Palatino Linotype</option>
+          <option value="Georgia, Times, 'Times New Roman', serif">Georgia</option>
+          <optgroup label="System fonts">
+            <option value="sans-serif">Sans Serif</option>
+            <option value="serif">Serif</option>
+            <option value="monospace">Monospace</option>
+            <option value="cursive">Cursive</option>
+            <option value="fantasy">Fantasy</option>
+          </optgroup>
+        </select>
+      </div>
+      <div>
+        <label for="font-size"><h4>Change Base Font Size</h4></label>
+        <select id="font-size">
+          <option value="12px">12px</option>
+          <option value="14px">14px</option>
+          <option value="">Default (16px)</option>
+          <option value="18px">18px</option>
+          <option value="20px">20px</option>
+        </select>
+      </div>
+      <div>
+        <ul>
+          <li><a href="https://github.com/AprilSylph/Palettes-for-Tumblr/releases" target="_blank">Changelog</a></li>
+          <li><a href="https://github.com/AprilSylph/Palettes-for-Tumblr/issues" target="_blank">Issue tracker</a></li>
+          <li><a href="https://github.com/AprilSylph/Palettes-for-Tumblr" target="_blank">Source code</a></li>
+        </ul>
+      </div>
     </main>
     <script src="/lib/browser-polyfill.min.js"></script>
     <script src="render_palettes.js"></script>
