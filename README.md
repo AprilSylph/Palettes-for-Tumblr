@@ -26,4 +26,4 @@ This dropdown lets you set the base font size that Tumblr uses. This affects the
 
 ## Credits
 - [Contributors to this repository](https://github.com/AprilSylph/Palettes-for-Tumblr/graphs/contributors)
-- [Dependency graph](https://github.com/AprilSylph/Palettes-for-Tumblr/network/dependencies#package.json)
+- [Dependency graph](https://github.com/AprilSylph/Palettes-for-Tumblr/network/dependencies)
