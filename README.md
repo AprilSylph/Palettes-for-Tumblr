@@ -4,8 +4,8 @@ A colour scheme manager for Tumblr!
 ## Features
 - Choose a palette from a dropdown instead of cycling through them
 - Wind back time by selecting a palette from Tumblr's past
-- Change the font type used by Tumblr
-- Change the base font size used by Tumblr
+- Change the page font independently of your chosen palette
+- Adjust the base font size
 
 ## Installation
 - [Get this extension for Firefox](https://addons.mozilla.org/addon/palettes-for-tumblr/)
