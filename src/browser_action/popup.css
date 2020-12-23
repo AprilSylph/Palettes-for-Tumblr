@@ -1,4 +1,22 @@
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --grey: #444444;
+  --blue: #00b8ff;
+  --purple: #7c5cff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --black: #ffffff;
+    --white: #343434;
+    --grey: #bbbbbb;
+  }
+}
+
 body {
+  color: var(--black);
+  background-color: var(--white);
   font-size: 100%;
   line-height: 1.5;
   -webkit-user-select: none;
@@ -20,7 +38,7 @@ main > div {
 }
 
 main > div + div {
-  border-top: 1px dotted #444;
+  border-top: 1px dotted var(--grey);
 }
 
 h4 {
@@ -38,4 +56,17 @@ label + * {
 ul {
   margin: 0;
   padding-left: 20px;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+:link {
+  color: var(--blue);
+}
+
+:visited {
+  color: var(--purple);
 }
