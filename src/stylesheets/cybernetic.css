@@ -1,42 +1,17 @@
 :root {
-  --palette: cybernetic;
-  --rgb-white: 34, 34, 34;
-  --rgb-white-on-dark: 0, 207, 53;
+  --black: 103, 255, 56;
+  --white: 34, 34, 34;
+  --white-on-dark: 0, 207, 53;
+  --navy: 0, 0, 0;
+  --red: 103, 255, 56;
+  --orange: 103, 255, 56;
+  --yellow: 103, 255, 56;
+  --green: 103, 255, 56;
+  --blue: 103, 255, 56;
+  --purple: 103, 255, 56;
+  --pink: 103, 255, 56;
 
-  --rgb-black: 103, 255, 56;
-
-  --navy: #000000;
-  --red: #67FF38;
-  --orange: #67FF38;
-  --yellow: #67FF38;
-  --green: #67FF38;
-  --blue: #67FF38;
-  --purple: #67FF38;
-  --pink: #67FF38;
-
-  --accent: #67FF38;
-  --rgb-accent: 103, 255, 56;
-
-  --secondary-accent: #14601a;
-  --follow: #14601a;
-
-  --white: rgb(var(--rgb-white));
-  --white-on-dark: rgb(var(--rgb-white-on-dark));
-  --black: rgb(var(--rgb-black));
-
-  --transparent-white-87: rgba(var(--rgb-white-on-dark), 0.87);
-  --transparent-white-65: rgba(var(--rgb-white-on-dark), 0.65);
-  --transparent-white-40: rgba(var(--rgb-white-on-dark), 0.4);
-  --transparent-white-25: rgba(var(--rgb-white-on-dark), 0.25);
-  --transparent-white-13: rgba(var(--rgb-white-on-dark), 0.13);
-  --transparent-white-7: rgba(var(--rgb-white-on-dark), 0.07);
-
-
-  --transparent-accent-25: rgba(var(--rgb-accent), 0.25);
-
-  --gray-65: rgba(var(--rgb-black), 0.65);
-  --gray-40: rgba(var(--rgb-black), 0.4);
-  --gray-25: rgba(var(--rgb-black), 0.25);
-  --gray-13: rgba(var(--rgb-black), 0.13);
-  --gray-7: rgba(var(--rgb-black), 0.07);
+  --accent: 103, 255, 56;
+  --secondary-accent: 20, 96, 26;
+  --follow: 20, 96, 26;
 }
