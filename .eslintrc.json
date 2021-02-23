@@ -5,15 +5,12 @@
     "webextensions": true
   },
   "extends": [
-    "standard"
+    "semistandard"
   ],
   "parserOptions": {
     "ecmaVersion": 12
   },
   "rules": {
-    "comma-dangle": [ "error", "always-multiline" ],
-    "indent": [ "error", 2, { "SwitchCase": 1, "MemberExpression": "off" } ],
-    "semi": [ "error", "always" ]
   },
   "ignorePatterns": [
     "lib/"
