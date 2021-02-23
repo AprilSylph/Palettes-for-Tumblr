@@ -55,7 +55,7 @@ const applyCurrentPalette = async function () {
     const stylesheet = Object.assign(document.createElement('link'), {
       id: 'palettes-for-tumblr',
       rel: 'stylesheet',
-      href: browser.runtime.getURL(`/stylesheets/${currentPalette}.css`),
+      href: browser.runtime.getURL(`/stylesheets/${currentPalette}.css`)
     });
 
     document.documentElement.appendChild(stylesheet);
@@ -71,7 +71,7 @@ const applyFontFamily = async function () {
 
   const style = Object.assign(document.createElement('style'), {
     id: 'pft-font-family',
-    textContent: `:root { --font-family: ${fontFamily} !important; }`,
+    textContent: `:root { --font-family: ${fontFamily} !important; }`
   });
 
   document.documentElement.appendChild(style);
@@ -86,7 +86,7 @@ const applyFontSize = async function () {
 
   const style = Object.assign(document.createElement('style'), {
     id: 'pft-font-size',
-    textContent: `:root { --base-font-size: ${fontSize} !important; }`,
+    textContent: `:root { --base-font-size: ${fontSize} !important; }`
   });
 
   document.documentElement.appendChild(style);
