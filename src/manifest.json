@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Palettes for Tumblr",
-	"version": "0.1.4",
+	"version": "0.1.5",
 
 	"description": "Colour scheme manager for Tumblr",
 	"icons": {
