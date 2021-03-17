@@ -31,8 +31,8 @@
       ]
     }
   ],
-	"homepage_url": "https://github.com/AprilSylph/Tumblr-Palettes",
-  "permissions": [ "storage", "*://www.tumblr.com/*" ],
+	"homepage_url": "https://github.com/AprilSylph/Palettes-for-Tumblr#readme",
+  "permissions": [ "storage" ],
   "web_accessible_resources": [ "palettes.json", "stylesheets/*.css" ],
 
 	"minimum_chrome_version": "38",
