@@ -3,8 +3,9 @@
 2. [Install editorconfig](https://editorconfig.org/#download) for your favourite text editor
 
 ### Setup
-1. Clone this repository
-2. In your clone, install the project dependencies with **`npm install`**
+1. Fork this repository
+2. Clone your fork locally
+3. In your local copy, install the project dependencies with **`npm install`**
 
 ### Development
 Load your clone as a temporary addon:
