@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
-    "webextension-polyfill": "^0.7.0"
+    "webextension-polyfill": "^0.8.0"
   },
   "webExt": {
     "sourceDir": "src/",
