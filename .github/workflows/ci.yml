@@ -2,9 +2,19 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+    paths:
+      - src
+      - package*.json
+      - .eslintrc.json
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
+    paths:
+      - src
+      - package*.json
+      - .eslintrc.json
 
 jobs:
   test:
@@ -14,7 +24,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2.3.4
 
-    - name: Setup Node.js Environment
+    - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.5
       with:
         node-version: 14
