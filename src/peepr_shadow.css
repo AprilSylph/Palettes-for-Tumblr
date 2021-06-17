@@ -1,3 +1,3 @@
-#glass-container > div[role="dialog"][aria-modal="true"] > button > span[tabindex="-1"] {
+#base-container > div:last-child > div[role="dialog"][aria-modal="true"] > button > span[style*="background-color"][tabindex="-1"] {
   background-color: rgba(var(--navy), 0.95) !important;
 }
