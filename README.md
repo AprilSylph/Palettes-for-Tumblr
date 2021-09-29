@@ -16,13 +16,13 @@ Once you've installed the addon, click the addon icon to open its configuration.
 
 This addon only affects pages updated to use Tumblr's new web interface. This means Tumblr pages that do not usually offer the "Change Palette" button will not be affected.
 
-#### Change Palette
+### Change Palette
 This dropdown allows you to override Tumblr's colour scheme. You can choose a palette provided by Tumblr, or a palette provided by the addon.
 
-#### Change Font
+### Change Font
 This dropdown allows you to override Tumblr's font type. You can choose to keep the default font (Favorit), switch back to Helvetica Neue, or select a system font.
 
-#### Change Base Font Size
+### Change Base Font Size
 This dropdown lets you set the base font size that Tumblr uses. This affects the size of *all* text on the page, essentially allowing you to zoom in or out without affecting the size of Tumblr's layout elements.
 
 ## Credits
