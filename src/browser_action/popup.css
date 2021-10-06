@@ -18,12 +18,17 @@
 
 html {
   display: flex;
+  flex-direction: row;
 
   background-color: rgb(var(--white));
   font-size: 14px;
 }
 
 body {
+  flex-basis: 100vw;
+  margin: 0;
+  padding: 0;
+
   color: rgb(var(--black));
   background-color: rgb(var(--white));
   font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
@@ -31,8 +36,6 @@ body {
   line-height: 1.5;
   -webkit-user-select: none;
   user-select: none;
-  margin: 0;
-  padding: 0;
 }
 
 main {
