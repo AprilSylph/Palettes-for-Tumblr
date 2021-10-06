@@ -61,33 +61,13 @@ const applyCurrentPalette = async function () {
 };
 
 const applyFontFamily = async function () {
-  const { fontFamily } = await browser.storage.local.get('fontFamily');
-
-  if (!fontFamily) {
-    return;
-  }
-
-  const style = Object.assign(document.createElement('style'), {
-    id: 'pft-font-family',
-    textContent: `:root { --font-family: ${fontFamily} !important; }`
-  });
-
-  document.documentElement.append(style);
+  const { fontFamily = '' } = await browser.storage.local.get('fontFamily');
+  document.documentElement.style.setProperty('--font-family', fontFamily);
 };
 
 const applyFontSize = async function () {
-  const { fontSize } = await browser.storage.local.get('fontSize');
-
-  if (!fontSize) {
-    return;
-  }
-
-  const style = Object.assign(document.createElement('style'), {
-    id: 'pft-font-size',
-    textContent: `:root { --base-font-size: ${fontSize} !important; }`
-  });
-
-  document.documentElement.append(style);
+  const { fontSize = '' } = await browser.storage.local.get('fontSize');
+  document.documentElement.style.setProperty('--base-font-size', fontSize);
 };
 
 const onStorageChanged = async function (changes, areaName) {
@@ -106,23 +86,8 @@ const onStorageChanged = async function (changes, areaName) {
     }
   }
 
-  if (fontFamily) {
-    const previousAppliedFontFamily = document.getElementById('pft-font-family');
-    await applyFontFamily();
-
-    if (previousAppliedFontFamily !== null) {
-      previousAppliedFontFamily.remove();
-    }
-  }
-
-  if (fontSize) {
-    const previousAppliedFontSize = document.getElementById('pft-font-size');
-    await applyFontSize();
-
-    if (previousAppliedFontSize !== null) {
-      previousAppliedFontSize.remove();
-    }
-  }
+  if (fontFamily) applyFontFamily();
+  if (fontSize) applyFontSize();
 };
 
 if ([...document.scripts].some(({ src }) => src.match('/pop/'))) {
