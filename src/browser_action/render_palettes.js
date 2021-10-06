@@ -20,14 +20,14 @@ const renderPalettes = async function () {
   for (const [groupLabel, group] of Object.entries(installedPalettes)) {
     const optgroup = document.createElement('optgroup');
     optgroup.label = groupLabel;
-    paletteSelect.appendChild(optgroup);
+    paletteSelect.append(optgroup);
 
     for (const [paletteName, paletteLabel] of Object.entries(group)) {
       const option = document.createElement('option');
       option.value = paletteName;
       option.textContent = paletteLabel;
       option.selected = paletteName === currentPalette;
-      optgroup.appendChild(option);
+      optgroup.append(option);
     }
   }
 };

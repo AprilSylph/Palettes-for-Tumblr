@@ -7,7 +7,7 @@ const hideChangePaletteButton = function () {
     const changePaletteLabel = window.tumblr.languageData.translations['Change Palette'] || 'Change Palette';
     const textContent = `button[aria-label="${changePaletteLabel}"] { display: none !important; }`;
     const style = Object.assign(document.createElement('style'), { textContent, id: 'pft-hide-change-palette' });
-    document.documentElement.appendChild(style);
+    document.documentElement.append(style);
   };
 
   const scriptWithNonce = [...document.scripts].find(script => script.getAttributeNames().includes('nonce'));
@@ -15,15 +15,13 @@ const hideChangePaletteButton = function () {
 
   const injectable = `(${toRunInPageContext.toString()})()`;
   const script = Object.assign(document.createElement('script'), { nonce, textContent: injectable });
-  document.documentElement.appendChild(script);
-  document.documentElement.removeChild(script);
+  document.documentElement.append(script);
+  script.remove();
 };
 
 const showChangePaletteButton = function () {
   const style = document.getElementById('pft-hide-change-palette');
-  if (style && style.parentNode) {
-    style.parentNode.removeChild(style);
-  }
+  if (style) style.remove();
 };
 
 const getProvidedPalettes = async function () {
@@ -58,7 +56,7 @@ const applyCurrentPalette = async function () {
       href: browser.runtime.getURL(`/stylesheets/${currentPalette}.css`)
     });
 
-    document.documentElement.appendChild(stylesheet);
+    document.documentElement.append(stylesheet);
   }
 };
 
@@ -74,7 +72,7 @@ const applyFontFamily = async function () {
     textContent: `:root { --font-family: ${fontFamily} !important; }`
   });
 
-  document.documentElement.appendChild(style);
+  document.documentElement.append(style);
 };
 
 const applyFontSize = async function () {
@@ -89,7 +87,7 @@ const applyFontSize = async function () {
     textContent: `:root { --base-font-size: ${fontSize} !important; }`
   });
 
-  document.documentElement.appendChild(style);
+  document.documentElement.append(style);
 };
 
 const onStorageChanged = async function (changes, areaName) {
@@ -104,7 +102,7 @@ const onStorageChanged = async function (changes, areaName) {
     await applyCurrentPalette();
 
     if (previousAppliedPalette !== null) {
-      previousAppliedPalette.parentNode.removeChild(previousAppliedPalette);
+      previousAppliedPalette.remove();
     }
   }
 
@@ -113,7 +111,7 @@ const onStorageChanged = async function (changes, areaName) {
     await applyFontFamily();
 
     if (previousAppliedFontFamily !== null) {
-      previousAppliedFontFamily.parentNode.removeChild(previousAppliedFontFamily);
+      previousAppliedFontFamily.remove();
     }
   }
 
@@ -122,7 +120,7 @@ const onStorageChanged = async function (changes, areaName) {
     await applyFontSize();
 
     if (previousAppliedFontSize !== null) {
-      previousAppliedFontSize.parentNode.removeChild(previousAppliedFontSize);
+      previousAppliedFontSize.remove();
     }
   }
 };
