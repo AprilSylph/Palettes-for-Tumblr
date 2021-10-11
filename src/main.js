@@ -44,6 +44,14 @@ const applyCurrentPalette = async function () {
     });
 
     document.documentElement.append(stylesheet);
+  } else {
+    const { [currentPalette]: currentPaletteData } = await browser.storage.local.get(currentPalette);
+    const style = Object.assign(document.createElement('style'), {
+      id: 'palettes-for-tumblr',
+      textContent: `:root { ${Object.entries(currentPaletteData).map(([property, value]) => `--${property}: ${value};`).join(' ')} }`
+    });
+
+    document.documentElement.append(style);
   }
 };
 
