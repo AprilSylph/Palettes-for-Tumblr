@@ -24,14 +24,6 @@ const showChangePaletteButton = function () {
   if (style) style.remove();
 };
 
-const getProvidedPalettes = async function () {
-  const url = browser.runtime.getURL('/palettes.json');
-  const file = await fetch(url);
-  const data = await file.json();
-
-  return data;
-};
-
 const applyCurrentPalette = async function () {
   const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
 
@@ -42,14 +34,9 @@ const applyCurrentPalette = async function () {
 
   hideChangePaletteButton();
 
-  const providedPalettes = await getProvidedPalettes();
-  const providedPalettesList = [];
+  const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
 
-  for (const group of Object.values(providedPalettes)) {
-    providedPalettesList.push(...Object.keys(group));
-  }
-
-  if (providedPalettesList.includes(currentPalette)) {
+  if (paletteIsBuiltIn) {
     const stylesheet = Object.assign(document.createElement('link'), {
       id: 'palettes-for-tumblr',
       rel: 'stylesheet',
