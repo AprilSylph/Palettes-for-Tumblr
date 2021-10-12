@@ -37,6 +37,12 @@ const renderPalettes = async function () {
   const definedPalettes = Object.keys(storageObject).filter(key => key.startsWith('palette:'));
   if (definedPalettes.length === 0) return;
 
+  definedPalettes.sort((a, b) => {
+    const firstTimestamp = a.split(':')[2];
+    const secondTimestamp = b.split(':')[2];
+    return firstTimestamp - secondTimestamp;
+  });
+
   const optgroup = document.createElement('optgroup');
   optgroup.label = 'Custom';
   paletteSelect.append(optgroup);
