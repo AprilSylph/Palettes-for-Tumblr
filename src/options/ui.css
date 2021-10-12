@@ -1,0 +1,91 @@
+:root {
+  --black: 21, 20, 26;
+  --white: 255, 255, 255;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --black: 251, 251, 254;
+    --white: 35, 34, 43;
+  }
+}
+
+body {
+  padding: 0 1ch;
+
+  background-color: rgb(var(--white));
+  color: rgb(var(--black));
+  font-size: 100%;
+}
+
+body > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+label {
+  margin-right: 1em;
+}
+
+select {
+  margin-left: auto;
+}
+
+fieldset {
+  padding: 1ch;
+  border-color: rgba(var(--black), 0.13);
+  margin: 20px 0 0;
+}
+
+fieldset legend {
+  color: rgba(var(--black), 0.65);
+}
+
+fieldset div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-row-gap: 1ch;
+  align-items: center;
+}
+
+fieldset div label {
+  grid-column: 1 / 2;
+  padding: 4px 0;
+
+  font-weight: bold;
+}
+
+fieldset div input {
+  grid-column: 2 / 3;
+}
+
+input[type="text"] {
+  padding: 4px;
+  border: none;
+  border-radius: 3px;
+
+  background-color: rgba(var(--black), 0.13);
+  color: rgb(var(--black));
+}
+
+input[type="text"]:focus {
+  background-color: rgba(var(--black), 0.195);
+}
+
+input[type="text"]:disabled {
+  color: rgba(var(--black), 0.13);
+  cursor: not-allowed;
+}
+
+input[type="submit"] {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 20px;
+}

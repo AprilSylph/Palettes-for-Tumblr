@@ -34,6 +34,9 @@
     }
   ],
 	"homepage_url": "https://github.com/AprilSylph/Palettes-for-Tumblr#readme",
+  "options_ui": {
+    "page": "options/ui.html"
+  },
   "permissions": [ "storage" ],
   "web_accessible_resources": [ "palettes.json", "stylesheets/*.css" ],
 

@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Palettes | Palettes for Tumblr</title>
+    <link rel="stylesheet" href="/lib/normalize.min.css">
+    <link rel="stylesheet" href="ui.css">
+    <script src="/lib/browser-polyfill.min.js"></script>
+    <script type="module" src="ui.js"></script>
+  </head>
+  <body>
+    <div>
+      <label for="palette">Manage palette</label>
+      <select id="palette">
+        <optgroup label="Modify" id="palette-list"></optgroup>
+        <optgroup label="Create">
+          <option value="" selected>New palette</option>
+        </optgroup>
+      </select>
+    </div>
+    <form id="palette-form">
+      <fieldset>
+        <div>
+          <label for="name">Name</label><input id="name" name="name" type="text" required>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Foreground</legend>
+        <div>
+          <label for="black">Black</label><input id="black" name="black" type="color" value="#000000" required>
+          <label for="white">White</label><input id="white" name="white" type="color" value="#ffffff" required>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Background</legend>
+        <div>
+          <label for="white-on-dark">White on Dark</label><input id="white-on-dark" name="white-on-dark" type="color" value="#ffffff" required>
+          <label for="navy">Navy</label><input id="navy" name="navy" type="color" value="#001935" required>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Colours</legend>
+        <div>
+          <label for="red">Red</label><input id="red" name="red" type="color" value="#ff492f" required>
+          <label for="orange">Orange</label><input id="orange" name="orange" type="color" value="#ff8a00" required>
+          <label for="yellow">Yellow</label><input id="yellow" name="yellow" type="color" value="#e8d738" required>
+          <label for="green">Green</label><input id="green" name="green" type="color" value="#00cf35" required>
+          <label for="blue">Blue</label><input id="blue" name="blue" type="color" value="#00b8ff" required>
+          <label for="purple">Purple</label><input id="purple" name="purple" type="color" value="#7c5cff" required>
+          <label for="pink">Pink</label><input id="pink" name="pink" type="color" value="#ff62ce" required>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Accents</legend>
+        <div>
+          <label for="accent">Primary Accent</label><input id="accent" name="accent" type="color" value="#00b8ff" required>
+          <label for="secondary-accent">Secondary Accent</label><input id="secondary-accent" name="secondary-accent" type="color" value="#e5e7ea" required>
+          <label for="follow">Follow</label><input id="follow" name="follow" type="color" value="#f3f8fb" required>
+        </div>
+      </fieldset>
+      <input type="submit" value="Save">
+    </form>
+  </body>
+</html>
