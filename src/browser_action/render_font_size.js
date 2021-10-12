@@ -1,16 +1,11 @@
-const writeFontSize = async function ({ target: { value } }) {
-  browser.storage.local.set({ fontSize: value });
-};
+const writeFontSize = ({ currentTarget }) => currentTarget.checkValidity() && browser.storage.local.set({ fontSize: `${currentTarget.value}px` });
 
 const renderFontSize = async function () {
-  const { fontSize = '' } = await browser.storage.local.get('fontSize');
-  const fontSizeSelect = document.getElementById('font-size');
+  const { fontSize } = await browser.storage.local.get('fontSize');
+  const fontSizeInput = document.getElementById('font-size');
 
-  fontSizeSelect.addEventListener('input', writeFontSize);
-
-  [...fontSizeSelect.options].forEach(option => {
-    option.selected = option.value === fontSize;
-  });
+  if (fontSize) fontSizeInput.value = parseInt(fontSize);
+  fontSizeInput.addEventListener('input', writeFontSize);
 };
 
 renderFontSize();

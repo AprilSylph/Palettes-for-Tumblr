@@ -66,7 +66,8 @@ label + * {
   margin-top: 0.5ch;
 }
 
-select {
+select,
+input {
   padding: 4px;
   border: none;
   border-radius: 3px;
@@ -75,7 +76,8 @@ select {
   color: rgb(var(--black));
 }
 
-select:focus {
+select:focus,
+input:focus {
   background-color: rgb(var(--active-grey));
 }
 
