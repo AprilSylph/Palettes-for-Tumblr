@@ -72,7 +72,7 @@ const onStorageChanged = async function (changes, areaName) {
 
   const { currentPalette, fontFamily, fontSize } = changes;
 
-  if (currentPalette) {
+  if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
     const previousAppliedPalette = document.getElementById('palettes-for-tumblr');
     await applyCurrentPalette();
 
