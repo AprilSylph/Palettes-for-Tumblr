@@ -70,6 +70,8 @@ const renderPalettes = async () => {
     option.textContent = fromCamelCase(paletteKey.split(':')[1]);
     paletteList.append(option);
   }
+
+  onPaletteSelected({ currentTarget: paletteSelect });
 };
 
 paletteForm.reset();
