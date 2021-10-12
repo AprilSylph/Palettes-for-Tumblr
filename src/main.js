@@ -26,32 +26,36 @@ const showChangePaletteButton = function () {
 
 const applyCurrentPalette = async function () {
   const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
+  const previousPalette = document.getElementById('palettes-for-tumblr');
 
   if (!currentPalette) {
     showChangePaletteButton();
+    if (previousPalette) previousPalette.remove();
     return;
   }
 
   hideChangePaletteButton();
 
   const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
+  const { [currentPalette]: currentPaletteData = {} } = paletteIsBuiltIn
+    ? {}
+    : await browser.storage.local.get(currentPalette);
 
-  if (paletteIsBuiltIn) {
-    const stylesheet = Object.assign(document.createElement('link'), {
+  const stylesheet = paletteIsBuiltIn
+    ? Object.assign(document.createElement('link'), {
       id: 'palettes-for-tumblr',
       rel: 'stylesheet',
       href: browser.runtime.getURL(`/stylesheets/${currentPalette}.css`)
-    });
-
-    document.documentElement.append(stylesheet);
-  } else {
-    const { [currentPalette]: currentPaletteData } = await browser.storage.local.get(currentPalette);
-    const style = Object.assign(document.createElement('style'), {
+    })
+    : Object.assign(document.createElement('style'), {
       id: 'palettes-for-tumblr',
       textContent: `:root { ${Object.entries(currentPaletteData).map(([property, value]) => `--${property}: ${value};`).join(' ')} }`
     });
 
-    document.documentElement.append(style);
+  if (previousPalette) {
+    previousPalette.replaceWith(stylesheet);
+  } else {
+    document.documentElement.append(stylesheet);
   }
 };
 
@@ -73,12 +77,7 @@ const onStorageChanged = async function (changes, areaName) {
   const { currentPalette, fontFamily, fontSize } = changes;
 
   if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
-    const previousAppliedPalette = document.getElementById('palettes-for-tumblr');
-    await applyCurrentPalette();
-
-    if (previousAppliedPalette !== null) {
-      previousAppliedPalette.remove();
-    }
+    applyCurrentPalette();
   }
 
   if (fontFamily) applyFontFamily();
