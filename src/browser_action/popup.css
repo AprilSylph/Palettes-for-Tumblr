@@ -81,6 +81,10 @@ input:focus {
   background-color: rgb(var(--active-grey));
 }
 
+input {
+  padding-left: 8px;
+}
+
 ul {
   margin: 0;
   padding-left: 20px;
