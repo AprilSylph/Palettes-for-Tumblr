@@ -57,3 +57,5 @@ const renderPalettes = async function () {
 };
 
 renderPalettes();
+
+document.getElementById('manage-palettes').addEventListener('click', () => browser.runtime.openOptionsPage());
