@@ -1,0 +1,17 @@
+:root {
+  --black: 131, 148, 150;
+  --white: 7, 54, 66;
+  --white-on-dark: 147, 161, 161;
+  --navy: 0, 43, 54;
+  --red: 220, 50, 47;
+  --orange: 203, 75, 22;
+  --yellow: 181, 137, 0;
+  --green: 133, 153, 0;
+  --blue: 38, 139, 210;
+  --purple: 108, 113, 196;
+  --pink: 211, 54, 130;
+
+  --accent: 42, 161, 152;
+  --secondary-accent: var(--navy);
+  --follow: var(--navy);
+}

@@ -16,5 +16,10 @@
   "Palettes from Tumblr past": {
     "2016": "circa 2016",
     "2013": "circa 2013"
+  },
+  "Other palettes": {
+    "solarized": "Solarized",
+    "solarizedDark": "Solarized Dark",
+    "solarizedLight": "Solarized Light"
   }
 }
