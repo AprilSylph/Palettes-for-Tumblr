@@ -14,7 +14,7 @@ const hideChangePaletteButton = function () {
   const nonce = scriptWithNonce.nonce || scriptWithNonce.getAttribute('nonce');
 
   const injectable = `(${toRunInPageContext.toString()})()`;
-  const script = Object.assign(document.createElement('script'), { nonce, defer: true, textContent: injectable });
+  const script = Object.assign(document.createElement('script'), { nonce, textContent: injectable });
   document.documentElement.append(script);
   script.remove();
 };
