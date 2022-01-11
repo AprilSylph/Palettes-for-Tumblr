@@ -1,5 +1,15 @@
+const delayToDocumentIdle = delayedFunction => {
+  document.readyState === 'complete'
+    ? delayedFunction()
+    : window.addEventListener('load', delayedFunction);
+};
+
 const hideChangePaletteButton = function () {
   if (document.getElementById('palette-override') !== null) {
+    return;
+  }
+
+  if ([...document.scripts].some(({ src }) => src.includes('/pop/')) === false) {
     return;
   }
 
@@ -24,39 +34,37 @@ const showChangePaletteButton = function () {
   if (style) style.remove();
 };
 
+let appliedPalettesProperties = [];
+
+const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
+const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
+
 const applyCurrentPalette = async function () {
   const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
-  const previousPalette = document.getElementById('palettes-for-tumblr');
 
   if (!currentPalette) {
     showChangePaletteButton();
-    if (previousPalette) previousPalette.remove();
+    appliedPalettesProperties.forEach(removeCssVariable);
+    appliedPalettesProperties = [];
     return;
   }
 
-  hideChangePaletteButton();
+  delayToDocumentIdle(hideChangePaletteButton);
 
   const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
   const { [currentPalette]: currentPaletteData = {} } = paletteIsBuiltIn
-    ? {}
+    ? await fetch(browser.runtime.getURL(`/stylesheets/${currentPalette}.json`)).then(response => response.json())
     : await browser.storage.local.get(currentPalette);
 
-  const stylesheet = paletteIsBuiltIn
-    ? Object.assign(document.createElement('link'), {
-      id: 'palettes-for-tumblr',
-      rel: 'stylesheet',
-      href: browser.runtime.getURL(`/stylesheets/${currentPalette}.css`)
-    })
-    : Object.assign(document.createElement('style'), {
-      id: 'palettes-for-tumblr',
-      textContent: `:root { ${Object.entries(currentPaletteData).map(([property, value]) => `--${property}: ${value};`).join(' ')} }`
-    });
+  const currentPaletteKeys = Object.keys(currentPaletteData);
+  const currentPaletteEntries = Object.entries(currentPaletteData);
 
-  if (previousPalette) {
-    previousPalette.replaceWith(stylesheet);
-  } else {
-    document.documentElement.append(stylesheet);
-  }
+  currentPaletteEntries.forEach(setCssVariable);
+  appliedPalettesProperties
+    .filter(([property]) => currentPaletteKeys.includes(property) === false)
+    .forEach(removeCssVariable);
+
+  appliedPalettesProperties = currentPaletteEntries;
 };
 
 const applyFontFamily = async function () {
@@ -84,9 +92,7 @@ const onStorageChanged = async function (changes, areaName) {
   if (fontSize) applyFontSize();
 };
 
-if ([...document.scripts].some(({ src }) => src.includes('/pop/'))) {
-  applyCurrentPalette();
-  applyFontFamily();
-  applyFontSize();
-  browser.storage.onChanged.addListener(onStorageChanged);
-}
+applyCurrentPalette();
+applyFontFamily();
+applyFontSize();
+browser.storage.onChanged.addListener(onStorageChanged);

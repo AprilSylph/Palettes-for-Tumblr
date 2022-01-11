@@ -1,0 +1,18 @@
+{
+  "nuclearWhite": {
+    "black": "0, 0, 0",
+    "white": "255, 255, 255",
+    "white-on-dark": "0, 0, 0",
+    "navy": "255, 255, 255",
+    "red": "0, 0, 0",
+    "orange": "0, 0, 0",
+    "yellow": "0, 0, 0",
+    "green": "0, 0, 0",
+    "blue": "0, 0, 0",
+    "purple": "0, 0, 0",
+    "pink": "0, 0, 0",
+    "accent": "150, 150, 150",
+    "secondary-accent": "208, 208, 208",
+    "follow": "208, 208, 208"
+  }
+}

@@ -23,7 +23,7 @@
   "content_scripts": [
     {
       "matches": [ "*://www.tumblr.com/*" ],
-      "run_at": "document_end",
+      "run_at": "document_start",
       "js": [
         "lib/browser-polyfill.min.js",
         "main.js"
@@ -38,7 +38,7 @@
     "page": "options/ui.html"
   },
   "permissions": [ "storage" ],
-  "web_accessible_resources": [ "palettes.json", "stylesheets/*.css" ],
+  "web_accessible_resources": [ "palettes.json", "stylesheets/*.json" ],
 
 	"minimum_chrome_version": "38",
   "browser_specific_settings": {
