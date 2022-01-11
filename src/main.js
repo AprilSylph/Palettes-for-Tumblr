@@ -84,7 +84,7 @@ const onStorageChanged = async function (changes, areaName) {
   if (fontSize) applyFontSize();
 };
 
-if ([...document.scripts].some(({ src }) => src.match('/pop/'))) {
+if ([...document.scripts].some(({ src }) => src.includes('/pop/'))) {
   applyCurrentPalette();
   applyFontFamily();
   applyFontSize();
