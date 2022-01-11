@@ -34,18 +34,19 @@ const showChangePaletteButton = function () {
   if (style) style.remove();
 };
 
-let appliedPalettesProperties = [];
-
+const paletteData = fetch(browser.runtime.getURL('/paletteData.json')).then(response => response.json());
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
+
+let appliedPaletteEntries = [];
 
 const applyCurrentPalette = async function () {
   const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
 
   if (!currentPalette) {
     showChangePaletteButton();
-    appliedPalettesProperties.forEach(removeCssVariable);
-    appliedPalettesProperties = [];
+    appliedPaletteEntries.forEach(removeCssVariable);
+    appliedPaletteEntries = [];
     return;
   }
 
@@ -53,18 +54,18 @@ const applyCurrentPalette = async function () {
 
   const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
   const { [currentPalette]: currentPaletteData = {} } = paletteIsBuiltIn
-    ? await fetch(browser.runtime.getURL(`/stylesheets/${currentPalette}.json`)).then(response => response.json())
+    ? await paletteData
     : await browser.storage.local.get(currentPalette);
 
   const currentPaletteKeys = Object.keys(currentPaletteData);
   const currentPaletteEntries = Object.entries(currentPaletteData);
 
   currentPaletteEntries.forEach(setCssVariable);
-  appliedPalettesProperties
+  appliedPaletteEntries
     .filter(([property]) => currentPaletteKeys.includes(property) === false)
     .forEach(removeCssVariable);
 
-  appliedPalettesProperties = currentPaletteEntries;
+  appliedPaletteEntries = currentPaletteEntries;
 };
 
 const applyFontFamily = async function () {

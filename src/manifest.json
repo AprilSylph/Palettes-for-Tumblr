@@ -38,7 +38,7 @@
     "page": "options/ui.html"
   },
   "permissions": [ "storage" ],
-  "web_accessible_resources": [ "palettes.json", "stylesheets/*.json" ],
+  "web_accessible_resources": [ "palettes.json", "paletteData.json" ],
 
 	"minimum_chrome_version": "38",
   "browser_specific_settings": {
