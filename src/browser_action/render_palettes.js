@@ -1,5 +1,3 @@
-const fromCamelCase = string => string.replace(/[A-Z]/g, match => ` ${match}`).replace(/^./, match => match.toUpperCase());
-
 const getInstalledPalettes = async function () {
   const url = browser.runtime.getURL('/palettes.json');
   const file = await fetch(url);
@@ -34,26 +32,26 @@ const renderPalettes = async function () {
   }
 
   const storageObject = await browser.storage.local.get();
-  const definedPalettes = Object.keys(storageObject).filter(key => key.startsWith('palette:'));
+  const definedPalettes = Object.entries(storageObject).filter(([key]) => key.startsWith('palette:'));
   if (definedPalettes.length === 0) return;
-
-  definedPalettes.sort((a, b) => {
-    const firstTimestamp = a.split(':')[2];
-    const secondTimestamp = b.split(':')[2];
-    return firstTimestamp - secondTimestamp;
-  });
 
   const optgroup = document.createElement('optgroup');
   optgroup.label = 'Custom';
   paletteSelect.append(optgroup);
 
-  for (const paletteKey of definedPalettes) {
-    const option = document.createElement('option');
-    option.value = paletteKey;
-    option.textContent = fromCamelCase(paletteKey.split(':')[1]);
-    option.selected = paletteKey === currentPalette;
-    optgroup.append(option);
-  }
+  definedPalettes.sort(([a], [b]) => {
+    const firstTimestamp = a.split(':')[2];
+    const secondTimestamp = b.split(':')[2];
+    return firstTimestamp - secondTimestamp;
+  });
+
+  optgroup.append(...definedPalettes.map(([paletteKey, { name }]) => {
+    return Object.assign(document.createElement('option'), {
+      value: paletteKey,
+      textContent: name,
+      selected: paletteKey === currentPalette
+    });
+  }));
 };
 
 renderPalettes();

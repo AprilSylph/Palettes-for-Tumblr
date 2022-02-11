@@ -35,7 +35,8 @@
   ],
 	"homepage_url": "https://github.com/AprilSylph/Palettes-for-Tumblr#readme",
   "options_ui": {
-    "page": "options/ui.html"
+    "page": "options/ui.html",
+    "open_in_tab": true
   },
   "permissions": [ "storage" ],
   "web_accessible_resources": [ "palettes.json", "paletteData.json" ],

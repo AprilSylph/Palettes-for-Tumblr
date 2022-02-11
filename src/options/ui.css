@@ -10,13 +10,13 @@
   }
 }
 
+* { max-width: 100%; }
+
 html {
   font-size: 16px;
 }
 
 body {
-  padding: 0 1ch;
-
   background-color: rgb(var(--white));
   color: rgb(var(--black));
   font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
@@ -26,25 +26,77 @@ body {
   user-select: none;
 }
 
-body > div {
+#base-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+aside {
+  width: 300px;
+  padding-bottom: 20px;
+  margin-left: 20px;
+}
+
+aside:empty {
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+@media (max-width: 1220px) {
+  aside:empty {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  #base-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  aside {
+    margin: 0;
+  }
+}
+
+aside > section {
   margin-top: 20px;
 }
 
-label {
-  margin-right: 1em;
+#edit {
+  display: flex;
+  flex-direction: column;
+  gap: 1ch;
 }
 
-select {
-  margin-left: auto;
+#edit label {
+  padding-bottom: 10px;
+
+  font-size: 1.3125rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+main {
+  width: 540px;
+  padding-bottom: 20px;
+  margin: 0 20px;
+}
+
+form {
+  padding: 0 1ch;
+  margin: 0;
+  margin-top: 20px;
 }
 
 fieldset {
   padding: 1ch;
   border-color: rgba(var(--black), 0.13);
-  margin: 20px 0 0;
+  margin: 0;
+  margin-bottom: 20px;
 }
 
 fieldset legend {
@@ -61,6 +113,7 @@ fieldset div {
 fieldset div label {
   grid-column: 1 / 2;
   padding: 4px 0;
+  margin-right: 1ch;
 
   font-weight: bold;
 }
