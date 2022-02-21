@@ -50,6 +50,16 @@ const onPaletteSelected = async ({ currentTarget: { options, value } }) => {
   createdTime.textContent = dateTimeFormat.format(creation);
 };
 
+const disableSaveButton = () => {
+  const saveButton = paletteForm.elements.save;
+  saveButton.disabled = true;
+  paletteForm.addEventListener(
+    'change',
+    () => { saveButton.disabled = false; },
+    { once: true }
+  );
+};
+
 const onFormSubmitted = async event => {
   event.preventDefault();
 
@@ -65,6 +75,7 @@ const onFormSubmitted = async event => {
   const storageValue = Object.fromEntries(formEntries.map(([key, value]) => value.startsWith('#') ? [key, hexToRgb(value)] : [key, value]));
 
   await browser.storage.local.set({ [storageKey]: storageValue });
+  disableSaveButton();
 
   if (!currentTarget.dataset.editing) {
     currentTarget.dataset.editing = storageKey;
@@ -96,8 +107,9 @@ const renderPalettes = async () => {
 newButton.addEventListener('click', createNewPalette);
 openSelect.addEventListener('change', onPaletteSelected);
 
-paletteForm.reset();
+paletteForm.addEventListener('reset', disableSaveButton);
 paletteForm.addEventListener('submit', onFormSubmitted);
+paletteForm.reset();
 
 browser.storage.onChanged.addListener(renderPalettes);
 renderPalettes();

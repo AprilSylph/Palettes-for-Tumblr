@@ -137,6 +137,10 @@ time:empty::before {
   opacity: 0.65;
 }
 
+:disabled {
+  cursor: not-allowed;
+}
+
 input[type="text"] {
   padding: 4px;
   border: none;
@@ -152,7 +156,6 @@ input[type="text"]:focus {
 
 input[type="text"]:disabled {
   color: rgba(var(--black), 0.13);
-  cursor: not-allowed;
 }
 
 input[type="submit"] {
