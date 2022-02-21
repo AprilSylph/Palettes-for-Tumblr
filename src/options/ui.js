@@ -22,11 +22,16 @@ const rgbToHex = rgb => `#${rgb.split(',').map(rgbValue => {
 
 const newButton = document.getElementById('new');
 const openSelect = document.getElementById('open');
+const saveButton = document.getElementById('save');
 
 const paletteForm = document.getElementById('palette-form');
 const createdTime = paletteForm.querySelector('time');
 
+const confirmDiscard = () => saveButton.disabled === true || window.confirm('Are you sure? Your unsaved changes will be lost.');
+
 const createNewPalette = () => {
+  if (!confirmDiscard()) return;
+
   delete paletteForm.dataset.editing;
   createdTime.textContent = '';
   paletteForm.reset();
@@ -34,6 +39,7 @@ const createNewPalette = () => {
 
 const onPaletteSelected = async ({ currentTarget: { options, value } }) => {
   options[0].selected = true;
+  if (!confirmDiscard()) return;
 
   paletteForm.dataset.editing = value;
   paletteForm.reset();
@@ -51,7 +57,8 @@ const onPaletteSelected = async ({ currentTarget: { options, value } }) => {
 };
 
 const disableSaveButton = () => {
-  const saveButton = paletteForm.elements.save;
+  if (saveButton.disabled === true) return;
+
   saveButton.disabled = true;
   paletteForm.addEventListener(
     'change',
