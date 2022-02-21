@@ -62,22 +62,26 @@ aside:empty {
   }
 }
 
-aside > section {
+aside section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1ch;
+  padding: 0 10px;
   margin-top: 20px;
 }
 
-#edit {
-  display: flex;
-  flex-direction: column;
-  gap: 1ch;
-}
-
-#edit label {
-  padding-bottom: 10px;
+aside section > h1 {
+  margin: 0;
+  margin-bottom: 10px;
 
   font-size: 1.3125rem;
   font-weight: 700;
   line-height: 1.2;
+}
+
+aside button,
+aside select {
+  text-align: left;
 }
 
 main {
@@ -141,8 +145,7 @@ input[type="text"]:disabled {
 }
 
 input[type="submit"] {
-  display: block;
   box-sizing: border-box;
   width: 100%;
-  margin-top: 20px;
+  margin-bottom: 20px;
 }

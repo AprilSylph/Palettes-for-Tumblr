@@ -15,14 +15,21 @@ const rgbToHex = rgb => `#${rgb.split(',').map(rgbValue => {
   return rgbValueInt.toString(16).padStart(2, '0');
 }).join('')}`;
 
-const paletteSelect = document.getElementById('palette');
-const paletteList = document.getElementById('palette-list');
+const newButton = document.getElementById('new');
+const openSelect = document.getElementById('open');
+
 const paletteForm = document.getElementById('palette-form');
 
-const onPaletteSelected = async ({ currentTarget: { value } }) => {
+const createNewPalette = () => {
+  delete paletteForm.dataset.editing;
   paletteForm.reset();
+};
 
-  if (value === '') return;
+const onPaletteSelected = async ({ currentTarget: { options, value } }) => {
+  options[0].selected = true;
+
+  paletteForm.dataset.editing = value;
+  paletteForm.reset();
 
   const { [value]: paletteData } = await browser.storage.local.get(value);
   for (const [propertyName, propertyValue] of Object.entries(paletteData)) {
@@ -39,7 +46,7 @@ const onFormSubmitted = async event => {
   if (!currentTarget.reportValidity()) return;
 
   const paletteName = toCamelCase(currentTarget.elements.name.value);
-  const storageKey = paletteSelect.value || `palette:${paletteName}:${Date.now()}`;
+  const storageKey = currentTarget.dataset.editing || `palette:${paletteName}:${Date.now()}`;
 
   const formData = new FormData(currentTarget);
   const formEntries = Array.from(formData.entries());
@@ -60,16 +67,18 @@ const renderPalettes = async () => {
     return firstTimestamp - secondTimestamp;
   });
 
-  paletteList.replaceChildren(...definedPalettes.map(([paletteKey, { name }]) => {
-    return Object.assign(document.createElement('option'), { value: paletteKey, textContent: name });
-  }));
-
-  onPaletteSelected({ currentTarget: paletteSelect });
+  openSelect.replaceChildren(
+    Object.assign(document.createElement('option'), { disabled: true, selected: true, textContent: 'Open...' }),
+    ...definedPalettes.map(([paletteKey, { name }]) => {
+      return Object.assign(document.createElement('option'), { value: paletteKey, textContent: name });
+    })
+  );
 };
 
-paletteForm.reset();
+newButton.addEventListener('click', createNewPalette);
+openSelect.addEventListener('change', onPaletteSelected);
 
-paletteSelect.addEventListener('change', onPaletteSelected);
+paletteForm.reset();
 paletteForm.addEventListener('submit', onFormSubmitted);
 
 browser.storage.onChanged.addListener(renderPalettes);
