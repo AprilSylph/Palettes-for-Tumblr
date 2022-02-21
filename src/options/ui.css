@@ -58,6 +58,7 @@ aside:empty {
   }
 
   aside {
+    width: 540px;
     margin: 0;
   }
 }
