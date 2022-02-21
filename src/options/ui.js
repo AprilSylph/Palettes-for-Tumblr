@@ -65,7 +65,14 @@ const onFormSubmitted = async event => {
   const storageValue = Object.fromEntries(formEntries.map(([key, value]) => value.startsWith('#') ? [key, hexToRgb(value)] : [key, value]));
 
   await browser.storage.local.set({ [storageKey]: storageValue });
-  currentTarget.reset();
+
+  if (!currentTarget.dataset.editing) {
+    currentTarget.dataset.editing = storageKey;
+
+    const timestamp = parseInt(storageKey.split(':')[2]);
+    const creation = new Date(timestamp);
+    createdTime.textContent = dateTimeFormat.format(creation);
+  }
 };
 
 const renderPalettes = async () => {
