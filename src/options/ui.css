@@ -80,7 +80,8 @@ aside section > h1 {
 }
 
 aside button,
-aside select {
+aside select,
+aside input {
   text-align: left;
 }
 
@@ -156,10 +157,4 @@ input[type="text"]:focus {
 
 input[type="text"]:disabled {
   color: rgba(var(--black), 0.13);
-}
-
-input[type="submit"] {
-  box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 20px;
 }
