@@ -132,6 +132,11 @@ time {
   padding: 4px;
 }
 
+time:empty::before {
+  content: "(unsaved)";
+  opacity: 0.65;
+}
+
 input[type="text"] {
   padding: 4px;
   border: none;
