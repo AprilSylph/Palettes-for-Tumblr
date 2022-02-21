@@ -23,6 +23,7 @@ const rgbToHex = rgb => `#${rgb.split(',').map(rgbValue => {
 const newButton = document.getElementById('new');
 const openSelect = document.getElementById('open');
 const saveButton = document.getElementById('save');
+const deleteButton = document.getElementById('delete');
 
 const paletteForm = document.getElementById('palette-form');
 const createdTime = paletteForm.querySelector('time');
@@ -32,6 +33,7 @@ const confirmDiscard = () => saveButton.disabled === true || window.confirm('Are
 const createNewPalette = () => {
   if (!confirmDiscard()) return;
 
+  deleteButton.disabled = true;
   delete paletteForm.dataset.editing;
   createdTime.textContent = '';
   paletteForm.reset();
@@ -41,6 +43,7 @@ const onPaletteSelected = async ({ currentTarget: { options, value } }) => {
   options[0].selected = true;
   if (!confirmDiscard()) return;
 
+  deleteButton.disabled = false;
   paletteForm.dataset.editing = value;
   paletteForm.reset();
 
@@ -67,6 +70,17 @@ const disableSaveButton = () => {
   );
 };
 
+const deleteCurrentPalette = async () => {
+  const storageKey = paletteForm.dataset.editing;
+  if (!storageKey) return;
+
+  if (window.confirm('Delete this palette? This cannot be undone!')) {
+    await browser.storage.local.remove(storageKey);
+    saveButton.disabled = true;
+    createNewPalette();
+  }
+};
+
 const onFormSubmitted = async event => {
   event.preventDefault();
 
@@ -85,6 +99,7 @@ const onFormSubmitted = async event => {
   disableSaveButton();
 
   if (!currentTarget.dataset.editing) {
+    deleteButton.disabled = false;
     currentTarget.dataset.editing = storageKey;
 
     const timestamp = parseInt(storageKey.split(':')[2]);
@@ -113,6 +128,8 @@ const renderPalettes = async () => {
 
 newButton.addEventListener('click', createNewPalette);
 openSelect.addEventListener('change', onPaletteSelected);
+deleteButton.addEventListener('click', deleteCurrentPalette);
+deleteButton.disabled = true;
 
 paletteForm.addEventListener('reset', disableSaveButton);
 paletteForm.addEventListener('submit', onFormSubmitted);

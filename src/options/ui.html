@@ -16,8 +16,11 @@
         <section id="controls">
           <h1>Manage palettes</h1>
           <button id="new">New</button>
-          <select id="open"></select>
-          <input form="palette-form" id="save" type="submit" value="Save">
+          <select id="open">
+            <option disabled="">Open...</option>
+          </select>
+          <input id="save" form="palette-form" type="submit" value="Save">
+          <button id="delete" disabled>Delete</button>
         </section>
       </aside>
       <main>
