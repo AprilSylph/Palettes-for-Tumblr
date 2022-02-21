@@ -1,3 +1,8 @@
+const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
+  dateStyle: 'medium',
+  timeStyle: 'medium'
+});
+
 const toCamelCase = string => string
   .replace(/\s+\D/g, match => match.trim().toUpperCase())
   .replace(/\s+/g, '')
@@ -19,9 +24,11 @@ const newButton = document.getElementById('new');
 const openSelect = document.getElementById('open');
 
 const paletteForm = document.getElementById('palette-form');
+const createdTime = paletteForm.querySelector('time');
 
 const createNewPalette = () => {
   delete paletteForm.dataset.editing;
+  createdTime.textContent = '';
   paletteForm.reset();
 };
 
@@ -37,6 +44,10 @@ const onPaletteSelected = async ({ currentTarget: { options, value } }) => {
       ? propertyValue
       : rgbToHex(propertyValue);
   }
+
+  const timestamp = parseInt(value.split(':')[2]);
+  const creation = new Date(timestamp);
+  createdTime.textContent = dateTimeFormat.format(creation);
 };
 
 const onFormSubmitted = async event => {

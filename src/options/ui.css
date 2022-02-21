@@ -114,7 +114,8 @@ fieldset div {
   align-items: center;
 }
 
-fieldset div label {
+fieldset div label,
+fieldset div span {
   grid-column: 1 / 2;
   padding: 4px 0;
   margin-right: 1ch;
@@ -122,8 +123,13 @@ fieldset div label {
   font-weight: bold;
 }
 
-fieldset div input {
+fieldset div input,
+fieldset div time {
   grid-column: 2 / 3;
+}
+
+time {
+  padding: 4px;
 }
 
 input[type="text"] {
