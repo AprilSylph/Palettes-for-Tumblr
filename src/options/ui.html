@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="ui.css">
     <script src="/lib/browser-polyfill.min.js"></script>
     <script type="module" src="ui.js"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" hidden>
+      <symbol id="circle" viewBox="0 0 10 10">
+        <g>
+          <circle cx="5" cy="5" r="5"/>
+        </g>
+      </symbol>
+    </svg>
   </head>
   <body>
     <div id="base-container">
@@ -32,41 +39,13 @@
             <hr>
             <div class="main">
               <div class="post-types">
-                <div class="text">
-                  <svg height="10" width="10" viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="5"/>
-                  </svg>
-                </div>
-                <div class="photo">
-                  <svg height="10" width="10" viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="5"/>
-                  </svg>
-                </div>
-                <div class="quote">
-                  <svg height="10" width="10" viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="5"/>
-                  </svg>
-                </div>
-                <div class="link">
-                  <svg height="10" width="10" viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="5"/>
-                  </svg>
-                </div>
-                <div class="chat">
-                  <svg height="10" width="10" viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="5"/>
-                  </svg>
-                </div>
-                <div class="audio">
-                  <svg height="10" width="10" viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="5"/>
-                  </svg>
-                </div>
-                <div class="video">
-                  <svg height="10" width="10" viewBox="0 0 10 10">
-                    <circle cx="5" cy="5" r="5"/>
-                  </svg>
-                </div>
+                <div class="text"><svg><use href="#circle"/></svg></div>
+                <div class="photo"><svg><use href="#circle"/></svg></div>
+                <div class="quote"><svg><use href="#circle"/></svg></div>
+                <div class="link"><svg><use href="#circle"/></svg></div>
+                <div class="chat"><svg><use href="#circle"/></svg></div>
+                <div class="audio"><svg><use href="#circle"/></svg></div>
+                <div class="video"><svg><use href="#circle"/></svg></div>
               </div>
               <div class="post">
                 <p>An example post</p>
