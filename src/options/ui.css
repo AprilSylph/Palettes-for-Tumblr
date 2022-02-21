@@ -39,13 +39,13 @@ aside {
   margin-left: 20px;
 }
 
-aside.secondary {
+aside:empty {
   margin-left: 0;
   margin-right: 20px;
 }
 
 @media (max-width: 1220px) {
-  aside.secondary {
+  aside:empty {
     display: none;
   }
 }
