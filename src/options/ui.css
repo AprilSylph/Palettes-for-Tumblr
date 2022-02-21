@@ -39,13 +39,13 @@ aside {
   margin-left: 20px;
 }
 
-aside:empty {
+aside.secondary {
   margin-left: 0;
   margin-right: 20px;
 }
 
 @media (max-width: 1220px) {
-  aside:empty {
+  aside.secondary {
     display: none;
   }
 }
@@ -158,4 +158,110 @@ input[type="text"]:focus {
 
 input[type="text"]:disabled {
   color: rgba(var(--black), 0.13);
+}
+
+#preview {
+  --black: #000000;
+  --white: #ffffff;
+  --white-on-dark: #ffffff;
+  --navy: #001935;
+  --red: #ff492f;
+  --orange: #ff8a00;
+  --yellow: #e8d738;
+  --green: #00cf35;
+  --blue: #00b8ff;
+  --purple: #7c5cff;
+  --pink: #ff62ce;
+  --accent: #00b8ff;
+  --secondary-accent: #e5e7ea;
+  --follow: #f3f8fb;
+}
+
+#preview .container {
+  border-radius: 5px;
+
+  background-color: var(--navy);
+}
+
+#preview .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 2em;
+  padding: 0 5px;
+}
+
+#preview hr {
+  border-top: none;
+  border-bottom: 1px solid var(--white-on-dark);
+  margin: 0;
+
+  opacity: 0.13;
+}
+
+#preview .logo {
+  color: var(--white-on-dark);
+  font-weight: bold;
+}
+
+#preview .new {
+  padding: 3px 5px;
+  border-radius: 3px;
+
+  background-color: var(--accent);
+  color: var(--navy);
+  font-size: 12px;
+  line-height: 1;
+}
+
+#preview .main {
+  padding: 0 10px 10px;
+}
+
+#preview .main > div {
+  margin-top: 10px;
+}
+
+#preview .post-types {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 3px;
+
+  background-color: var(--white);
+}
+
+#preview .post-types > div {
+  flex-basis: calc(100% / 7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+#preview svg {
+  height: 1.5em;
+  width: auto;
+}
+
+#preview .text svg { fill: var(--black); }
+#preview .photo svg { fill: var(--red); }
+#preview .quote svg { fill: var(--orange); }
+#preview .link svg { fill: var(--green); }
+#preview .chat svg { fill: var(--blue); }
+#preview .audio svg { fill: var(--purple); }
+#preview .video svg { fill: var(--pink); }
+
+#preview .post {
+  padding: 5px 10px;
+  border-radius: 3px;
+
+  background-color: var(--white);
+  color: var(--black);
+}
+
+#preview .post p {
+  margin: 0;
 }

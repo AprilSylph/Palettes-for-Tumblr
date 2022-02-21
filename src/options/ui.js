@@ -28,6 +28,8 @@ const deleteButton = document.getElementById('delete');
 const paletteForm = document.getElementById('palette-form');
 const createdTime = paletteForm.querySelector('time');
 
+const previewSection = document.getElementById('preview');
+
 const confirmDiscard = () => saveButton.disabled === true || window.confirm('Are you sure? Your unsaved changes will be lost.');
 
 const createNewPalette = () => {
@@ -37,6 +39,8 @@ const createNewPalette = () => {
   delete paletteForm.dataset.editing;
   createdTime.textContent = '';
   paletteForm.reset();
+
+  updatePreview();
 };
 
 const onPaletteSelected = async ({ currentTarget: { options, value } }) => {
@@ -57,6 +61,8 @@ const onPaletteSelected = async ({ currentTarget: { options, value } }) => {
   const timestamp = parseInt(value.split(':')[2]);
   const creation = new Date(timestamp);
   createdTime.textContent = dateTimeFormat.format(creation);
+
+  updatePreview();
 };
 
 const disableSaveButton = () => {
@@ -126,6 +132,12 @@ const renderPalettes = async () => {
   );
 };
 
+const updatePreview = () => {
+  const formData = new FormData(paletteForm);
+  const formEntries = Array.from(formData.entries());
+  formEntries.forEach(([property, value]) => previewSection.style.setProperty(`--${property}`, value));
+};
+
 newButton.addEventListener('click', createNewPalette);
 openSelect.addEventListener('change', onPaletteSelected);
 deleteButton.addEventListener('click', deleteCurrentPalette);
@@ -133,6 +145,7 @@ deleteButton.disabled = true;
 
 paletteForm.addEventListener('reset', disableSaveButton);
 paletteForm.addEventListener('submit', onFormSubmitted);
+paletteForm.addEventListener('input', updatePreview);
 paletteForm.reset();
 
 browser.storage.onChanged.addListener(renderPalettes);
