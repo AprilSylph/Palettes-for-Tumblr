@@ -178,9 +178,18 @@ input[type="text"]:disabled {
 }
 
 #preview .container {
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(21, 20, 26, 0.13);
   border-radius: 5px;
 
   background-color: var(--navy);
+}
+
+@media (prefers-color-scheme: dark) {
+  #preview .container {
+    border-color: rgba(251, 251, 254, 0.13);
+  }
 }
 
 #preview .header {
