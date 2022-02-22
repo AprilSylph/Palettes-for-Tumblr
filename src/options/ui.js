@@ -162,6 +162,8 @@ const updatePreview = () => {
 const loadFromFile = async ({ currentTarget }) => {
   try {
     const { files } = currentTarget;
+    if (files.length === 0) return;
+
     const [importedPalettes] = files;
 
     if (importedPalettes.type !== 'application/json') {
@@ -187,6 +189,8 @@ const loadFromFile = async ({ currentTarget }) => {
   } catch (exception) {
     window.alert(exception.toString());
     currentTarget.value = currentTarget.defaultValue;
+  } finally {
+    currentTarget.value = '';
   }
 };
 
