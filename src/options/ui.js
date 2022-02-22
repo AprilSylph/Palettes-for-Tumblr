@@ -188,9 +188,8 @@ const loadFromFile = async ({ currentTarget }) => {
     window.alert(`Successfully imported ${validPaletteEntries.length} palettes!`);
   } catch (exception) {
     window.alert(exception.toString());
-    currentTarget.value = currentTarget.defaultValue;
   } finally {
-    currentTarget.value = '';
+    currentTarget.value = currentTarget.defaultValue;
   }
 };
 
