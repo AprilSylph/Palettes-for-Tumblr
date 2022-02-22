@@ -4,6 +4,7 @@ const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
 });
 
 const toCamelCase = string => string
+  .replace(/\W/g, ' ')
   .replace(/\s+\D/g, match => match.trim().toUpperCase())
   .replace(/\s+/g, '')
   .replace(/^[A-Z]/, match => match.toLowerCase())
