@@ -32,6 +32,12 @@ const previewSection = document.getElementById('preview');
 
 const confirmDiscard = () => saveButton.disabled === true || window.confirm('Are you sure? Your unsaved changes will be lost.');
 
+const getTimestamp = paletteKey => {
+  const timestamp = parseInt(paletteKey.split(':')[2]);
+  const creationDate = new Date(timestamp);
+  return dateTimeFormat.format(creationDate);
+};
+
 const createNewPalette = () => {
   if (!confirmDiscard()) return;
 
@@ -58,10 +64,7 @@ const onPaletteSelected = async ({ currentTarget: { options, value } }) => {
       : rgbToHex(propertyValue);
   }
 
-  const timestamp = parseInt(value.split(':')[2]);
-  const creation = new Date(timestamp);
-  createdTime.textContent = dateTimeFormat.format(creation);
-
+  createdTime.textContent = getTimestamp(value);
   updatePreview();
 };
 
@@ -107,10 +110,7 @@ const onFormSubmitted = async event => {
   if (!currentTarget.dataset.editing) {
     deleteButton.disabled = false;
     currentTarget.dataset.editing = storageKey;
-
-    const timestamp = parseInt(storageKey.split(':')[2]);
-    const creation = new Date(timestamp);
-    createdTime.textContent = dateTimeFormat.format(creation);
+    createdTime.textContent = getTimestamp(storageKey);
   }
 };
 
