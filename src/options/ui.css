@@ -274,3 +274,21 @@ input[type="text"]:disabled {
 #preview .post p {
   margin: 0;
 }
+
+#transfer details[open] summary {
+  margin-bottom: 1ch;
+}
+
+#transfer button {
+  text-align: center;
+}
+
+#export div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1ch;
+}
+
+#select-all { grid-column: 1 / 2; }
+#select-none { grid-column: 2 / 3; }
+#export-list, #save-file { grid-column: 1 / 3; }
