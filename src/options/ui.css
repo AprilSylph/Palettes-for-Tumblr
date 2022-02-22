@@ -283,6 +283,11 @@ input[type="text"]:disabled {
   text-align: center;
 }
 
+#import button {
+  box-sizing: border-box;
+  width: 100%;
+}
+
 #export div {
   display: grid;
   grid-template-columns: 1fr 1fr;

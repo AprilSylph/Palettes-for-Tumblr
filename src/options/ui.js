@@ -28,6 +28,9 @@ const deleteButton = document.getElementById('delete');
 
 const previewSection = document.getElementById('preview');
 
+const loadFileButton = document.getElementById('load-file');
+const loadFileInput = loadFileButton.nextElementSibling;
+
 const selectAllButton = document.getElementById('select-all');
 const selectNoneButton = document.getElementById('select-none');
 const exportList = document.getElementById('export-list');
@@ -38,6 +41,7 @@ const createdTime = paletteForm.querySelector('time');
 
 const confirmDiscard = () => saveButton.disabled === true || window.confirm('Are you sure? Your unsaved changes will be lost.');
 const buildPaletteOption = ([paletteKey, { name }]) => Object.assign(document.createElement('option'), { value: paletteKey, textContent: name });
+const isValidDate = value => isNaN((new Date(value)).valueOf()) === false;
 
 const getTimestamp = paletteKey => {
   const timestamp = parseInt(paletteKey.split(':')[2]);
@@ -155,6 +159,37 @@ const updatePreview = () => {
   formEntries.forEach(([property, value]) => previewSection.style.setProperty(`--${property}`, value));
 };
 
+const loadFromFile = async ({ currentTarget }) => {
+  try {
+    const { files } = currentTarget;
+    const [importedPalettes] = files;
+
+    if (importedPalettes.type !== 'application/json') {
+      throw new Error('Invalid file type selected.');
+    }
+
+    const paletteString = await importedPalettes.text();
+    const paletteData = JSON.parse(paletteString);
+
+    const paletteEntries = Object.entries(paletteData);
+    const validPaletteEntries = paletteEntries.filter(([paletteKey]) => {
+      const keyParts = paletteKey.split(':');
+      if (keyParts.length !== 3) return false;
+
+      const [type, name, timestamp] = keyParts;
+      return type === 'palette' && /\s/.test(name) === false && isValidDate(parseInt(timestamp));
+    });
+
+    if (validPaletteEntries.length === 0) throw new Error('No palettes found in file.');
+
+    await browser.storage.local.set(Object.fromEntries(validPaletteEntries));
+    window.alert(`Successfully imported ${validPaletteEntries.length} palettes!`);
+  } catch (exception) {
+    window.alert(exception.toString());
+    currentTarget.value = currentTarget.defaultValue;
+  }
+};
+
 const selectAllForExport = () => {
   [...exportList.options].forEach(option => { option.selected = true; });
   exportList.focus();
@@ -202,6 +237,9 @@ newButton.addEventListener('click', createNewPalette);
 openSelect.addEventListener('change', onPaletteSelected);
 deleteButton.addEventListener('click', deleteCurrentPalette);
 deleteButton.disabled = true;
+
+loadFileButton.addEventListener('click', () => loadFileInput.click());
+loadFileInput.addEventListener('change', loadFromFile);
 
 selectAllButton.addEventListener('click', selectAllForExport);
 selectNoneButton.addEventListener('click', selectNoneForExport);
