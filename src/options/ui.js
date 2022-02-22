@@ -31,6 +31,7 @@ const createdTime = paletteForm.querySelector('time');
 const previewSection = document.getElementById('preview');
 
 const confirmDiscard = () => saveButton.disabled === true || window.confirm('Are you sure? Your unsaved changes will be lost.');
+const buildPaletteOption = ([paletteKey, { name }]) => Object.assign(document.createElement('option'), { value: paletteKey, textContent: name });
 
 const getTimestamp = paletteKey => {
   const timestamp = parseInt(paletteKey.split(':')[2]);
@@ -126,9 +127,7 @@ const renderPalettes = async () => {
 
   openSelect.replaceChildren(
     Object.assign(document.createElement('option'), { disabled: true, selected: true, textContent: 'Open...' }),
-    ...definedPalettes.map(([paletteKey, { name }]) => {
-      return Object.assign(document.createElement('option'), { value: paletteKey, textContent: name });
-    })
+    ...definedPalettes.map(buildPaletteOption)
   );
 };
 
