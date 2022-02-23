@@ -264,8 +264,8 @@ input[type="text"]:disabled {
 #preview .video svg { fill: var(--pink); }
 
 #preview .post {
-  padding: 5px 10px;
   border-radius: 3px;
+  overflow: hidden;
 
   background-color: var(--white);
   color: var(--black);
@@ -273,11 +273,19 @@ input[type="text"]:disabled {
 
 #preview .post p {
   display: flex;
-  margin: 0;
+  padding: 0 10px;
+  margin: 5px 0;
 }
 
-#preview .post p:not(:first-child) {
-  margin-top: 5px;
+#preview .post p.filtered {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0;
+
+  background-color: var(--secondary-accent);
 }
 
 #preview .post p time {
@@ -287,6 +295,15 @@ input[type="text"]:disabled {
 
 #preview .post p small {
   font-size: 0.65rem;
+}
+
+#preview .post p.filtered small {
+  opacity: 0.65;
+}
+
+#preview .post p.filtered .filtered-tag {
+  color: var(--accent);
+  opacity: 1;
 }
 
 #transfer details[open] summary {
