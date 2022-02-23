@@ -40,7 +40,11 @@ const paletteForm = document.getElementById('palette-form');
 const createdTime = paletteForm.querySelector('time');
 
 const confirmDiscard = () => saveButton.disabled === true || window.confirm('Are you sure? Your unsaved changes will be lost.');
-const buildPaletteOption = ([paletteKey, { name }]) => Object.assign(document.createElement('option'), { value: paletteKey, textContent: name });
+const buildPaletteOption = ([paletteKey, { name }]) => Object.assign(document.createElement('option'), {
+  value: paletteKey,
+  title: `Created ${getTimestamp(paletteKey)}`,
+  textContent: name
+});
 const isValidDate = value => isNaN((new Date(value)).valueOf()) === false;
 
 const getTimestamp = paletteKey => {
