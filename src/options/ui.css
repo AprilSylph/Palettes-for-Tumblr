@@ -130,7 +130,7 @@ fieldset div time {
   grid-column: 2 / 3;
 }
 
-time {
+fieldset div time {
   padding: 4px;
 }
 
@@ -272,7 +272,21 @@ input[type="text"]:disabled {
 }
 
 #preview .post p {
+  display: flex;
   margin: 0;
+}
+
+#preview .post p:not(:first-child) {
+  margin-top: 5px;
+}
+
+#preview .post p time {
+  font-size: 0.5rem;
+  opacity: 0.65;
+}
+
+#preview .post p small {
+  font-size: 0.65rem;
 }
 
 #transfer details[open] summary {
