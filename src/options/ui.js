@@ -108,7 +108,8 @@ const deleteCurrentPalette = async () => {
   const storageKey = paletteForm.dataset.editing;
   if (!storageKey) return;
 
-  if (window.confirm('Delete this palette? This cannot be undone!')) {
+  const { [storageKey]: { name } } = await browser.storage.local.get(storageKey);
+  if (window.confirm(`Delete the "${name}" palette? This cannot be undone!`)) {
     await browser.storage.local.remove(storageKey);
     saveButton.disabled = true;
     createNewPalette();
