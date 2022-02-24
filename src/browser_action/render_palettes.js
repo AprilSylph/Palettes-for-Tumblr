@@ -17,18 +17,14 @@ const renderPalettes = async function () {
   const installedPalettes = await getInstalledPalettes();
   const { currentPalette } = await browser.storage.local.get('currentPalette');
 
-  for (const [groupLabel, group] of Object.entries(installedPalettes)) {
-    const optgroup = document.createElement('optgroup');
-    optgroup.label = groupLabel;
+  for (const [label, options] of installedPalettes) {
+    const optgroup = Object.assign(document.createElement('optgroup'), { label });
+    optgroup.append(...options.map(([value, textContent]) => Object.assign(document.createElement('option'), {
+      value,
+      textContent,
+      selected: value === currentPalette
+    })));
     paletteSelect.append(optgroup);
-
-    for (const [paletteName, paletteLabel] of Object.entries(group)) {
-      const option = document.createElement('option');
-      option.value = paletteName;
-      option.textContent = paletteLabel;
-      option.selected = paletteName === currentPalette;
-      optgroup.append(option);
-    }
   }
 
   const storageObject = await browser.storage.local.get();
