@@ -259,12 +259,14 @@ deleteButton.addEventListener('click', deleteCurrentPalette);
 deleteButton.disabled = true;
 
 getBuiltInPaletteList.then(builtInPaletteList => {
-  newSelect.append(...builtInPaletteList.flatMap(([label, options]) => {
-    return options.map(([value, name]) => Object.assign(document.createElement('option'), {
+  const optgroup = Object.assign(document.createElement('optgroup'), { label: 'From template:' });
+  optgroup.append(...builtInPaletteList.flatMap(([label, options]) => {
+    return options.map(([value, textContent]) => Object.assign(document.createElement('option'), {
       value,
-      textContent: `Template: ${name}`
+      textContent
     }));
   }));
+  newSelect.append(optgroup);
 });
 
 loadFileButton.addEventListener('click', () => loadFileInput.click());
