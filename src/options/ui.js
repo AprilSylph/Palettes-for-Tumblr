@@ -44,11 +44,13 @@ const paletteForm = document.getElementById('palette-form');
 const createdTime = paletteForm.querySelector('time');
 
 const confirmDiscard = () => saveButton.disabled === true || window.confirm('Are you sure? Your unsaved changes will be lost.');
+
 const buildPaletteOption = ([paletteKey, { name }]) => Object.assign(document.createElement('option'), {
   value: paletteKey,
   title: `Created ${getTimestamp(paletteKey)}`,
   textContent: name
 });
+
 const isValidDate = value => isNaN((new Date(value)).valueOf()) === false;
 
 const getTimestamp = paletteKey => {
@@ -67,16 +69,17 @@ const getDatestamp = () => {
   return `${fourDigitYear}-${twoDigitMonth}-${twoDigitDate}`;
 };
 
-const createNewPalette = async ({ currentTarget: { options, value } }) => {
-  options[0].selected = true;
-  if (!confirmDiscard()) return;
+const populateForm = ({ paletteKey, paletteData }) => {
+  if (paletteKey) {
+    paletteForm.dataset.editing = paletteKey;
+    createdTime.textContent = getTimestamp(paletteKey);
+    deleteButton.disabled = false;
+  } else {
+    delete paletteForm.dataset.editing;
+    createdTime.textContent = '';
+    deleteButton.disabled = true;
+  }
 
-  deleteButton.disabled = true;
-  delete paletteForm.dataset.editing;
-  createdTime.textContent = '';
-  paletteForm.reset();
-
-  const { [value]: paletteData } = await getBuiltInPalettes;
   for (const [propertyName, propertyValue] of Object.entries(paletteData)) {
     paletteForm.elements[propertyName].value = propertyName === 'name'
       ? propertyValue
@@ -86,23 +89,22 @@ const createNewPalette = async ({ currentTarget: { options, value } }) => {
   updatePreview();
 };
 
-const onPaletteSelected = async ({ currentTarget: { options, value } }) => {
+const createNewPalette = async ({ currentTarget: { options, value } }) => {
   options[0].selected = true;
   if (!confirmDiscard()) return;
-
-  deleteButton.disabled = false;
-  paletteForm.dataset.editing = value;
   paletteForm.reset();
 
-  const { [value]: paletteData } = await browser.storage.local.get(value);
-  for (const [propertyName, propertyValue] of Object.entries(paletteData)) {
-    paletteForm.elements[propertyName].value = propertyName === 'name'
-      ? propertyValue
-      : rgbToHex(propertyValue);
-  }
+  const { [value]: paletteData } = await getBuiltInPalettes;
+  populateForm({ paletteData });
+};
 
-  createdTime.textContent = getTimestamp(value);
-  updatePreview();
+const onPaletteSelected = async ({ currentTarget: { options, value: paletteKey } }) => {
+  options[0].selected = true;
+  if (!confirmDiscard()) return;
+  paletteForm.reset();
+
+  const { [paletteKey]: paletteData } = await browser.storage.local.get(paletteKey);
+  populateForm({ paletteKey, paletteData });
 };
 
 const disableSaveButton = () => {
