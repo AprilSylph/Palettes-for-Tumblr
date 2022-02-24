@@ -1,11 +1,8 @@
+import { getDatestamp, getTimestamp, isValidDate } from './modules/datetime.js';
+
 const { getURL } = browser.runtime;
 const getBuiltInPaletteList = fetch(getURL('/palettes.json')).then(response => response.json());
 const getBuiltInPalettes = fetch(getURL('/paletteData.json')).then(response => response.json());
-
-const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
-  dateStyle: 'medium',
-  timeStyle: 'medium'
-});
 
 const toCamelCase = string => string
   .replace(/\W/g, ' ')
@@ -50,24 +47,6 @@ const buildPaletteOption = ([paletteKey, { name }]) => Object.assign(document.cr
   title: `Created ${getTimestamp(paletteKey)}`,
   textContent: name
 });
-
-const isValidDate = value => isNaN((new Date(value)).valueOf()) === false;
-
-const getTimestamp = paletteKey => {
-  const timestamp = parseInt(paletteKey.split(':')[2]);
-  const creationDate = new Date(timestamp);
-  return dateTimeFormat.format(creationDate);
-};
-
-const getDatestamp = () => {
-  const now = new Date();
-
-  const fourDigitYear = now.getFullYear().toString().padStart(4, '0');
-  const twoDigitMonth = (now.getMonth() + 1).toString().padStart(2, '0');
-  const twoDigitDate = now.getDate().toString().padStart(2, '0');
-
-  return `${fourDigitYear}-${twoDigitMonth}-${twoDigitDate}`;
-};
 
 const populateForm = ({ paletteKey, paletteData }) => {
   if (paletteKey) {
