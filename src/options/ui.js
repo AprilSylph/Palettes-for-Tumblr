@@ -1,3 +1,4 @@
+import { hexToRgb, rgbToHex } from './modules/color.js';
 import { getDatestamp, getTimestamp, isValidDate } from './modules/datetime.js';
 
 const { getURL } = browser.runtime;
@@ -10,17 +11,6 @@ const toCamelCase = string => string
   .replace(/\s+/g, '')
   .replace(/^[A-Z]/, match => match.toLowerCase())
   .trim();
-
-const hexToRgb = hex => [
-  parseInt(hex.substr(1, 2), 16),
-  parseInt(hex.substr(3, 2), 16),
-  parseInt(hex.substr(5, 2), 16)
-].join(',');
-
-const rgbToHex = rgb => `#${rgb.split(',').map(rgbValue => {
-  const rgbValueInt = parseInt(rgbValue);
-  return rgbValueInt.toString(16).padStart(2, '0');
-}).join('')}`;
 
 const newSelect = document.getElementById('new');
 const openSelect = document.getElementById('open');
