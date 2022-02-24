@@ -1,3 +1,7 @@
+const { getURL } = browser.runtime;
+const getBuiltInPaletteList = fetch(getURL('/palettes.json')).then(response => response.json());
+const getBuiltInPalettes = fetch(getURL('/paletteData.json')).then(response => response.json());
+
 const dateTimeFormat = new Intl.DateTimeFormat(undefined, {
   dateStyle: 'medium',
   timeStyle: 'medium'
@@ -21,7 +25,7 @@ const rgbToHex = rgb => `#${rgb.split(',').map(rgbValue => {
   return rgbValueInt.toString(16).padStart(2, '0');
 }).join('')}`;
 
-const newButton = document.getElementById('new');
+const newSelect = document.getElementById('new');
 const openSelect = document.getElementById('open');
 const saveButton = document.getElementById('save');
 const deleteButton = document.getElementById('delete');
@@ -63,13 +67,21 @@ const getDatestamp = () => {
   return `${fourDigitYear}-${twoDigitMonth}-${twoDigitDate}`;
 };
 
-const createNewPalette = () => {
+const createNewPalette = async ({ currentTarget: { options, value } }) => {
+  options[0].selected = true;
   if (!confirmDiscard()) return;
 
   deleteButton.disabled = true;
   delete paletteForm.dataset.editing;
   createdTime.textContent = '';
   paletteForm.reset();
+
+  const { [value]: paletteData } = await getBuiltInPalettes;
+  for (const [propertyName, propertyValue] of Object.entries(paletteData)) {
+    paletteForm.elements[propertyName].value = propertyName === 'name'
+      ? propertyValue
+      : rgbToHex(propertyValue);
+  }
 
   updatePreview();
 };
@@ -241,10 +253,19 @@ const saveToFile = async () => {
   URL.revokeObjectURL(href);
 };
 
-newButton.addEventListener('click', createNewPalette);
+newSelect.addEventListener('change', createNewPalette);
 openSelect.addEventListener('change', onPaletteSelected);
 deleteButton.addEventListener('click', deleteCurrentPalette);
 deleteButton.disabled = true;
+
+getBuiltInPaletteList.then(builtInPaletteList => {
+  newSelect.append(...builtInPaletteList.flatMap(([label, options]) => {
+    return options.map(([value, name]) => Object.assign(document.createElement('option'), {
+      value,
+      textContent: `Template: ${name}`
+    }));
+  }));
+});
 
 loadFileButton.addEventListener('click', () => loadFileInput.click());
 loadFileInput.addEventListener('change', loadFromFile);
