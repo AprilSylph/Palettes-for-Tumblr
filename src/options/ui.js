@@ -89,6 +89,7 @@ const deleteCurrentPalette = async () => {
   if (window.confirm(`Delete the "${name}" palette? This cannot be undone!`)) {
     await browser.storage.local.remove(storageKey);
     paletteForm.reset();
+    updatePreview();
   }
 };
 
