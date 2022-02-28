@@ -41,10 +41,6 @@ const populateForm = ({ paletteKey, paletteData }) => {
     paletteForm.dataset.editing = paletteKey;
     createdTime.textContent = getTimestamp(paletteKey);
     deleteButton.disabled = false;
-  } else {
-    delete paletteForm.dataset.editing;
-    createdTime.textContent = '';
-    deleteButton.disabled = true;
   }
 
   for (const [propertyName, propertyValue] of Object.entries(paletteData)) {
@@ -95,6 +91,14 @@ const deleteCurrentPalette = async () => {
     saveButton.disabled = true;
     createNewPalette();
   }
+};
+
+const onFormReset = () => {
+  delete paletteForm.dataset.editing;
+  createdTime.textContent = '';
+
+  disableSaveButton();
+  deleteButton.disabled = true;
 };
 
 const onFormSubmitted = async event => {
@@ -159,7 +163,7 @@ getBuiltInPaletteList.then(builtInPaletteList => {
   ));
 });
 
-paletteForm.addEventListener('reset', disableSaveButton);
+paletteForm.addEventListener('reset', onFormReset);
 paletteForm.addEventListener('submit', onFormSubmitted);
 paletteForm.addEventListener('input', updatePreview);
 paletteForm.reset();
