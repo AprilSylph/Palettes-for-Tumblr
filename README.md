@@ -2,8 +2,7 @@
 A colour scheme manager for Tumblr!
 
 ## Features
-- Choose a palette from a dropdown instead of cycling through them
-- Wind back time by selecting a palette from Tumblr's past
+- Create your own palette, or choose from the built-in options
 - Change the page font independently of your chosen palette
 - Adjust the base font size
 
@@ -17,7 +16,10 @@ Once you've installed the addon, click the addon icon to open its configuration.
 This addon only affects pages updated to use Tumblr's new web interface. This means Tumblr pages that do not usually offer the "Change Palette" button will not be affected.
 
 ### Change Palette
-This dropdown allows you to override Tumblr's colour scheme. You can choose a palette provided by Tumblr, or a palette provided by the addon.
+This dropdown allows you to override Tumblr's colour scheme. You can choose a palette provided by Tumblr, a palette provided by the addon, or any custom palettes you've defined.
+
+#### Manage...
+Click this button to open the palette manager. You can create and edit custom palettes on this page.
 
 ### Change Font
 This dropdown allows you to override Tumblr's font type. You can choose to keep the default font (Favorit), switch back to Helvetica Neue, or select a system font.
