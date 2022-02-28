@@ -281,6 +281,8 @@ input[type="text"]:disabled {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  height: 80px;
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 0;
