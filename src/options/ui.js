@@ -25,6 +25,11 @@ const createdTime = paletteForm.querySelector('time');
 
 const confirmDiscard = () => saveButton.disabled === true || window.confirm('Are you sure? Your unsaved changes will be lost.');
 
+const buildPaletteTemplateOption = ([value, textContent]) => Object.assign(document.createElement('option'), {
+  value,
+  textContent
+});
+
 const buildPaletteOption = ([paletteKey, { name }]) => Object.assign(document.createElement('option'), {
   value: paletteKey,
   title: `Created ${getTimestamp(paletteKey)}`,
@@ -146,14 +151,10 @@ deleteButton.addEventListener('click', deleteCurrentPalette);
 deleteButton.disabled = true;
 
 getBuiltInPaletteList.then(builtInPaletteList => {
-  const optgroup = Object.assign(document.createElement('optgroup'), { label: 'From template:' });
-  optgroup.append(...builtInPaletteList.flatMap(([label, options]) => {
-    return options.map(([value, textContent]) => Object.assign(document.createElement('option'), {
-      value,
-      textContent
-    }));
-  }));
-  newSelect.append(optgroup);
+  const templates = document.getElementById('templates');
+  templates.replaceChildren(...builtInPaletteList.flatMap(
+    ([label, options]) => options.map(buildPaletteTemplateOption)
+  ));
 });
 
 paletteForm.addEventListener('reset', disableSaveButton);
