@@ -283,8 +283,6 @@ input[type="text"]:disabled {
   align-items: center;
   box-sizing: border-box;
   height: 80px;
-  padding-top: 5px;
-  padding-bottom: 5px;
   margin: 0;
 
   background-color: var(--secondary-accent);
