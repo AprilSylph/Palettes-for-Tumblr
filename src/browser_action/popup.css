@@ -63,13 +63,14 @@ label {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  min-width: max-content;
 }
 
 button {
   padding: 0;
   border: none;
   margin: 0;
-  margin-left: 1ch;
+  margin-left: 2em;
 
   background-color: transparent;
   color: rgb(var(--accent));
