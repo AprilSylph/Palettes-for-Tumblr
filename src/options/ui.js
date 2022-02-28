@@ -142,7 +142,9 @@ const renderPalettes = async () => {
 const updatePreview = () => {
   const formData = new FormData(paletteForm);
   const formEntries = Array.from(formData.entries());
-  formEntries.forEach(([property, value]) => previewSection.style.setProperty(`--${property}`, value));
+  formEntries
+    .filter(([property, value]) => value.startsWith('#'))
+    .forEach(([property, value]) => previewSection.style.setProperty(`--${property}`, value));
 };
 
 newSelect.addEventListener('change', createNewPalette);
