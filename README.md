@@ -11,7 +11,7 @@ A colour scheme manager for Tumblr!
 - [View on the Chrome Web Store](https://chrome.google.com/webstore/detail/kgllgjbdbkempofinoadnlleigmgppfm)
 
 ## Usage
-Once you've installed the addon, click the addon icon to open its configuration. The addon can be configured from any page, but will only affect [www.tumblr.com](https://www.tumblr.com/).
+Once you've installed the addon, click the addon icon in the browser toolbar to open its configuration. The addon can be configured from any page, but will only affect [www.tumblr.com](https://www.tumblr.com/).
 
 This addon only affects pages updated to use Tumblr's new web interface. This means Tumblr pages that do not usually offer the "Change Palette" button will not be affected.
 
@@ -22,7 +22,7 @@ This dropdown allows you to override Tumblr's colour scheme. You can choose a pa
 Click this button to open the palette manager. You can create and edit custom palettes on this page.
 
 ### Change Font
-This dropdown allows you to override Tumblr's font type. You can choose to keep the default font (Favorit), switch back to Helvetica Neue, or select a system font.
+This dropdown allows you to override Tumblr's font type. You can choose to keep the default font (Favorit), switch back to Tumblr's old default font (Helvetica Neue), or select a system font.
 
 ### Change Base Font Size
 This dropdown lets you set the base font size that Tumblr uses. This affects the size of *all* text on the page, essentially allowing you to zoom in or out without affecting the size of Tumblr's layout elements.
