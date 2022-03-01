@@ -1,7 +1,6 @@
 import { getDatestamp, isValidDate } from './datetime.js';
 
-const loadFileButton = document.getElementById('load-file');
-const loadFileInput = loadFileButton.nextElementSibling;
+const loadFileInput = document.getElementById('load-file');
 
 const selectAllButton = document.getElementById('select-all');
 const selectNoneButton = document.getElementById('select-none');
@@ -85,7 +84,6 @@ const saveToFile = async () => {
   URL.revokeObjectURL(href);
 };
 
-loadFileButton.addEventListener('click', () => loadFileInput.click());
 loadFileInput.addEventListener('change', loadFromFile);
 
 selectAllButton.addEventListener('click', selectAllForExport);
