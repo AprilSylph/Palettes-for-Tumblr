@@ -6,6 +6,11 @@ A colour scheme manager for Tumblr!
 - Change the page font independently of your chosen palette
 - Adjust the base font size
 
+## Screenshots
+
+![](https://github.com/AprilSylph/Palettes-for-Tumblr/raw/76fcb149660ff151764038a643dc4dbb8a2176f5/assets/screenshots/Firefox/Screenshot%202022-03-01%20at%205.02.48%20pm.png) | ![](https://github.com/AprilSylph/Palettes-for-Tumblr/raw/76fcb149660ff151764038a643dc4dbb8a2176f5/assets/screenshots/Firefox/Screenshot%202022-03-01%20at%205.16.38%20pm.png)
+-- | --
+
 ## Installation
 - [Get this extension for Firefox](https://addons.mozilla.org/addon/palettes-for-tumblr/)
 - [View on the Chrome Web Store](https://chrome.google.com/webstore/detail/kgllgjbdbkempofinoadnlleigmgppfm)
