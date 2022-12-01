@@ -16,7 +16,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.4.0",
     "eslint-plugin-promise": "^6.1.1",
-    "web-ext": "^7.3.1"
+    "web-ext": "^7.4.0"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
