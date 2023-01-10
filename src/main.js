@@ -70,7 +70,12 @@ const applyCurrentPalette = async function () {
 
 const applyFontFamily = async function () {
   const { fontFamily = '' } = await browser.storage.local.get('fontFamily');
-  document.documentElement.style.setProperty('--font-family', fontFamily);
+  const { customFontFamily = '' } = await browser.storage.local.get('customFontFamily');
+
+  document.documentElement.style.setProperty(
+    '--font-family',
+    fontFamily === 'custom' ? customFontFamily : fontFamily
+  );
 };
 
 const applyFontSize = async function () {
@@ -83,13 +88,13 @@ const onStorageChanged = async function (changes, areaName) {
     return;
   }
 
-  const { currentPalette, fontFamily, fontSize } = changes;
+  const { currentPalette, fontFamily, customFontFamily, fontSize } = changes;
 
   if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
     applyCurrentPalette();
   }
 
-  if (fontFamily) applyFontFamily();
+  if (fontFamily || customFontFamily) applyFontFamily();
   if (fontSize) applyFontSize();
 };
 
