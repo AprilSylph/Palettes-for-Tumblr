@@ -3,6 +3,9 @@
   "extends": [
     "config:base"
   ],
+  "schedule": [
+    "before 3am on the first day of the month"
+  ],
   "packageRules": [
     {
       "groupName": "all non-major dependencies",
