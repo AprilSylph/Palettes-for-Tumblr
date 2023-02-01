@@ -8,15 +8,21 @@
   ],
   "packageRules": [
     {
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "matchPackagePatterns": [
-        "*"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ]
+      "groupName": "vendored dependencies",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies"],
+      "matchPackagePatterns": ["*"]
+    },
+    {
+      "groupName": "dev dependencies",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchPackagePatterns": ["*"]
+    },
+    {
+      "groupName": "automation dependencies",
+      "matchManagers": ["github-actions"],
+      "matchPackagePatterns": ["*"]
     }
   ]
 }
