@@ -3,9 +3,6 @@
   "extends": [
     "config:base"
   ],
-  "schedule": [
-    "before 3am on the first day of the month"
-  ],
   "packageRules": [
     {
       "groupName": "vendored dependencies",
@@ -24,5 +21,11 @@
       "matchManagers": ["github-actions"],
       "matchPackagePatterns": ["*"]
     }
-  ]
+  ],
+  "schedule": [
+    "before 6am on the first day of the month"
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": false
+  }
 }
