@@ -198,7 +198,9 @@ input[type="text"]:disabled {
   justify-content: space-between;
   align-items: center;
   height: 2em;
-  padding: 0 5px;
+  padding: 0 10px;
+
+  font-weight: 700;
 }
 
 #preview hr {
@@ -211,7 +213,6 @@ input[type="text"]:disabled {
 
 #preview .logo {
   color: var(--white-on-dark);
-  font-weight: bold;
 }
 
 #preview .new {
