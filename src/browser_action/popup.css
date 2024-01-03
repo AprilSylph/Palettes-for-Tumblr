@@ -54,7 +54,7 @@ main > div + div {
   border-top: 1px dotted rgb(var(--passive-grey));
 }
 
-h4 {
+h4, h5 {
   margin: 0;
 }
 
@@ -64,6 +64,10 @@ label {
   justify-content: space-between;
   align-items: center;
   min-width: max-content;
+}
+
+label ~ label {
+  margin-top: 1ch;
 }
 
 button {
@@ -115,4 +119,8 @@ a {
 :link,
 :visited {
   color: rgb(var(--accent));
+}
+
+select:not([data-value="custom"]) ~ :is([for="font-family-custom"], [id="font-family-custom"]) {
+  display: none;
 }
