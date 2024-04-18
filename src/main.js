@@ -1,34 +1,3 @@
-const delayToDocumentIdle = delayedFunction => {
-  document.readyState === 'complete'
-    ? delayedFunction()
-    : window.addEventListener('load', delayedFunction);
-};
-
-const hideChangePaletteButton = function () {
-  if (document.getElementById('palette-override') !== null) {
-    return;
-  }
-
-  if ([...document.scripts].some(({ src }) => src.includes('/pop/')) === false) {
-    return;
-  }
-
-  const toRunInPageContext = function () {
-    const changePaletteLabel = window.tumblr.languageData.translations['Change Palette'] || 'Change Palette';
-    const textContent = `button[aria-label="${changePaletteLabel}"] { display: none !important; }`;
-    const style = Object.assign(document.createElement('style'), { textContent, id: 'palette-override' });
-    document.head.append(style);
-  };
-
-  const scriptWithNonce = [...document.scripts].find(script => script.getAttributeNames().includes('nonce'));
-  const nonce = scriptWithNonce.nonce || scriptWithNonce.getAttribute('nonce');
-
-  const injectable = `(${toRunInPageContext.toString()})()`;
-  const script = Object.assign(document.createElement('script'), { nonce, textContent: injectable });
-  document.documentElement.append(script);
-  script.remove();
-};
-
 const showChangePaletteButton = function () {
   const style = document.getElementById('palette-override');
   if (style) style.remove();
@@ -49,8 +18,6 @@ const applyCurrentPalette = async function () {
     appliedPaletteEntries = [];
     return;
   }
-
-  delayToDocumentIdle(hideChangePaletteButton);
 
   const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
   const { [currentPalette]: currentPaletteData = {} } = paletteIsBuiltIn
