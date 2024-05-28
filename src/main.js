@@ -25,6 +25,7 @@ const applyCurrentPalette = async function () {
     : await browser.storage.local.get(currentPalette);
 
   currentPaletteData['deprecated-accent'] = currentPaletteData.accent;
+  delete currentPaletteData.accent;
 
   const currentPaletteKeys = Object.keys(currentPaletteData);
   const currentPaletteEntries = Object.entries(currentPaletteData);
