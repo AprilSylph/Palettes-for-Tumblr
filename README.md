@@ -14,7 +14,6 @@ A colour scheme manager for Tumblr!
 ## Installation
 - [Get this extension for Firefox](https://addons.mozilla.org/addon/palettes-for-tumblr/)
 - [View on the Chrome Web Store](https://chrome.google.com/webstore/detail/kgllgjbdbkempofinoadnlleigmgppfm)
-- [View on Microsoft Edge Addons](https://microsoftedge.microsoft.com/addons/detail/palettes-for-tumblr/neebggkhkldogjekaaljdopepckppphb)
 
 ## Usage
 Once you've installed the addon, click the addon icon in the browser toolbar to open its configuration. The addon can be configured from any page, but will only affect [www.tumblr.com](https://www.tumblr.com/).
