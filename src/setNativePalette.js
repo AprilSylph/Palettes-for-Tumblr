@@ -1,5 +1,5 @@
 try {
-  const palette = new URL(import.meta.url).searchParams.get('palette');
+  const { palette } = document.currentScript.dataset;
   const styleElement = document.querySelector('#root > div > style');
   const reactKey = Object.keys(styleElement).find((key) => key.startsWith('__reactFiber'));
   let fiber = styleElement[reactKey];

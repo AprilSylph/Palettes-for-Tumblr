@@ -6,9 +6,9 @@ const setNativePalette = async palette => {
 
   const { nonce } = [...document.scripts].find(script => script.getAttributeNames().includes('nonce'));
   const script = document.createElement('script');
-  script.type = 'module';
   script.nonce = nonce;
-  script.src = `${browser.runtime.getURL('/setNativePalette.js')}?palette=${palette}`;
+  script.dataset.palette = palette;
+  script.src = browser.runtime.getURL('/setNativePalette.js');
   document.documentElement.append(script);
   script.remove();
 };
