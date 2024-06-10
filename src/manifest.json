@@ -39,7 +39,7 @@
   },
   "permissions": [ "storage" ],
   "web_accessible_resources": [{
-    "resources": [ "palettes.json", "paletteData.json" ],
+    "resources": [ "palettes.json", "paletteData.json", "setNativePalette.js" ],
     "matches": [ "*://www.tumblr.com/*" ]
   }],
 

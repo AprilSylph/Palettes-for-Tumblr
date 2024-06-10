@@ -1,3 +1,18 @@
+const setNativePalette = async palette => {
+  document.readyState === 'loading' &&
+    await new Promise((resolve) =>
+      document.addEventListener('readystatechange', resolve, { once: true })
+    );
+
+  const { nonce } = [...document.scripts].find(script => script.getAttributeNames().includes('nonce'));
+  const script = document.createElement('script');
+  script.type = 'module';
+  script.nonce = nonce;
+  script.src = `${browser.runtime.getURL('/setNativePalette.js')}?palette=${palette}`;
+  document.documentElement.append(script);
+  script.remove();
+};
+
 const showChangePaletteButton = function () {
   const style = document.getElementById('palette-override');
   if (style) style.remove();
@@ -10,7 +25,7 @@ const removeCssVariable = ([property]) => document.documentElement.style.removeP
 let appliedPaletteEntries = [];
 
 const applyCurrentPalette = async function () {
-  const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
+  let { currentPalette = '' } = await browser.storage.local.get('currentPalette');
 
   if (!currentPalette) {
     showChangePaletteButton();
@@ -24,8 +39,18 @@ const applyCurrentPalette = async function () {
     ? await paletteData
     : await browser.storage.local.get(currentPalette);
 
-  currentPaletteData['deprecated-accent'] = currentPaletteData.accent;
-  delete currentPaletteData.accent;
+  if (currentPaletteData.accent) {
+    currentPaletteData['deprecated-accent'] = currentPaletteData.accent;
+    delete currentPaletteData.accent;
+  }
+
+  if (currentPalette === 'nuclearWhite') {
+    currentPalette = 'snowBright';
+  }
+
+  if (paletteIsBuiltIn) {
+    setNativePalette(currentPalette);
+  }
 
   const currentPaletteKeys = Object.keys(currentPaletteData);
   const currentPaletteEntries = Object.entries(currentPaletteData);
