@@ -1,6 +1,7 @@
 import { exportList } from './modules/backup.js';
 import { hexToRgb, rgbToHex } from './modules/color.js';
 import { getTimestamp } from './modules/datetime.js';
+import './modules/permissions_banner.js';
 
 const { getURL } = browser.runtime;
 const getBuiltInPaletteList = fetch(getURL('/palettes.json')).then(response => response.json());
