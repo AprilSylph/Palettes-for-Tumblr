@@ -10,7 +10,17 @@ const removeCssVariable = ([property]) => document.documentElement.style.removeP
 let appliedPaletteEntries = [];
 
 const applyCurrentPalette = async function () {
-  const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
+  let {
+    currentPalette = '',
+    currentLightPalette = '',
+    currentDarkPalette = ''
+  } = await browser.storage.local.get(['currentPalette', 'currentLightPalette', 'currentDarkPalette']);
+
+  if (currentPalette === 'prefers-color-scheme') {
+    // todo: implement dark mode
+    console.log({ currentLightPalette, currentDarkPalette });
+    currentPalette = currentLightPalette;
+  }
 
   if (!currentPalette) {
     showChangePaletteButton();
@@ -61,9 +71,9 @@ const onStorageChanged = async function (changes, areaName) {
     return;
   }
 
-  const { currentPalette, fontFamily, customFontFamily, fontSize } = changes;
+  const { currentPalette, currentLightPalette, currentDarkPalette, fontFamily, customFontFamily, fontSize } = changes;
 
-  if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
+  if (currentPalette || currentLightPalette || currentDarkPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
     applyCurrentPalette();
   }
 
