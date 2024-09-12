@@ -9,6 +9,8 @@ const removeCssVariable = ([property]) => document.documentElement.style.removeP
 
 let appliedPaletteEntries = [];
 
+const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
 const applyCurrentPalette = async function () {
   let {
     currentPalette = '',
@@ -17,9 +19,7 @@ const applyCurrentPalette = async function () {
   } = await browser.storage.local.get(['currentPalette', 'currentLightPalette', 'currentDarkPalette']);
 
   if (currentPalette === 'prefers-color-scheme') {
-    // todo: implement dark mode
-    console.log({ currentLightPalette, currentDarkPalette });
-    currentPalette = currentLightPalette;
+    currentPalette = darkModeQuery.matches ? currentDarkPalette : currentLightPalette;
   }
 
   if (!currentPalette) {
@@ -80,6 +80,8 @@ const onStorageChanged = async function (changes, areaName) {
   if (fontFamily || customFontFamily) applyFontFamily();
   if (fontSize) applyFontSize();
 };
+
+darkModeQuery.addEventListener('change', applyCurrentPalette);
 
 applyCurrentPalette();
 applyFontFamily();
