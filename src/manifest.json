@@ -41,7 +41,7 @@
   "permissions": [ "storage" ],
   "web_accessible_resources": [ "palettes.json", "paletteData.json", "paletteSystemData.json" ],
 
-	"minimum_chrome_version": "111",
+	"minimum_chrome_version": "38",
   "browser_specific_settings": {
     "gecko": {
       "strict_min_version": "113.0"

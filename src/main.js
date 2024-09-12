@@ -33,8 +33,14 @@ const applyCurrentPalette = async function () {
 
   const currentPaletteSystemData = (await paletteSystemData)[currentPalette] || (await paletteSystemData).default;
 
-  const currentPaletteKeys = Object.keys({ ...currentPaletteData, ...currentPaletteSystemData });
-  const currentPaletteEntries = Object.entries({ ...currentPaletteData, ...currentPaletteSystemData });
+  const toApply =
+    Object.values(currentPaletteSystemData).every((value) => !value.includes('color-mix')) ||
+    CSS.supports('color', 'color-mix(in srgb, white, black)')
+      ? { ...currentPaletteData, ...currentPaletteSystemData }
+      : currentPaletteData;
+
+  const currentPaletteKeys = Object.keys(toApply);
+  const currentPaletteEntries = Object.entries(toApply);
 
   currentPaletteEntries.forEach(setCssVariable);
   appliedPaletteEntries
