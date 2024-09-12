@@ -393,6 +393,7 @@
     "pink": "116, 128, 137",
     "deprecated-accent": "82, 158, 204",
     "secondary-accent": "229, 231, 234",
+    "follow": "243, 248, 251",
     "chrome": "rgba(54, 70, 93, 1)",
     "chrome-panel": "rgba(64.05, 79.25, 101.1)",
     "chrome-panel-border": "rgba(255, 255, 255, 0.05)",
