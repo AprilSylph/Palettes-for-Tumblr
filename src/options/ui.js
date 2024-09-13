@@ -219,7 +219,9 @@ highlightCheckboxes.forEach(checkbox =>
   })
 );
 
-browser.storage.onChanged.addListener(renderPalettes);
+browser.storage.onChanged.addListener(
+  changes => Object.keys(changes).some((key) => key.startsWith('palette:')) && renderPalettes()
+);
 renderPalettes();
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
