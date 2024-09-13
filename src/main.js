@@ -1,4 +1,5 @@
 const paletteData = fetch(browser.runtime.getURL('/paletteData.json')).then(response => response.json());
+const paletteSystemData = fetch(browser.runtime.getURL('/paletteSystemData.json')).then(response => response.json());
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
@@ -31,8 +32,16 @@ const applyCurrentPalette = async function () {
   };
   delete currentPaletteData.accent;
 
-  const currentPaletteKeys = Object.keys(currentPaletteData);
-  const currentPaletteEntries = Object.entries(currentPaletteData);
+  const currentPaletteSystemData = (await paletteSystemData)[currentPalette] || (await paletteSystemData).default;
+
+  const toApply =
+    Object.values(currentPaletteSystemData).every((value) => !value.includes('color-mix')) ||
+    CSS.supports('color', 'color-mix(in srgb, white, black)')
+      ? { ...currentPaletteData, ...currentPaletteSystemData }
+      : currentPaletteData;
+
+  const currentPaletteKeys = Object.keys(toApply);
+  const currentPaletteEntries = Object.entries(toApply);
 
   currentPaletteEntries.forEach(setCssVariable);
   appliedPaletteEntries
