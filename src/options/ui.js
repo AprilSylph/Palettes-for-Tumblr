@@ -193,6 +193,32 @@ paletteForm.addEventListener('submit', onFormSubmitted);
 paletteForm.addEventListener('input', updatePreview);
 paletteForm.reset();
 
+const highlightCheckboxes = [...document.querySelectorAll('.highlight-checkbox')];
+const rainbow = ['#ff492f', '#ff8a00', '#e8d738', '#00cf35', '#00b8ff', '#7c5cff', '#ff62ce'];
+let i = 0;
+setInterval(() => {
+  i++;
+  const color = rainbow[i % rainbow.length];
+  const selected = highlightCheckboxes.filter(checkbox => checkbox.checked);
+  selected.forEach(checkbox => {
+    checkbox.previousElementSibling.value = color;
+  });
+  if (selected.length) {
+    updatePreview();
+  }
+}, 200);
+
+highlightCheckboxes.forEach(checkbox =>
+  checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+      checkbox.dataset.stored = checkbox.previousElementSibling.value;
+    } else {
+      checkbox.previousElementSibling.value = checkbox.dataset.stored;
+      updatePreview();
+    }
+  })
+);
+
 browser.storage.onChanged.addListener(renderPalettes);
 renderPalettes();
 

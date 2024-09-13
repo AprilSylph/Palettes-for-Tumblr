@@ -113,6 +113,7 @@ fieldset div {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   grid-row-gap: 1ch;
+  grid-column-gap: 1ch;
   align-items: center;
 }
 
@@ -128,6 +129,10 @@ fieldset div span {
 fieldset div input,
 fieldset div time {
   grid-column: 2 / 3;
+}
+
+fieldset div input[type="checkbox"] {
+  grid-column: 3 / 4;
 }
 
 fieldset div time {
