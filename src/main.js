@@ -1,11 +1,19 @@
 const paletteData = fetch(browser.runtime.getURL('/paletteData.json')).then(response => response.json());
+const paletteSystemData = fetch(browser.runtime.getURL('/paletteSystemData.json')).then(response => response.json());
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
 let appliedPaletteEntries = [];
 
+let currentPalette;
+let previewPalette;
+
 const applyCurrentPalette = async function () {
-  const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
+  ({ currentPalette = '', previewPalette } = await browser.storage.local.get());
+
+  if (previewPalette) {
+    currentPalette = 'previewPalette';
+  }
 
   if (!currentPalette) {
     appliedPaletteEntries.forEach(removeCssVariable);
@@ -13,7 +21,7 @@ const applyCurrentPalette = async function () {
     return;
   }
 
-  const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
+  const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false && currentPalette !== 'previewPalette';
   const { [currentPalette]: rawCurrentPaletteData = {} } = paletteIsBuiltIn
     ? await paletteData
     : await browser.storage.local.get(currentPalette);
@@ -24,8 +32,16 @@ const applyCurrentPalette = async function () {
   };
   delete currentPaletteData.accent;
 
-  const currentPaletteKeys = Object.keys(currentPaletteData);
-  const currentPaletteEntries = Object.entries(currentPaletteData);
+  const currentPaletteSystemData = (await paletteSystemData)[currentPalette] || (await paletteSystemData).default;
+
+  const toApply =
+    Object.values(currentPaletteSystemData).every((value) => !value.includes('color-mix')) ||
+    CSS.supports('color', 'color-mix(in srgb, white, black)')
+      ? { ...currentPaletteData, ...currentPaletteSystemData }
+      : currentPaletteData;
+
+  const currentPaletteKeys = Object.keys(toApply);
+  const currentPaletteEntries = Object.entries(toApply);
 
   currentPaletteEntries.forEach(setCssVariable);
   appliedPaletteEntries
@@ -55,9 +71,9 @@ const onStorageChanged = async function (changes, areaName) {
     return;
   }
 
-  const { currentPalette, fontFamily, customFontFamily, fontSize } = changes;
+  const { currentPalette, previewPalette, fontFamily, customFontFamily, fontSize } = changes;
 
-  if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
+  if (currentPalette || previewPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
     applyCurrentPalette();
   }
 
@@ -69,3 +85,12 @@ applyCurrentPalette();
 applyFontFamily();
 applyFontSize();
 browser.storage.onChanged.addListener(onStorageChanged);
+
+const checkManagePalettesOpen = () => browser.runtime.sendMessage('manage-palettes-open').catch(() => false);
+
+setInterval(async () => {
+  if (currentPalette === 'previewPalette' && await checkManagePalettesOpen() !== true) {
+    await browser.storage.local.remove('previewPalette');
+    applyCurrentPalette();
+  }
+}, 1000);
