@@ -148,7 +148,7 @@ const updatePreview = () => {
   const formEntries = Array.from(formData.entries());
   formEntries
     .filter(([property, value]) => value.startsWith('#'))
-    .forEach(([property, value]) => previewSection.style.setProperty(`--${property}`, value));
+    .forEach(([property, value]) => previewSection.style.setProperty(`--${property}`, hexToRgb(value)));
 };
 
 newSelect.addEventListener('change', createNewPalette);
