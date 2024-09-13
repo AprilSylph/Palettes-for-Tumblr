@@ -4,8 +4,25 @@ const removeCssVariable = ([property]) => document.documentElement.style.removeP
 
 let appliedPaletteEntries = [];
 
+let previewIntervalId;
+
 const applyCurrentPalette = async function () {
-  const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
+  let { currentPalette = '', previewPalette, previewLastActive } = await browser.storage.local.get();
+
+  if (previewPalette && previewLastActive) {
+    if (previewLastActive + 300 > Date.now()) {
+      currentPalette = 'previewPalette';
+
+      if (!previewIntervalId) {
+        previewIntervalId = setInterval(applyCurrentPalette, 100);
+      }
+    } else {
+      clearInterval(previewIntervalId);
+      previewIntervalId = undefined;
+
+      await browser.storage.local.remove('previewPalette');
+    }
+  }
 
   if (!currentPalette) {
     appliedPaletteEntries.forEach(removeCssVariable);
@@ -13,7 +30,7 @@ const applyCurrentPalette = async function () {
     return;
   }
 
-  const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
+  const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false && currentPalette !== 'previewPalette';
   const { [currentPalette]: rawCurrentPaletteData = {} } = paletteIsBuiltIn
     ? await paletteData
     : await browser.storage.local.get(currentPalette);
@@ -55,9 +72,9 @@ const onStorageChanged = async function (changes, areaName) {
     return;
   }
 
-  const { currentPalette, fontFamily, customFontFamily, fontSize } = changes;
+  const { currentPalette, previewPalette, fontFamily, customFontFamily, fontSize } = changes;
 
-  if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
+  if (currentPalette || previewPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
     applyCurrentPalette();
   }
 

@@ -19,6 +19,7 @@ const saveButton = document.getElementById('save');
 const deleteButton = document.getElementById('delete');
 
 const previewSection = document.getElementById('preview');
+const livePreviewToggle = document.getElementById('live-preview-toggle');
 
 const paletteForm = document.getElementById('palette-form');
 const createdTime = paletteForm.querySelector('time');
@@ -149,7 +150,21 @@ const updatePreview = () => {
   formEntries
     .filter(([property, value]) => value.startsWith('#'))
     .forEach(([property, value]) => previewSection.style.setProperty(`--${property}`, value));
+
+  if (livePreviewToggle.checked) {
+    const storageValue = Object.fromEntries(
+      formEntries
+        .filter(([property, value]) => value.startsWith('#'))
+        .map(([key, value]) => [key, hexToRgb(value)])
+    );
+    browser.storage.local.set({ previewPalette: storageValue, previewLastActive: Date.now() });
+  } else {
+    browser.storage.local.remove('previewPalette');
+  }
 };
+
+livePreviewToggle.addEventListener('change', () => setTimeout(updatePreview, 200));
+setInterval(() => livePreviewToggle.checked && browser.storage.local.set({ previewLastActive: Date.now() }), 100);
 
 newSelect.addEventListener('change', createNewPalette);
 openSelect.addEventListener('change', onPaletteSelected);
@@ -168,5 +183,7 @@ paletteForm.addEventListener('submit', onFormSubmitted);
 paletteForm.addEventListener('input', updatePreview);
 paletteForm.reset();
 
-browser.storage.onChanged.addListener(renderPalettes);
+browser.storage.onChanged.addListener(
+  (changes) => Object.keys(changes).some((key) => key.startsWith('palette:')) && renderPalettes()
+);
 renderPalettes();
