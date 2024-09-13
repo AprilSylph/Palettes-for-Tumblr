@@ -39,7 +39,7 @@
     "open_in_tab": true
   },
   "permissions": [ "storage" ],
-  "web_accessible_resources": [ "palettes.json", "paletteData.json" ],
+  "web_accessible_resources": [ "palettes.json", "paletteData.json", "paletteSystemData.json" ],
 
 	"minimum_chrome_version": "38",
   "browser_specific_settings": {
