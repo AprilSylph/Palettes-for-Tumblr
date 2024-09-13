@@ -220,7 +220,7 @@ input[type="text"]:disabled {
   border-radius: 3px;
 
   background-color: var(--accent);
-  color: var(--navy);
+  color: var(--black);
   font-size: 12px;
   line-height: 1;
 }
