@@ -4,8 +4,15 @@ const removeCssVariable = ([property]) => document.documentElement.style.removeP
 
 let appliedPaletteEntries = [];
 
+let currentPalette;
+let previewPalette;
+
 const applyCurrentPalette = async function () {
-  const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
+  ({ currentPalette = '', previewPalette } = await browser.storage.local.get());
+
+  if (previewPalette) {
+    currentPalette = 'previewPalette';
+  }
 
   if (!currentPalette) {
     appliedPaletteEntries.forEach(removeCssVariable);
@@ -13,7 +20,7 @@ const applyCurrentPalette = async function () {
     return;
   }
 
-  const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
+  const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false && currentPalette !== 'previewPalette';
   const { [currentPalette]: rawCurrentPaletteData = {} } = paletteIsBuiltIn
     ? await paletteData
     : await browser.storage.local.get(currentPalette);
@@ -55,9 +62,9 @@ const onStorageChanged = async function (changes, areaName) {
     return;
   }
 
-  const { currentPalette, fontFamily, customFontFamily, fontSize } = changes;
+  const { currentPalette, previewPalette, fontFamily, customFontFamily, fontSize } = changes;
 
-  if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
+  if (currentPalette || previewPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
     applyCurrentPalette();
   }
 
@@ -69,3 +76,12 @@ applyCurrentPalette();
 applyFontFamily();
 applyFontSize();
 browser.storage.onChanged.addListener(onStorageChanged);
+
+const checkManagePalettesOpen = () => browser.runtime.sendMessage('manage-palettes-open').catch(() => false);
+
+setInterval(async () => {
+  if (currentPalette === 'previewPalette' && await checkManagePalettesOpen() !== true) {
+    await browser.storage.local.remove('previewPalette');
+    applyCurrentPalette();
+  }
+}, 1000);
