@@ -152,6 +152,7 @@ const updatePreview = () => {
     .forEach(([property, value]) => previewSection.style.setProperty(`--${property}`, value));
 
   if (livePreviewToggle.checked) {
+    disableLivePreviewInOtherTabs();
     const storageValue = Object.fromEntries(
       formEntries
         .filter(([property, value]) => value.startsWith('#'))
@@ -187,9 +188,11 @@ browser.storage.onChanged.addListener(renderPalettes);
 renderPalettes();
 
 window.disableLivePreview = () => { livePreviewToggle.checked = false; };
-browser.extension
+const disableLivePreviewInOtherTabs = () => browser.extension
   .getViews()
   .forEach((view) => view !== window && view.disableLivePreview && view.disableLivePreview());
+
+disableLivePreviewInOtherTabs();
 browser.storage.local.remove('previewPalette');
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => message === 'check-ui-active' && sendResponse(true));
