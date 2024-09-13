@@ -21,6 +21,12 @@ const deleteButton = document.getElementById('delete');
 const previewSection = document.getElementById('preview');
 const livePreviewToggle = document.getElementById('live-preview-toggle');
 
+window.disableLivePreview = () => { livePreviewToggle.checked = false; };
+const disableLivePreviewInOtherTabs = () =>
+  browser.extension.getViews()
+    .filter(view => view !== window && view.disableLivePreview)
+    .forEach(view => view.disableLivePreview());
+
 const paletteForm = document.getElementById('palette-form');
 const createdTime = paletteForm.querySelector('time');
 
@@ -158,7 +164,7 @@ const updatePreview = () => {
         .filter(([property, value]) => value.startsWith('#'))
         .map(([key, value]) => [key, hexToRgb(value)])
     );
-    browser.storage.local.set({ previewPalette: storageValue, previewLastActive: Date.now() });
+    browser.storage.local.set({ previewPalette: storageValue });
   } else {
     browser.storage.local.remove('previewPalette');
   }
@@ -166,6 +172,9 @@ const updatePreview = () => {
 
 livePreviewToggle.addEventListener('change', updatePreview);
 window.addEventListener('pagehide', () => browser.storage.local.remove('previewPalette'));
+
+disableLivePreviewInOtherTabs();
+browser.storage.local.remove('previewPalette');
 
 newSelect.addEventListener('change', createNewPalette);
 openSelect.addEventListener('change', onPaletteSelected);
@@ -187,12 +196,8 @@ paletteForm.reset();
 browser.storage.onChanged.addListener(renderPalettes);
 renderPalettes();
 
-window.disableLivePreview = () => { livePreviewToggle.checked = false; };
-const disableLivePreviewInOtherTabs = () => browser.extension
-  .getViews()
-  .forEach((view) => view !== window && view.disableLivePreview && view.disableLivePreview());
-
-disableLivePreviewInOtherTabs();
-browser.storage.local.remove('previewPalette');
-
-browser.runtime.onMessage.addListener((message, sender, sendResponse) => message === 'check-ui-active' && sendResponse(true));
+browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message === 'manage-palettes-open') {
+    sendResponse(true);
+  }
+});
