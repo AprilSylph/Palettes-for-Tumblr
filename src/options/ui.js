@@ -163,8 +163,8 @@ const updatePreview = () => {
   }
 };
 
-livePreviewToggle.addEventListener('change', () => setTimeout(updatePreview, 200));
-setInterval(() => livePreviewToggle.checked && browser.storage.local.set({ previewLastActive: Date.now() }), 100);
+livePreviewToggle.addEventListener('change', updatePreview);
+window.addEventListener('pagehide', () => browser.storage.local.remove('previewPalette'));
 
 newSelect.addEventListener('change', createNewPalette);
 openSelect.addEventListener('change', onPaletteSelected);
@@ -183,7 +183,13 @@ paletteForm.addEventListener('submit', onFormSubmitted);
 paletteForm.addEventListener('input', updatePreview);
 paletteForm.reset();
 
-browser.storage.onChanged.addListener(
-  (changes) => Object.keys(changes).some((key) => key.startsWith('palette:')) && renderPalettes()
-);
+browser.storage.onChanged.addListener(renderPalettes);
 renderPalettes();
+
+window.disableLivePreview = () => { livePreviewToggle.checked = false; };
+browser.extension
+  .getViews()
+  .forEach((view) => view !== window && view.disableLivePreview && view.disableLivePreview());
+browser.storage.local.remove('previewPalette');
+
+browser.runtime.onMessage.addListener((message, sender, sendResponse) => message === 'check-ui-active' && sendResponse(true));

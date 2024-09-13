@@ -7,14 +7,14 @@ let appliedPaletteEntries = [];
 let previewIntervalId;
 
 const applyCurrentPalette = async function () {
-  let { currentPalette = '', previewPalette, previewLastActive } = await browser.storage.local.get();
+  let { currentPalette = '', previewPalette } = await browser.storage.local.get();
 
-  if (previewPalette && previewLastActive) {
-    if (previewLastActive + 300 > Date.now()) {
+  if (previewPalette) {
+    if (await browser.runtime.sendMessage('check-ui-active').catch(() => false)) {
       currentPalette = 'previewPalette';
 
       if (!previewIntervalId) {
-        previewIntervalId = setInterval(applyCurrentPalette, 100);
+        previewIntervalId = setInterval(applyCurrentPalette, 1000);
       }
     } else {
       clearInterval(previewIntervalId);
