@@ -43,6 +43,10 @@ const applyFontFamily = async function () {
     '--font-family',
     fontFamily === 'custom' ? customFontFamily : fontFamily
   );
+  document.documentElement.style.setProperty(
+    '--font-family-modern',
+    fontFamily === 'custom' ? customFontFamily : fontFamily
+  );
 };
 
 const applyFontSize = async function () {
