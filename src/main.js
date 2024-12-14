@@ -1,4 +1,5 @@
 const paletteData = fetch(browser.runtime.getURL('/paletteData.json')).then(response => response.json());
+const paletteSystemData = fetch(browser.runtime.getURL('/paletteSystemData.json')).then(response => response.json());
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
@@ -24,8 +25,10 @@ const applyCurrentPalette = async function () {
   };
   delete currentPaletteData.accent;
 
-  const currentPaletteKeys = Object.keys(currentPaletteData);
-  const currentPaletteEntries = Object.entries(currentPaletteData);
+  const currentPaletteSystemData = (await paletteSystemData)[currentPalette] ?? {};
+
+  const currentPaletteKeys = Object.keys({ ...currentPaletteData, ...currentPaletteSystemData });
+  const currentPaletteEntries = Object.entries({ ...currentPaletteData, ...currentPaletteSystemData });
 
   currentPaletteEntries.forEach(setCssVariable);
   appliedPaletteEntries
