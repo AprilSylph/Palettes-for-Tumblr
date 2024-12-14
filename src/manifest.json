@@ -39,7 +39,7 @@
   },
   "permissions": [ "storage" ],
   "web_accessible_resources": [{
-    "resources": [ "*.json" ],
+    "resources": [ "*.js", "*.json" ],
     "matches": [ "*://www.tumblr.com/*" ]
   }],
 
