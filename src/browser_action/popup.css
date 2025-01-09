@@ -70,7 +70,7 @@ label ~ label {
   margin-top: 1ch;
 }
 
-button {
+main button {
   padding: 0;
   border: none;
   margin: 0;
@@ -122,5 +122,34 @@ a {
 }
 
 select:not([data-value="custom"]) ~ :is([for="font-family-custom"], [id="font-family-custom"]) {
+  display: none;
+}
+
+#permissions-banner {
+  box-sizing: border-box;
+  width: 375px;
+  min-width: 100%;
+  max-width: 100%;
+  padding: 8px 4px;
+  border-bottom: 1px solid rgb(var(--active-grey));
+
+  text-align: center;
+}
+
+#grant-host-permission {
+  display: block;
+  padding: 0.5ch 1ch;
+  border-radius: 0.5ch;
+  margin: 8px auto 0;
+
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 1;
+}
+
+#grant-host-permission:focus {
+  outline: 2px solid rgb(var(--accent));
+}
+
+#permissions-banner:not([hidden]) + #embedded-banner {
   display: none;
 }

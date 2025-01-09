@@ -1,5 +1,5 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"name": "Palettes for Tumblr",
 	"version": "1.1.0",
 
@@ -10,8 +10,7 @@
     "128": "icons/128.png"
   },
 
-	"browser_action": {
-    "browser_style": true,
+	"action": {
     "default_icon": {
       "16": "icons/16.png",
       "48": "icons/48.png",
@@ -39,15 +38,19 @@
     "open_in_tab": true
   },
   "permissions": [ "storage" ],
-  "web_accessible_resources": [ "palettes.json", "paletteData.json" ],
+  "web_accessible_resources": [{
+    "resources": [ "palettes.json", "paletteData.json" ],
+    "matches": [ "*://www.tumblr.com/*" ]
+  }],
 
-	"minimum_chrome_version": "38",
+	"minimum_chrome_version": "103",
   "browser_specific_settings": {
     "gecko": {
-      "strict_min_version": "113.0"
+      "id": "{04b5e1e9-3044-41fd-be51-e8915008ad16}",
+      "strict_min_version": "128.0"
     },
     "gecko_android": {
-      "strict_min_version": "113.0"
+      "strict_min_version": "128.0"
     }
   }
 }
