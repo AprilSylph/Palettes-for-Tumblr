@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import fs from 'node:fs/promises';
 
 try {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ browser: 'firefox', headless: false });
   const page = await browser.newPage();
   await page.goto('https://www.tumblr.com/');
 
