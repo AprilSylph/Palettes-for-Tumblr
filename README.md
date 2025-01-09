@@ -1,4 +1,4 @@
-# Palettes for Tumblr [![CI](https://github.com/AprilSylph/Palettes-for-Tumblr/workflows/CI/badge.svg)](https://github.com/AprilSylph/Palettes-for-Tumblr/actions?query=workflow%3ACI)
+# Palettes for Tumblr [![CI](https://github.com/AprilSylph/Palettes-for-Tumblr/actions/workflows/ci.yml/badge.svg)](https://github.com/AprilSylph/Palettes-for-Tumblr/actions/workflows/ci.yml)
 A colour scheme manager for Tumblr!
 
 ## Features
