@@ -15,17 +15,15 @@ const applyCurrentPalette = async function () {
   }
 
   const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
-  let { [currentPalette]: currentPaletteData = {} } = paletteIsBuiltIn
+  const { [currentPalette]: rawCurrentPaletteData = {} } = paletteIsBuiltIn
     ? await paletteData
     : await browser.storage.local.get(currentPalette);
 
-  if (currentPaletteData.accent && !currentPaletteData['deprecated-accent']) {
-    currentPaletteData = {
-      ...currentPaletteData,
-      'deprecated-accent': currentPaletteData.accent
-    };
-    delete currentPaletteData.accent;
-  }
+  const currentPaletteData = {
+    ...rawCurrentPaletteData,
+    'deprecated-accent': rawCurrentPaletteData.accent
+  };
+  delete currentPaletteData.accent;
 
   const currentPaletteSystemData = (await paletteSystemData)[currentPalette] ?? {};
 
