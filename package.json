@@ -8,7 +8,7 @@
     "build-webextension": "web-ext build",
     "sign-webextension": "web-ext sign",
     "webstore-upload": "chrome-webstore-upload upload --source=src/ --auto-publish",
-    "updateSystemData": "node dev/update-palette-system-data.js"
+    "update-palette-system-data": "node dev/update-palette-system-data.js"
   },
   "devDependencies": {
     "chrome-webstore-upload-cli": "^3.3.1",
