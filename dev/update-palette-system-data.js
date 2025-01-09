@@ -8,6 +8,14 @@ try {
 
   await page.waitForSelector(':root:not(:has([data-rh]))');
 
+  await Promise.all(
+    page.frames().map(async (frame) => {
+      const privacyAgreeButton = await frame.$('.cmp__dialog-footer button.cmp-components-button.white-space-normal.is-primary');
+      privacyAgreeButton?.click();
+    })
+  );
+  await page.waitForSelector(':root:not(:has(#cmp-app-container iframe))');
+
   const allData = {};
 
   for (let i = 0; i < 12; i++) {
