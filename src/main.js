@@ -1,9 +1,5 @@
-const showChangePaletteButton = function () {
-  const style = document.getElementById('palette-override');
-  if (style) style.remove();
-};
-
 const paletteData = fetch(browser.runtime.getURL('/paletteData.json')).then(response => response.json());
+const paletteSystemData = fetch(browser.runtime.getURL('/paletteSystemData.json')).then(response => response.json());
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
@@ -23,25 +19,28 @@ const applyCurrentPalette = async function () {
   }
 
   if (!currentPalette) {
-    showChangePaletteButton();
     appliedPaletteEntries.forEach(removeCssVariable);
     appliedPaletteEntries = [];
     return;
   }
 
   const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
-  const { [currentPalette]: rawCurrentPaletteData = {} } = paletteIsBuiltIn
+  let { [currentPalette]: currentPaletteData = {} } = paletteIsBuiltIn
     ? await paletteData
     : await browser.storage.local.get(currentPalette);
 
-  const currentPaletteData = {
-    ...rawCurrentPaletteData,
-    'deprecated-accent': rawCurrentPaletteData.accent
-  };
-  delete currentPaletteData.accent;
+  if (currentPaletteData.accent && !currentPaletteData['deprecated-accent']) {
+    currentPaletteData = {
+      ...currentPaletteData,
+      'deprecated-accent': currentPaletteData.accent
+    };
+    delete currentPaletteData.accent;
+  }
 
-  const currentPaletteKeys = Object.keys(currentPaletteData);
-  const currentPaletteEntries = Object.entries(currentPaletteData);
+  const currentPaletteSystemData = (await paletteSystemData)[currentPalette] ?? {};
+
+  const currentPaletteKeys = Object.keys({ ...currentPaletteData, ...currentPaletteSystemData });
+  const currentPaletteEntries = Object.entries({ ...currentPaletteData, ...currentPaletteSystemData });
 
   currentPaletteEntries.forEach(setCssVariable);
   appliedPaletteEntries
@@ -57,6 +56,10 @@ const applyFontFamily = async function () {
 
   document.documentElement.style.setProperty(
     '--font-family',
+    fontFamily === 'custom' ? customFontFamily : fontFamily
+  );
+  document.documentElement.style.setProperty(
+    '--font-family-modern',
     fontFamily === 'custom' ? customFontFamily : fontFamily
   );
 };

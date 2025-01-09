@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="popup.css">
   </head>
   <body>
+    <header id="permissions-banner" hidden>
+      &#x26A0;&#xFE0F; Palettes for Tumblr needs additional permissions in order to apply palettes automatically.
+      <button id="grant-host-permission">Always allow on www.tumblr.com</button>
+    </header>
     <main>
       <div>
         <label for="palette">
@@ -61,5 +65,6 @@
     <script src="render_palettes.js"></script>
     <script src="render_font_family.js"></script>
     <script src="render_font_size.js"></script>
+    <script src="permissions_banner.js"></script>
   </body>
 </html>

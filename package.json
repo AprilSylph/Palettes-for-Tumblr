@@ -1,21 +1,24 @@
 {
   "license": "GPL-3.0",
   "repository": "github:AprilSylph/Palettes-for-Tumblr",
+  "type": "module",
   "scripts": {
     "test": "eslint . && web-ext lint",
     "lint-webextension": "web-ext lint",
     "build-webextension": "web-ext build",
     "sign-webextension": "web-ext sign",
-    "webstore-upload": "chrome-webstore-upload upload --source=src/ --auto-publish"
+    "webstore-upload": "chrome-webstore-upload upload --source=src/ --auto-publish",
+    "update-palette-system-data": "node dev/update-palette-system-data.js"
   },
   "devDependencies": {
     "chrome-webstore-upload-cli": "^3.3.1",
-    "eslint": "^8.57.0",
+    "eslint": "^8.57.1",
     "eslint-config-semistandard": "^17.0.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.6.0",
+    "puppeteer": "^23.10.4",
     "web-ext": "^7.12.0"
   },
   "dependencies": {
