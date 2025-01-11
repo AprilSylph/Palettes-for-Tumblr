@@ -7,8 +7,7 @@
     "lint-webextension": "web-ext lint",
     "build-webextension": "web-ext build",
     "sign-webextension": "web-ext sign",
-    "webstore-upload": "chrome-webstore-upload upload --source=src/ --auto-publish",
-    "update-palette-system-data": "node dev/update-palette-system-data.js"
+    "webstore-upload": "chrome-webstore-upload upload --source=src/ --auto-publish"
   },
   "devDependencies": {
     "chrome-webstore-upload-cli": "^3.3.1",
@@ -18,7 +17,6 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.6.0",
-    "puppeteer": "^23.10.4",
     "web-ext": "^7.12.0"
   },
   "dependencies": {
