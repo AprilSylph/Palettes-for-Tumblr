@@ -1,12 +1,29 @@
+const setNativePalette = async palette => {
+  document.readyState === 'loading' &&
+    await new Promise((resolve) =>
+      document.addEventListener('readystatechange', resolve, { once: true })
+    );
+
+  const scriptWithNonce = [...document.scripts].find(script => script.getAttributeNames().includes('nonce'));
+  if (scriptWithNonce) {
+    const { nonce } = scriptWithNonce;
+    const script = document.createElement('script');
+    script.nonce = nonce;
+    script.dataset.palette = palette;
+    script.src = browser.runtime.getURL('/setNativePalette.js');
+    document.documentElement.append(script);
+    script.remove();
+  }
+};
+
 const paletteData = fetch(browser.runtime.getURL('/paletteData.json')).then(response => response.json());
-const paletteSystemData = fetch(browser.runtime.getURL('/paletteSystemData.json')).then(response => response.json());
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
 let appliedPaletteEntries = [];
 
 const applyCurrentPalette = async function () {
-  const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
+  let { currentPalette = '' } = await browser.storage.local.get('currentPalette');
 
   if (!currentPalette) {
     appliedPaletteEntries.forEach(removeCssVariable);
@@ -27,10 +44,14 @@ const applyCurrentPalette = async function () {
     delete currentPaletteData.accent;
   }
 
-  const currentPaletteSystemData = (await paletteSystemData)[currentPalette] ?? {};
+  if (currentPalette === 'nuclearWhite') {
+    currentPalette = 'snowBright';
+  }
 
-  const currentPaletteKeys = Object.keys({ ...currentPaletteData, ...currentPaletteSystemData });
-  const currentPaletteEntries = Object.entries({ ...currentPaletteData, ...currentPaletteSystemData });
+  setNativePalette(currentPalette);
+
+  const currentPaletteKeys = Object.keys(currentPaletteData);
+  const currentPaletteEntries = Object.entries(currentPaletteData);
 
   currentPaletteEntries.forEach(setCssVariable);
   appliedPaletteEntries
