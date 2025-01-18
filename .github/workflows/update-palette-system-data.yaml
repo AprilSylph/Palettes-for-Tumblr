@@ -2,8 +2,8 @@ name: Update Palette System Data
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: "0 0 1 * *" # monthly
+  schedule:
+    - cron: "0 0 1 * *" # monthly
 
 jobs:
   update-palette-system-data:
