@@ -121,7 +121,11 @@ a {
   color: rgb(var(--accent));
 }
 
-select:not([data-value="custom"]) ~ :is([for="font-family-custom"], [id="font-family-custom"]) {
+#font-family:not([data-value="custom"]) ~ :is([for="font-family-custom"], [id="font-family-custom"]) {
+  display: none;
+}
+
+#palette:not([data-value="prefers-color-scheme"]) ~ :is([for="palette-light"], [id="palette-light"], [for="palette-dark"], [id="palette-dark"]) {
   display: none;
 }
 
