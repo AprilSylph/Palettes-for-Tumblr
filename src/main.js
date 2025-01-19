@@ -1,5 +1,6 @@
 const paletteData = fetch(browser.runtime.getURL('/paletteData.json')).then(response => response.json());
 const paletteSystemData = fetch(browser.runtime.getURL('/paletteSystemData.json')).then(response => response.json());
+const adaptivePaletteSystem = import(browser.runtime.getURL('/adaptivePaletteSystem.js'));
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
@@ -15,19 +16,19 @@ const applyCurrentPalette = async function () {
   }
 
   const paletteIsBuiltIn = currentPalette.startsWith('palette:') === false;
-  let { [currentPalette]: currentPaletteData = {} } = paletteIsBuiltIn
+  const { [currentPalette]: rawCurrentPaletteData = {} } = paletteIsBuiltIn
     ? await paletteData
     : await browser.storage.local.get(currentPalette);
 
-  if (currentPaletteData.accent && !currentPaletteData['deprecated-accent']) {
-    currentPaletteData = {
-      ...currentPaletteData,
-      'deprecated-accent': currentPaletteData.accent
-    };
-    delete currentPaletteData.accent;
-  }
+  const currentPaletteData = {
+    ...rawCurrentPaletteData,
+    'deprecated-accent': rawCurrentPaletteData.accent
+  };
+  delete currentPaletteData.accent;
 
-  const currentPaletteSystemData = (await paletteSystemData)[currentPalette] ?? {};
+  const currentPaletteSystemData = paletteIsBuiltIn
+    ? (await paletteSystemData)[currentPalette] ?? (await adaptivePaletteSystem).oldBlueSystem
+    : {};
 
   const currentPaletteKeys = Object.keys({ ...currentPaletteData, ...currentPaletteSystemData });
   const currentPaletteEntries = Object.entries({ ...currentPaletteData, ...currentPaletteSystemData });
