@@ -12,7 +12,6 @@ try {
 
     const ast = cssParser.parse(cssText);
     const rules = ast.stylesheet.rules
-      .flatMap((rule) => rule.rules ?? [rule])
       .filter((rule) => rule.type === 'rule');
 
     fontWeight350Rules.push(...rules.filter(
