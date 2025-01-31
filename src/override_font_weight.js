@@ -35,7 +35,6 @@
 
     const allCssStyleRules = sheets
       .flatMap((sheet) => [...sheet.cssRules])
-      .flatMap((rule) => (rule instanceof CSSMediaRule ? [...rule.cssRules] : [rule]))
       .filter((rule) => rule instanceof CSSStyleRule && rule.style)
       .map(({ selectorText, style }) => ({
         selectorText,
