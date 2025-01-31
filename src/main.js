@@ -3,6 +3,24 @@ const paletteSystemData = fetch(browser.runtime.getURL('/paletteSystemData.json'
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
+const documentInteractive = new Promise((resolve) =>
+  document.readyState === 'loading'
+    ? document.addEventListener('readystatechange', resolve, { once: true })
+    : resolve()
+);
+
+documentInteractive.then(() => {
+  const scriptWithNonce = [...document.scripts].find(script => script.getAttributeNames().includes('nonce'));
+  if (scriptWithNonce) {
+    const script = Object.assign(document.createElement('script'), {
+      nonce: scriptWithNonce.nonce,
+      src: browser.runtime.getURL('/override_font_weight.js')
+    });
+    document.documentElement.append(script);
+    script.remove();
+  }
+});
+
 let appliedPaletteEntries = [];
 
 const applyCurrentPalette = async function () {
@@ -52,6 +70,10 @@ const applyFontFamily = async function () {
     '--font-family-modern',
     fontFamily === 'custom' ? customFontFamily : fontFamily
   );
+  await documentInteractive;
+  document.body.classList[
+    (fontFamily === 'custom' ? customFontFamily : fontFamily) ? 'add' : 'remove'
+  ]('override-font-weight');
 };
 
 const applyFontSize = async function () {
