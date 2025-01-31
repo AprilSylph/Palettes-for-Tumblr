@@ -8,11 +8,7 @@ try {
   const urls = sw.match(/https:\/\/assets\.tumblr\.com\/pop\/[a-z0-9-]+\.css/g);
   for (const url of urls) {
     console.log('downloading', url);
-
-    const [cssText] = await Promise.all([
-      fetch(url).then((response) => response.text()),
-      new Promise((resolve) => setTimeout(resolve, 500))
-    ]);
+    const cssText = await fetch(url).then((response) => response.text());
 
     const ast = cssParser.parse(cssText);
     const rules = ast.stylesheet.rules
