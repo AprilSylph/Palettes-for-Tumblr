@@ -12,18 +12,12 @@ const getSelectorsFromUrl = async (url) => {
   const cssText = await fetch(url).then(response => response.text());
   const sheet = await new CSSStyleSheet().replace(cssText);
 
-  const allCssStyleRules = [...sheet.cssRules]
+  return [...sheet.cssRules]
     .filter((rule) => rule instanceof CSSStyleRule && rule.style)
-    .map(({ selectorText, style }) => ({
-      selectorText,
-      rules: Object.fromEntries([...style].map((key) => [key, style.getPropertyValue(key)]))
-    }));
-
-  return allCssStyleRules
     .filter(
-      ({ rules }) =>
-        rules['font-family'] === 'var(--font-family-modern)' &&
-        rules['font-weight'] === '350'
+      ({ style }) =>
+        style.getPropertyValue('font-family') === 'var(--font-family-modern)' &&
+        style.getPropertyValue('font-weight') === '350'
     )
     .map(({ selectorText }) => selectorText);
 };
