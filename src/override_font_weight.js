@@ -31,7 +31,7 @@ const processLinkElements = async () => {
       cache[url] ??= getSelectorsFromUrl(url);
     });
 
-  const selectors = await Promise.all(Object.values(cache)).then(results => results.flat());
+  const selectors = await Promise.all(Object.values(cache)).then(results => [...new Set(results.flat())]);
   fontWeightOverride.textContent = `
     ${selectors.join(', ')} {
       font-weight: normal;
