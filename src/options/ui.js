@@ -5,6 +5,7 @@ import { getTimestamp } from './modules/datetime.js';
 const { getURL } = browser.runtime;
 const getBuiltInPaletteList = fetch(getURL('/palettes.json')).then(response => response.json());
 const getBuiltInPalettes = fetch(getURL('/paletteData.json')).then(response => response.json());
+const getBuiltInPaletteSystem = fetch(getURL('/paletteSystemData.json')).then(response => response.json());
 
 const toCamelCase = string => string
   .replace(/\W/g, ' ')
@@ -69,6 +70,35 @@ const onPaletteSelected = async ({ currentTarget: { options, value: paletteKey }
   const { [paletteKey]: paletteData } = await browser.storage.local.get(paletteKey);
   populateForm({ paletteKey, paletteData });
 };
+
+const selectInitialPalette = async () => {
+  const paletteKey = 'lowContrastClassic';
+  const { [paletteKey]: paletteData } = await getBuiltInPalettes;
+  const { [paletteKey]: paletteSystemData } = await getBuiltInPaletteSystem;
+
+  for (const [propertyName, propertyValue] of Object.entries(paletteData)) {
+    if (paletteForm.elements[propertyName]) {
+      paletteForm.elements[propertyName].value = propertyName === 'name'
+        ? propertyValue
+        : rgbToHex(propertyValue);
+    }
+  }
+
+  Object.entries({ ...paletteData, ...paletteSystemData })
+    .forEach(([property, value]) => previewSection.style.setProperty(`--${property}`, value));
+};
+selectInitialPalette();
+
+// const sleep = ms => new Promise(resolve => setTimeout(() => resolve(), ms));
+// const simulateHover = async () => {
+//   while (true) {
+//     previewSection.classList.add('hovered');
+//     await sleep(1000);
+//     previewSection.classList.remove('hovered');
+//     await sleep(2000);
+//   }
+// };
+// simulateHover();
 
 const disableSaveButton = () => {
   if (saveButton.disabled === true) return;
