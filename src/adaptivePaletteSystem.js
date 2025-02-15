@@ -16,7 +16,7 @@ export const system = (selector) => {
         --chrome-tint-strong: ${tint('white', 10)};
         --chrome-tint-heavy: ${tint('white', 15)};
         --chrome-mobile: ${color('navy')};
-        --chrome-fg: ${color('white')};
+        --chrome-fg: ${color('white-on-dark')};
         --chrome-fg-secondary: ${mix(color('navy'), 'white', 60)};
         --chrome-fg-tertiary: ${mix(color('navy'), 'white', 40)};
         --accent: ${color('deprecated-accent')};
