@@ -200,3 +200,9 @@ paletteForm.reset();
 
 browser.storage.onChanged.addListener(renderPalettes);
 renderPalettes();
+
+previewSection.append(Object.assign(document.createElement('a'), {
+  href: browser.runtime.getURL('/dev/index.html'),
+  target: '_blank',
+  textContent: 'palette dev page'
+}));
