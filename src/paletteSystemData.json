@@ -1766,7 +1766,7 @@
     "content-mobile-container": "rgba(13, 13, 13, 1)",
     "content-fg": "rgba(176, 157, 255, 1)",
     "content-fg-secondary": "rgba(150, 125, 255, 1)",
-    "content-fg-tertiary": "rgba(124, 92, 255, 1)",
+    "content-fg-tertiary": "rgba(99, 74, 204, 1)",
     "color-panel-border": "rgba(0, 0, 0, 1)",
     "color-tint": "rgba(0, 0, 0, 0.1)",
     "color-tint-strong": "rgba(0, 0, 0, 0.15)",
