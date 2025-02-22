@@ -28,7 +28,7 @@
         "main.js"
       ],
       "css": [
-        "peepr_shadow.css"
+        "static.css"
       ]
     }
   ],
