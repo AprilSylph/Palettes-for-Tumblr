@@ -8,10 +8,12 @@
     "build-webextension": "web-ext build",
     "sign-webextension": "web-ext sign",
     "webstore-upload": "chrome-webstore-upload upload --source=src/ --auto-publish",
-    "update-palette-system-data": "node dev/update-palette-system-data.js"
+    "update-palette-system-data": "node dev/update-palette-system-data.js",
+    "update-font-weight-override": "node dev/update-font-weight-override.js"
   },
   "devDependencies": {
     "chrome-webstore-upload-cli": "^3.3.1",
+    "css": "^3.0.0",
     "eslint": "^8.57.1",
     "eslint-config-semistandard": "^17.0.0",
     "eslint-config-standard": "^17.1.0",

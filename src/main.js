@@ -3,6 +3,12 @@ const paletteSystemData = fetch(browser.runtime.getURL('/paletteSystemData.json'
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
+const documentInteractive = new Promise((resolve) =>
+  document.readyState === 'loading'
+    ? document.addEventListener('readystatechange', resolve, { once: true })
+    : resolve()
+);
+
 let appliedPaletteEntries = [];
 
 const applyCurrentPalette = async function () {
@@ -40,6 +46,12 @@ const applyCurrentPalette = async function () {
   appliedPaletteEntries = currentPaletteEntries;
 };
 
+const fontWeightOverride = Object.assign(document.createElement('link'), {
+  rel: 'stylesheet',
+  id: 'palettes-for-tumblr-override',
+  href: browser.runtime.getURL(`/fontWeightOverride.css?t=${Date.now()}`)
+});
+
 const applyFontFamily = async function () {
   const { fontFamily = '' } = await browser.storage.local.get('fontFamily');
   const { customFontFamily = '' } = await browser.storage.local.get('customFontFamily');
@@ -52,6 +64,10 @@ const applyFontFamily = async function () {
     '--font-family-modern',
     fontFamily === 'custom' ? customFontFamily : fontFamily
   );
+  await documentInteractive;
+  document.getElementById('palettes-for-tumblr-override')?.remove();
+  (fontFamily === 'custom' ? customFontFamily : fontFamily) &&
+    document.documentElement.append(fontWeightOverride);
 };
 
 const applyFontSize = async function () {
