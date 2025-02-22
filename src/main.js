@@ -52,6 +52,10 @@ const applyFontFamily = async function () {
     '--font-family-modern',
     fontFamily === 'custom' ? customFontFamily : fontFamily
   );
+  const { fontWeightOverride } = await import(browser.runtime.getURL('/override_font_weight.js'));
+  document.getElementById('palettes-for-tumblr-override')?.remove();
+  (fontFamily === 'custom' ? customFontFamily : fontFamily) &&
+    document.documentElement.append(fontWeightOverride);
 };
 
 const applyFontSize = async function () {
