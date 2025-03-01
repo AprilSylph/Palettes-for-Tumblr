@@ -18,8 +18,8 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.6.0",
-    "puppeteer": "^23.10.4",
-    "web-ext": "^8.3.0"
+    "puppeteer": "^23.11.1",
+    "web-ext": "^8.4.0"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
