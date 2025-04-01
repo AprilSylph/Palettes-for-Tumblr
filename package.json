@@ -11,7 +11,7 @@
     "update-palette-system-data": "node dev/update-palette-system-data.js"
   },
   "devDependencies": {
-    "chrome-webstore-upload-cli": "^3.3.1",
+    "chrome-webstore-upload-cli": "^3.3.2",
     "eslint": "^8.57.1",
     "eslint-config-semistandard": "^17.0.0",
     "eslint-config-standard": "^17.1.0",
@@ -19,7 +19,7 @@
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.6.0",
     "puppeteer": "^23.11.1",
-    "web-ext": "^8.4.0"
+    "web-ext": "^8.5.0"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
