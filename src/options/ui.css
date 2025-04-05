@@ -307,6 +307,10 @@ input[type="text"]:disabled {
   opacity: 1;
 }
 
+#preview > label {
+  text-align: center;
+}
+
 #transfer details[open] summary {
   margin-bottom: 1ch;
 }
