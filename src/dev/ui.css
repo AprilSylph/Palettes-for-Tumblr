@@ -1,0 +1,19 @@
+#preview {
+  display: flex;
+  gap: 10px;
+  overflow: scroll;
+  margin: 10px;
+}
+
+#preview > section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1ch;
+
+  width: 280px;
+  flex: none;
+}
+
+.show-more {
+  display: none !important;
+}
