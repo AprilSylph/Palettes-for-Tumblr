@@ -1,5 +1,5 @@
 const paletteData = fetch(browser.runtime.getURL('/palette_data.json')).then(response => response.json());
-const paletteSystemData = fetch(browser.runtime.getURL('/paletteSystemData.json')).then(response => response.json());
+const paletteSystemData = fetch(browser.runtime.getURL('/palette_system_data.json')).then(response => response.json());
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 

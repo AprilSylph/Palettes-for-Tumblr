@@ -47,7 +47,7 @@ try {
 
   await browser.close();
 
-  await fs.writeFile('src/paletteSystemData.json', JSON.stringify(allData, null, 2), {
+  await fs.writeFile('src/palette_system_data.json', JSON.stringify(allData, null, 2), {
     encoding: 'utf8',
     flag: 'w+'
   });
