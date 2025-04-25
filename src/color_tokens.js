@@ -29,6 +29,7 @@ export const colorYellow = 'rgba(232, 215, 58, 1)';
 export const colorGreen = 'rgba(1, 207, 53, 1)';
 export const colorBlack = 'rgba(0, 0, 0, 1)';
 export const colorWhite = 'rgba(255, 255, 255, 1)';
+
 export const colorTransparent = 'rgba(255, 255, 255, 0)';
 
 export const colorNavy3 = 'rgba(251, 252, 252, 1)';
