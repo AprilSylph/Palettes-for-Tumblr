@@ -269,7 +269,8 @@ export const getCustomTokens = ({
   colorGreen,
   colorBlack,
   colorWhite,
-  colorWhiteOnDark
+  colorWhiteOnDark,
+  colorAccent
 }) => {
   const baseNavy = new Color(colorNavy);
   const baseBlue = new Color(colorBlue);
@@ -282,6 +283,7 @@ export const getCustomTokens = ({
   const baseBlack = new Color(colorBlack);
   const baseWhite = new Color(colorWhite);
   const baseWhiteOnDark = new Color(colorWhiteOnDark);
+  const baseAccent = new Color(colorAccent);
 
   return {
     colorNavy,
@@ -295,6 +297,7 @@ export const getCustomTokens = ({
     colorBlack,
     colorWhite,
     colorWhiteOnDark,
+    colorAccent,
 
     colorTransparent: baseWhite.set(deltas.get('colorTransparent')).to('srgb').toString(),
 
@@ -413,6 +416,30 @@ export const getCustomTokens = ({
     colorBlueTint80: baseBlue.set(deltas.get('colorBlueTint80')).to('srgb').toString(),
     colorBlueTint90: baseBlue.set(deltas.get('colorBlueTint90')).to('srgb').toString(),
     colorBlueTint95: baseBlue.set(deltas.get('colorBlueTint95')).to('srgb').toString(),
+
+    colorAccent5: baseAccent.set(deltas.get('colorBlue5')).to('srgb').toString(),
+    colorAccent10: baseAccent.set(deltas.get('colorBlue10')).to('srgb').toString(),
+    colorAccent20: baseAccent.set(deltas.get('colorBlue20')).to('srgb').toString(),
+    colorAccent30: baseAccent.set(deltas.get('colorBlue30')).to('srgb').toString(),
+    colorAccent40: baseAccent.set(deltas.get('colorBlue40')).to('srgb').toString(),
+    colorAccent50: colorAccent,
+    colorAccent60: baseAccent.set(deltas.get('colorBlue60')).to('srgb').toString(),
+    colorAccent70: baseAccent.set(deltas.get('colorBlue70')).to('srgb').toString(),
+    colorAccent80: baseAccent.set(deltas.get('colorBlue80')).to('srgb').toString(),
+    colorAccent90: baseAccent.set(deltas.get('colorBlue90')).to('srgb').toString(),
+    colorAccent95: baseAccent.set(deltas.get('colorBlue95')).to('srgb').toString(),
+
+    colorAccentTint5: baseAccent.set(deltas.get('colorBlueTint5')).to('srgb').toString(),
+    colorAccentTint10: baseAccent.set(deltas.get('colorBlueTint10')).to('srgb').toString(),
+    colorAccentTint20: baseAccent.set(deltas.get('colorBlueTint20')).to('srgb').toString(),
+    colorAccentTint30: baseAccent.set(deltas.get('colorBlueTint30')).to('srgb').toString(),
+    colorAccentTint40: baseAccent.set(deltas.get('colorBlueTint40')).to('srgb').toString(),
+    colorAccentTint50: baseAccent.set(deltas.get('colorBlueTint50')).to('srgb').toString(),
+    colorAccentTint60: baseAccent.set(deltas.get('colorBlueTint60')).to('srgb').toString(),
+    colorAccentTint70: baseAccent.set(deltas.get('colorBlueTint70')).to('srgb').toString(),
+    colorAccentTint80: baseAccent.set(deltas.get('colorBlueTint80')).to('srgb').toString(),
+    colorAccentTint90: baseAccent.set(deltas.get('colorBlueTint90')).to('srgb').toString(),
+    colorAccentTint95: baseAccent.set(deltas.get('colorBlueTint95')).to('srgb').toString(),
 
     colorPurple5: basePurple.set(deltas.get('colorPurple5')).to('srgb').toString(),
     colorPurple10: basePurple.set(deltas.get('colorPurple10')).to('srgb').toString(),
