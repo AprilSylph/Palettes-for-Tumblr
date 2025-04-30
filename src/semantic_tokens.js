@@ -6,12 +6,12 @@ export const getSemanticTokens = (colors) => {
   return {
     chrome: customTokens.colorNavy,
     'chrome-panel': customTokens.colorNavy95,
-    'chrome-panel-border': customTokens.colorWhiteTint5,
-    'chrome-tint': customTokens.colorWhiteTint5,
-    'chrome-tint-strong': customTokens.colorWhiteTint10,
-    'chrome-tint-heavy': customTokens.colorWhiteTint15,
+    'chrome-panel-border': customTokens.colorWhiteOnDarkTint5,
+    'chrome-tint': customTokens.colorWhiteOnDarkTint5,
+    'chrome-tint-strong': customTokens.colorWhiteOnDarkTint10,
+    'chrome-tint-heavy': customTokens.colorWhiteOnDarkTint15,
     'chrome-mobile': customTokens.colorNavy,
-    'chrome-fg': customTokens.colorWhite,
+    'chrome-fg': customTokens.colorWhiteOnDark,
     'chrome-fg-secondary': customTokens.colorNavy40,
     'chrome-fg-tertiary': customTokens.colorNavy60,
 

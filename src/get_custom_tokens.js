@@ -268,7 +268,8 @@ export const getCustomTokens = ({
   colorYellow,
   colorGreen,
   colorBlack,
-  colorWhite
+  colorWhite,
+  colorWhiteOnDark
 }) => {
   const baseNavy = new Color(colorNavy);
   const baseBlue = new Color(colorBlue);
@@ -280,6 +281,7 @@ export const getCustomTokens = ({
   const baseGreen = new Color(colorGreen);
   const baseBlack = new Color(colorBlack);
   const baseWhite = new Color(colorWhite);
+  const baseWhiteOnDark = new Color(colorWhiteOnDark);
 
   return {
     colorNavy,
@@ -292,6 +294,7 @@ export const getCustomTokens = ({
     colorGreen,
     colorBlack,
     colorWhite,
+    colorWhiteOnDark,
 
     colorTransparent: baseWhite.set(deltas.get('colorTransparent')).to('srgb').toString(),
 
@@ -371,6 +374,21 @@ export const getCustomTokens = ({
     colorWhiteTint85: baseWhite.set(deltas.get('colorWhiteTint85')).to('srgb').toString(),
     colorWhiteTint90: baseWhite.set(deltas.get('colorWhiteTint90')).to('srgb').toString(),
     colorWhiteTint95: baseWhite.set(deltas.get('colorWhiteTint95')).to('srgb').toString(),
+
+    colorWhiteOnDarkTint3: baseWhiteOnDark.set(deltas.get('colorWhiteTint3')).to('srgb').toString(),
+    colorWhiteOnDarkTint5: baseWhiteOnDark.set(deltas.get('colorWhiteTint5')).to('srgb').toString(),
+    colorWhiteOnDarkTint10: baseWhiteOnDark.set(deltas.get('colorWhiteTint10')).to('srgb').toString(),
+    colorWhiteOnDarkTint15: baseWhiteOnDark.set(deltas.get('colorWhiteTint15')).to('srgb').toString(),
+    colorWhiteOnDarkTint20: baseWhiteOnDark.set(deltas.get('colorWhiteTint20')).to('srgb').toString(),
+    colorWhiteOnDarkTint30: baseWhiteOnDark.set(deltas.get('colorWhiteTint30')).to('srgb').toString(),
+    colorWhiteOnDarkTint40: baseWhiteOnDark.set(deltas.get('colorWhiteTint40')).to('srgb').toString(),
+    colorWhiteOnDarkTint50: baseWhiteOnDark.set(deltas.get('colorWhiteTint50')).to('srgb').toString(),
+    colorWhiteOnDarkTint60: baseWhiteOnDark.set(deltas.get('colorWhiteTint60')).to('srgb').toString(),
+    colorWhiteOnDarkTint70: baseWhiteOnDark.set(deltas.get('colorWhiteTint70')).to('srgb').toString(),
+    colorWhiteOnDarkTint80: baseWhiteOnDark.set(deltas.get('colorWhiteTint80')).to('srgb').toString(),
+    colorWhiteOnDarkTint85: baseWhiteOnDark.set(deltas.get('colorWhiteTint85')).to('srgb').toString(),
+    colorWhiteOnDarkTint90: baseWhiteOnDark.set(deltas.get('colorWhiteTint90')).to('srgb').toString(),
+    colorWhiteOnDarkTint95: baseWhiteOnDark.set(deltas.get('colorWhiteTint95')).to('srgb').toString(),
 
     colorBlue5: baseBlue.set(deltas.get('colorBlue5')).to('srgb').toString(),
     colorBlue10: baseBlue.set(deltas.get('colorBlue10')).to('srgb').toString(),
