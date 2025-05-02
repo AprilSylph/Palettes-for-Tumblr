@@ -1,4 +1,4 @@
-import { getCustomTokens } from './get_custom_tokens';
+import { getCustomTokens } from './get_custom_tokens.js';
 
 export const getSemanticTokens = (colors) => {
   const customTokens = getCustomTokens(colors);

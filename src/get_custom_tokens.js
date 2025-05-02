@@ -1,4 +1,57 @@
 import Color from './lib/color.min.js';
+
+export const getCustomTokens = (colors) => {
+  const result = {};
+
+  [
+    'navy',
+    'blue',
+    'purple',
+    'pink',
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'black',
+    'white',
+    'white-on-dark',
+    'secondary-accent',
+    'deprecated-accent'
+  ].forEach((colorNameKebab) => {
+    const camelCase = (kebabCase) => kebabCase.replace(/-./g, (match) => match[1].toUpperCase());
+
+    const key = camelCase(`color-${(colorNameKebab)}`);
+    const color = `rgba(${colors[colorNameKebab]}, 1)`;
+
+    result[key] = color;
+
+    const colorJsColor = new Color(color);
+    const toWhite = colorJsColor.range('white', { space: 'srgb' });
+    const toBlack = colorJsColor.range('black', { space: 'srgb' });
+
+    const toStringFormat = { format: 'rgba_number', precision: 4 };
+
+    [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100].forEach((num) => {
+      if (colorNameKebab === 'navy') {
+        result[`${key}${num}`] = toWhite((100 - num) / 100).toString(toStringFormat);
+      } else {
+        result[`${key}${num}`] = (
+          num > 50 ? toBlack((num * 2 - 100) / 100) : toWhite((100 - num * 2) / 100)
+        ).toString(toStringFormat);
+      }
+    });
+
+    [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100].forEach((num) => {
+      result[`${key}Tint${num}`] = `rgba(${colors[colorNameKebab]}, ${num / 100})`;
+    });
+  });
+
+  result.colorTransparent = 'rgba(255, 255, 255, 0)';
+
+  return result;
+};
+
+/*
 import * as colors from './color_tokens.js';
 
 const getDelta = (baseColorRgb, targetColorRgb) => {
@@ -598,3 +651,4 @@ export const getCustomTokens = ({
     colorRainbow10: colorPurple
   };
 };
+*/
