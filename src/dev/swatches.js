@@ -47,17 +47,19 @@ for (const [id, label] of paletteIds) {
 
   Object.entries({ ...currentPaletteData, ...currentPaletteSystemData }).forEach(
     ([property, value]) =>
+      value &&
       nativeColumn.style.setProperty(
         `--${property}`,
-        !value || value.startsWith('rgb') ? value : `rgba(${value})`
+        value.startsWith('rgb') ? value : `rgba(${value})`
       )
   );
 
   Object.entries({ ...currentPaletteData, ...getSemanticTokens(currentPaletteData) }).forEach(
     ([property, value]) =>
+      value &&
       previewColumn.style.setProperty(
         `--${property}`,
-        !value || value.startsWith('rgb') ? value : `rgba(${value})`
+        value.startsWith('rgb') ? value : `rgba(${value})`
       )
   );
 
