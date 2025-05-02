@@ -25,23 +25,27 @@ export const getCustomTokens = (colors) => {
 
     result[key] = color;
 
-    const colorJsColor = new Color(color);
-    const toWhite = colorJsColor.range('white', { space: 'srgb' });
-    const toBlack = colorJsColor.range('black', { space: 'srgb' });
+    const toWhite = new Color(color).range('white', { space: 'srgb' });
+    const toBlack = new Color(color).range('black', { space: 'srgb' });
+    const format = { format: 'rgba_number', precision: 4 };
 
-    const toStringFormat = { format: 'rgba_number', precision: 4 };
+    const increments = [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100];
 
-    [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100].forEach((num) => {
-      if (colorNameKebab === 'navy') {
-        result[`${key}${num}`] = toWhite((100 - num) / 100).toString(toStringFormat);
-      } else {
-        result[`${key}${num}`] = (
-          num > 50 ? toBlack((num * 2 - 100) / 100) : toWhite((100 - num * 2) / 100)
-        ).toString(toStringFormat);
-      }
-    });
+    if (colorNameKebab === 'navy') {
+      increments.forEach((num) => {
+        result[`${key}${num}`] = toWhite((100 - num) / 100).toString(format);
+      });
+    } else {
+      increments.forEach((num) => {
+        if (num > 50) {
+          result[`${key}${num}`] = toBlack((num * 2 - 100) / 100).toString(format);
+        } else {
+          result[`${key}${num}`] = toWhite((100 - num * 2) / 100).toString(format);
+        }
+      });
+    }
 
-    [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100].forEach((num) => {
+    increments.forEach((num) => {
       result[`${key}Tint${num}`] = `rgba(${colors[colorNameKebab]}, ${num / 100})`;
     });
   });
