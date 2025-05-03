@@ -33,10 +33,13 @@
 }
 
 .swatch {
-  color: black;
   padding: 0.5em 0;
   width: 13em;
   text-align: center;
+
+  color: black;
+
+  --error: repeating-linear-gradient(45deg, rgb(255 0 0 / 0.5), rgb(255 0 0 / 0.5) 2px, transparent 4px, transparent 20px);
 }
 
 .swatch.header {

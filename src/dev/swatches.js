@@ -25,13 +25,13 @@ for (const [id, label] of paletteIds) {
   nativeColumn.append(
     dom('div', { class: 'swatch header' }, null, [`${label} (real)`]),
     ...paletteKeys.map((key) =>
-      dom('div', { class: 'swatch', style: `background: var(--${key}, repeating-linear-gradient(45deg, rgb(255 0 0 / 0.5), rgb(255 0 0 / 0.5) 2px, transparent 4px, transparent 20px))` }, null, [key])
+      dom('div', { class: 'swatch', style: `background: var(--${key}, var(--error))` }, null, [key])
     )
   );
   previewColumn.append(
     dom('div', { class: 'swatch header' }, null, [label]),
     ...paletteKeys.map((key) =>
-      dom('div', { class: 'swatch', style: `background: var(--${key}, repeating-linear-gradient(45deg, rgb(255 0 0 / 0.5), rgb(255 0 0 / 0.5) 2px, transparent 4px, transparent 20px))` }, null, [key])
+      dom('div', { class: 'swatch', style: `background: var(--${key}, var(--error))` }, null, [key])
     )
   );
 
