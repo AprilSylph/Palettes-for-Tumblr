@@ -7,9 +7,18 @@ const builtInPaletteList = await jsonFetch('/palettes.json');
 const builtInPalettes = await jsonFetch('/palette_data.json');
 const builtInPaletteSystem = await jsonFetch('/palette_system_data.json');
 
+const storageObject = await browser.storage.local.get();
+
 const containerElement = document.getElementById('container');
 
-const paletteIds = builtInPaletteList.flatMap(([label, options]) => options);
+const paletteData = [
+  ...builtInPaletteList
+    .flatMap(([label, options]) => options)
+    .map(([id, name]) => ({ id, name, builtIn: true })),
+  ...Object.entries(storageObject)
+    .filter(([key]) => key.startsWith('palette:'))
+    .map(([id, { name }]) => ({ id, name, builtIn: false }))
+];
 
 const paletteKeys = [
   ...Object.keys(builtInPalettes.trueBlue).map((key) =>
@@ -18,24 +27,24 @@ const paletteKeys = [
   ...Object.keys(builtInPaletteSystem.trueBlue)
 ];
 
-for (const [id, label] of paletteIds) {
+for (const { id, name, builtIn } of paletteData) {
   const nativeColumn = dom('div', { class: 'column' });
   const previewColumn = dom('div', { class: 'column' });
 
   nativeColumn.append(
-    dom('div', { class: 'swatch header' }, null, [`${label} (real)`]),
+    dom('div', { class: 'swatch header' }, null, [`${name} (real)`]),
     ...paletteKeys.map((key) =>
       dom('div', { class: 'swatch', style: `background: var(--${key}, var(--error))` }, null, [key])
     )
   );
   previewColumn.append(
-    dom('div', { class: 'swatch header' }, null, [label]),
+    dom('div', { class: 'swatch header' }, null, [name]),
     ...paletteKeys.map((key) =>
       dom('div', { class: 'swatch', style: `background: var(--${key}, var(--error))` }, null, [key])
     )
   );
 
-  let currentPaletteData = builtInPalettes[id];
+  let currentPaletteData = builtInPalettes[id] ?? storageObject[id];
   if (currentPaletteData.accent && !currentPaletteData['deprecated-accent']) {
     currentPaletteData = {
       ...currentPaletteData,
@@ -63,5 +72,5 @@ for (const [id, label] of paletteIds) {
       )
   );
 
-  containerElement.append(dom('div', { class: 'columns' }, null, [nativeColumn, previewColumn]));
+  containerElement.append(dom('div', { class: 'columns' }, null, builtIn ? [nativeColumn, previewColumn] : [previewColumn]));
 }
