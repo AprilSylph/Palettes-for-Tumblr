@@ -27,7 +27,9 @@ const applyCurrentPalette = async function () {
     delete currentPaletteData.accent;
   }
 
-  const currentPaletteSystemData = (await paletteSystemData)[currentPalette] ?? {};
+  const currentPaletteSystemData =
+    (await paletteSystemData)[currentPalette] ??
+    (await import(browser.runtime.getURL('/get_semantic_tokens.js')).then(({ getSemanticTokens }) => getSemanticTokens(currentPaletteData)));
 
   const currentPaletteKeys = Object.keys({ ...currentPaletteData, ...currentPaletteSystemData });
   const currentPaletteEntries = Object.entries({ ...currentPaletteData, ...currentPaletteSystemData });
