@@ -18,6 +18,8 @@ export const getCustomTokens = (colors) => {
     'secondary-accent',
     'deprecated-accent'
   ].forEach((colorNameKebab) => {
+    if (!colors[colorNameKebab]) return;
+
     const camelCase = (kebabCase) => kebabCase.replace(/-./g, (match) => match[1].toUpperCase());
 
     const key = camelCase(`color-${(colorNameKebab)}`);
