@@ -16,7 +16,7 @@ try {
   );
   await page.waitForSelector(':root:not(:has(#cmp-app-container iframe))');
 
-  const allData = {};
+  const allData = await fs.readFile('src/palette_system_data.json').then(JSON.parse).catch(() => ({}));
 
   for (let i = 0; i < 12; i++) {
     await new Promise((resolve) => setTimeout(resolve, 500));
