@@ -1,3 +1,7 @@
+html, body {
+  overscroll-behavior: none;
+}
+
 #root {
   width: 100%;
   box-sizing: border-box;
