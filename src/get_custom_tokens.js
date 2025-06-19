@@ -16,7 +16,8 @@ const rootColorKeys = [
   'pink',
   'accent',
   'deprecated-accent',
-  'secondary-accent'
+  'secondary-accent',
+  'gray'
 ];
 
 const increments = [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100];

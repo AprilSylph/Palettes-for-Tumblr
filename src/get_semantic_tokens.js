@@ -2,7 +2,15 @@ import { getCustomTokens } from './get_custom_tokens.js';
 
 export const getSemanticTokens = (colors) => {
   const customTokens = getCustomTokens(colors);
-  const staticTokens = getCustomTokens({ black: '0, 0, 0', white: '255, 255, 255' });
+  const staticTokens = getCustomTokens({
+    black: '0, 0, 0',
+    white: '255, 255, 255',
+    gray: '128, 128, 128',
+
+    red: '255, 73, 48',
+    green: '0, 207, 53',
+    purple: '124, 92, 255'
+  });
 
   return {
     chrome: customTokens.colorNavy,
@@ -79,9 +87,9 @@ export const getSemanticTokens = (colors) => {
     'chrome-ui-fg-secondary': customTokens.colorBlackTint80,
     'chrome-ui-fg-tertiary': customTokens.colorBlackTint60,
     'chrome-ui-toggle': staticTokens.colorWhite,
-    'chrome-danger': customTokens.colorRed30,
-    'chrome-success': customTokens.colorGreen30,
-    'chrome-education': customTokens.colorPurple30,
+    'chrome-danger': staticTokens.colorRed30,
+    'chrome-success': staticTokens.colorGreen30,
+    'chrome-education': staticTokens.colorPurple30,
     'chrome-blue': customTokens.colorBlue30,
     'chrome-purple': customTokens.colorPurple30,
     'chrome-pink': customTokens.colorPink30,
@@ -98,9 +106,9 @@ export const getSemanticTokens = (colors) => {
     'content-ui-fg-secondary': customTokens.colorNavy40,
     'content-ui-fg-tertiary': customTokens.colorNavy60,
     'content-ui-toggle': staticTokens.colorWhite,
-    'content-danger': customTokens.colorRed70,
-    'content-success': customTokens.colorGreen70,
-    'content-education': customTokens.colorPurple70,
+    'content-danger': staticTokens.colorRed70,
+    'content-success': staticTokens.colorGreen70,
+    'content-education': staticTokens.colorPurple70,
     'content-blue': customTokens.colorBlue70,
     'content-purple': customTokens.colorPurple70,
     'content-pink': customTokens.colorPink70,
@@ -114,8 +122,8 @@ export const getSemanticTokens = (colors) => {
     'color-ui-pressed': staticTokens.colorBlackTint80,
     'color-ui-focus': staticTokens.colorBlack,
     'color-ui-fg': staticTokens.colorWhite,
-    'color-ui-fg-secondary': customTokens.colorGray40,
-    'color-ui-fg-tertiary': customTokens.colorGray60,
+    'color-ui-fg-secondary': staticTokens.colorGray40,
+    'color-ui-fg-tertiary': staticTokens.colorGray60,
     'color-ui-toggle': staticTokens.colorWhite,
 
     'image-ui': staticTokens.colorWhite,
@@ -127,8 +135,24 @@ export const getSemanticTokens = (colors) => {
     'image-ui-fg-tertiary': customTokens.colorNavy40,
     'image-ui-toggle': staticTokens.colorWhite,
 
-    'danger-hover': customTokens.colorRed60,
-    'danger-pressed': customTokens.colorRed70,
+    danger: staticTokens.colorRed,
+    'danger-hover': staticTokens.colorRed60,
+    'danger-pressed': staticTokens.colorRed70,
+    'danger-tint': staticTokens.colorRedTint10,
+    'danger-tint-strong': staticTokens.colorRedTint20,
+    'danger-tint-heavy': staticTokens.colorRedTint30,
+    success: staticTokens.colorGreen,
+    'success-hover': staticTokens.colorGreen40,
+    'success-pressed': staticTokens.colorGreen30,
+    'success-tint': staticTokens.colorGreenTint10,
+    'success-tint-strong': staticTokens.colorGreenTint20,
+    'success-tint-heavy': staticTokens.colorGreenTint30,
+    education: staticTokens.colorPurple,
+    'education-hover': staticTokens.colorPurple40,
+    'education-pressed': staticTokens.colorPurple30,
+    'education-tint': staticTokens.colorPurpleTint10,
+    'education-tint-strong': staticTokens.colorPurpleTint20,
+    'education-tint-heavy': staticTokens.colorPurpleTint30,
 
     'brand-blue': customTokens.colorBlue,
     'brand-blue-hover': customTokens.colorBlue40,
