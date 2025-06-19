@@ -1,0 +1,54 @@
+html, body {
+  overscroll-behavior: none;
+}
+
+#root {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+#background {
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  position: fixed;
+
+  --light-tile: rgb(138, 138, 138);
+  --dark-tile: rgb(128, 128, 128);
+  background: conic-gradient(
+    var(--light-tile) 90deg,
+    var(--dark-tile) 90deg 180deg,
+    var(--light-tile) 180deg 270deg,
+    var(--dark-tile) 270deg
+  );
+  background-repeat: repeat;
+  background-size: 60px 60px;
+  background-position: top left;
+}
+
+#container {
+  display: flex;
+}
+
+.columns {
+  display: flex;
+  padding: 1em;
+}
+
+.swatch {
+  padding: 0.5em 0;
+  width: 13em;
+  text-align: center;
+
+  color: black;
+
+  --error: repeating-linear-gradient(45deg, rgb(255 0 0 / 0.5), rgb(255 0 0 / 0.5) 2px, transparent 4px, transparent 20px);
+}
+
+.swatch.header {
+  position: sticky;
+  top: 0;
+
+  background-color: darkgray;
+}
