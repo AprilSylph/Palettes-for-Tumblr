@@ -1,4 +1,8 @@
+import Color from './lib/color.min.js';
 import { getCustomTokens } from './get_custom_tokens.js';
+
+// semi-arbitrary breakpoint in between cement accent and goth rave accent
+const isDark = color => new Color(color).oklch[0] < 0.57;
 
 export const getSemanticTokens = (colors) => {
   const customTokens = getCustomTokens(colors);
@@ -24,9 +28,10 @@ export const getSemanticTokens = (colors) => {
     'chrome-fg-secondary': customTokens.colorNavy40,
     'chrome-fg-tertiary': customTokens.colorNavy60,
 
+    // use: unread count
     accent: customTokens.colorAccent,
-    'accent-fg': customTokens.colorBlack,
-    'accent-fg-light': customTokens.colorWhite,
+    'accent-fg': isDark(customTokens.colorAccent) ? staticTokens.colorWhite : staticTokens.colorBlack,
+    'accent-fg-light': staticTokens.colorWhite,
     'accent-hover': customTokens.colorAccent40,
     'accent-pressed': customTokens.colorAccent30,
     'accent-tint': customTokens.colorAccentTint10,
@@ -35,9 +40,11 @@ export const getSemanticTokens = (colors) => {
 
     'content-panel': customTokens.colorWhite,
     'content-panel-border': customTokens.colorTransparent,
-    'content-tint': customTokens.colorNavyTint5,
-    'content-tint-strong': customTokens.colorNavyTint10,
-    'content-tint-heavy': customTokens.colorNavyTint15,
+
+    // over content-panel/modal (use: search options form element outline, community button outline)
+    'content-tint': isDark(customTokens.colorWhite) ? staticTokens.colorWhiteTint5 : staticTokens.colorBlackTint5,
+    'content-tint-strong': isDark(customTokens.colorWhite) ? staticTokens.colorWhiteTint10 : staticTokens.colorBlackTint10,
+    'content-tint-heavy': isDark(customTokens.colorWhite) ? staticTokens.colorWhiteTint15 : staticTokens.colorBlackTint15,
     'content-mobile-container': customTokens.colorNavy3,
     'content-fg': customTokens.colorBlack,
     'content-fg-secondary': customTokens.colorNavy60,
@@ -67,10 +74,15 @@ export const getSemanticTokens = (colors) => {
     'side-menu-shadow': customTokens.colorWhiteTint10,
     'top-menu': customTokens.colorNavy,
     'top-menu-shadow': customTokens.colorWhiteTint10,
+
+    // use: search mode options modal
     modal: customTokens.colorWhite,
-    'modal-border': customTokens.colorNavyTint10,
-    'tool-tip': customTokens.colorBlack,
-    'tool-tip-text': customTokens.colorWhite,
+    'modal-border': isDark(customTokens.colorWhite) ? staticTokens.colorWhiteTint10 : staticTokens.colorBlackTint10, // should look similar to content-tint-heavy
+
+    // over content-panel (use: post footer control tooltips)
+    'tool-tip': isDark(customTokens.colorWhite) ? staticTokens.colorWhite : staticTokens.colorBlack,
+    'tool-tip-text': isDark(customTokens.colorWhite) ? staticTokens.colorBlack : staticTokens.colorWhite,
+
     'overlay-tint': customTokens.colorNavyTint20,
     'overlay-tint-strong': customTokens.colorNavyTint60,
     'overlay-tint-heavy': customTokens.colorNavyTint80,
@@ -83,20 +95,22 @@ export const getSemanticTokens = (colors) => {
     'chrome-ui-hover': customTokens.colorAccent40,
     'chrome-ui-pressed': customTokens.colorAccent30,
     'chrome-ui-focus': customTokens.colorAccent,
-    'chrome-ui-fg': customTokens.colorBlack,
-    'chrome-ui-fg-secondary': customTokens.colorBlackTint80,
-    'chrome-ui-fg-tertiary': customTokens.colorBlackTint60,
+    'chrome-ui-fg': isDark(customTokens.colorAccent) ? staticTokens.colorWhite : staticTokens.colorBlack,
+    'chrome-ui-fg-secondary': isDark(customTokens.colorAccent) ? staticTokens.colorWhiteTint80 : staticTokens.colorBlackTint80,
+    'chrome-ui-fg-tertiary': isDark(customTokens.colorAccent) ? staticTokens.colorWhiteTint60 : staticTokens.colorBlackTint60,
     'chrome-ui-toggle': staticTokens.colorWhite,
-    'chrome-danger': staticTokens.colorRed30,
-    'chrome-success': staticTokens.colorGreen30,
-    'chrome-education': staticTokens.colorPurple30,
-    'chrome-blue': customTokens.colorBlue30,
-    'chrome-purple': customTokens.colorPurple30,
-    'chrome-pink': customTokens.colorPink30,
-    'chrome-red': customTokens.colorRed30,
-    'chrome-orange': customTokens.colorOrange30,
-    'chrome-yellow': customTokens.colorYellow30,
-    'chrome-green': customTokens.colorGreen30,
+
+    // can't find these but they're probably over navy
+    'chrome-danger': isDark(customTokens.colorNavy) ? staticTokens.colorRed30 : staticTokens.colorRed70,
+    'chrome-success': isDark(customTokens.colorNavy) ? staticTokens.colorGreen30 : staticTokens.colorGreen70,
+    'chrome-education': isDark(customTokens.colorNavy) ? staticTokens.colorPurple30 : staticTokens.colorPurple70,
+    'chrome-blue': isDark(customTokens.colorNavy) ? customTokens.colorBlue30 : customTokens.colorBlue70,
+    'chrome-purple': isDark(customTokens.colorNavy) ? customTokens.colorPurple30 : customTokens.colorPurple70,
+    'chrome-pink': isDark(customTokens.colorNavy) ? customTokens.colorPink30 : customTokens.colorPink70,
+    'chrome-red': isDark(customTokens.colorNavy) ? customTokens.colorRed30 : customTokens.colorRed70,
+    'chrome-orange': isDark(customTokens.colorNavy) ? customTokens.colorOrange30 : customTokens.colorOrange70,
+    'chrome-yellow': isDark(customTokens.colorNavy) ? customTokens.colorYellow30 : customTokens.colorYellow70,
+    'chrome-green': isDark(customTokens.colorNavy) ? customTokens.colorGreen30 : customTokens.colorGreen70,
 
     'content-ui': customTokens.colorNavy,
     'content-ui-hover': customTokens.colorNavy90,
@@ -106,16 +120,18 @@ export const getSemanticTokens = (colors) => {
     'content-ui-fg-secondary': customTokens.colorNavy40,
     'content-ui-fg-tertiary': customTokens.colorNavy60,
     'content-ui-toggle': staticTokens.colorWhite,
-    'content-danger': staticTokens.colorRed70,
-    'content-success': staticTokens.colorGreen70,
-    'content-education': staticTokens.colorPurple70,
-    'content-blue': customTokens.colorBlue70,
-    'content-purple': customTokens.colorPurple70,
-    'content-pink': customTokens.colorPink70,
-    'content-red': customTokens.colorRed70,
-    'content-orange': customTokens.colorOrange70,
-    'content-yellow': customTokens.colorYellow70,
-    'content-green': customTokens.colorGreen70,
+
+    // over content-panel
+    'content-danger': isDark(customTokens.colorWhite) ? staticTokens.colorRed30 : staticTokens.colorRed70,
+    'content-success': isDark(customTokens.colorWhite) ? staticTokens.colorGreen30 : staticTokens.colorGreen70,
+    'content-education': isDark(customTokens.colorWhite) ? staticTokens.colorPurple30 : staticTokens.colorPurple70, // use: community moderate post modal info
+    'content-blue': isDark(customTokens.colorWhite) ? customTokens.colorBlue30 : customTokens.colorBlue70,
+    'content-purple': isDark(customTokens.colorWhite) ? customTokens.colorPurple30 : customTokens.colorPurple70,
+    'content-pink': isDark(customTokens.colorWhite) ? customTokens.colorPink30 : customTokens.colorPink70,
+    'content-red': isDark(customTokens.colorWhite) ? customTokens.colorRed30 : customTokens.colorRed70,
+    'content-orange': isDark(customTokens.colorWhite) ? customTokens.colorOrange30 : customTokens.colorOrange70,
+    'content-yellow': isDark(customTokens.colorWhite) ? customTokens.colorYellow30 : customTokens.colorYellow70,
+    'content-green': isDark(customTokens.colorWhite) ? customTokens.colorGreen30 : customTokens.colorGreen70,
 
     'color-ui': staticTokens.colorBlack,
     'color-ui-hover': staticTokens.colorBlackTint90,
@@ -135,9 +151,10 @@ export const getSemanticTokens = (colors) => {
     'image-ui-fg-tertiary': customTokens.colorNavy40,
     'image-ui-toggle': staticTokens.colorWhite,
 
+    // over content-panel/modal (use: community moderate post modal confirm)
     danger: staticTokens.colorRed,
-    'danger-hover': staticTokens.colorRed60,
-    'danger-pressed': staticTokens.colorRed70,
+    'danger-hover': isDark(customTokens.colorWhite) ? staticTokens.colorRed40 : staticTokens.colorRed60,
+    'danger-pressed': isDark(customTokens.colorWhite) ? staticTokens.colorRed30 : staticTokens.colorRed70,
     'danger-tint': staticTokens.colorRedTint10,
     'danger-tint-strong': staticTokens.colorRedTint20,
     'danger-tint-heavy': staticTokens.colorRedTint30,
