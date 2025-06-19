@@ -2,6 +2,7 @@ import { getCustomTokens } from './get_custom_tokens.js';
 
 export const getSemanticTokens = (colors) => {
   const customTokens = getCustomTokens(colors);
+  const staticTokens = getCustomTokens({ black: '0, 0, 0', white: '255, 255, 255' });
 
   return {
     chrome: customTokens.colorNavy,
@@ -35,11 +36,24 @@ export const getSemanticTokens = (colors) => {
     'content-fg-tertiary': customTokens.colorNavy40,
 
     'color-panel-border': customTokens.colorTransparent,
+    'color-tint': staticTokens.colorBlackTint10,
+    'color-tint-strong': staticTokens.colorBlackTint15,
+    'color-tint-heavy': staticTokens.colorBlackTint20,
+    'color-fg': staticTokens.colorBlack,
+    'color-fg-secondary': staticTokens.colorBlackTint80,
+    'color-fg-tertiary': staticTokens.colorBlackTint60,
+    'color-fg-light': staticTokens.colorWhite,
+    'color-fg-light-secondary': staticTokens.colorWhiteTint80,
+    'color-fg-light-tertiary': staticTokens.colorWhiteTint60,
 
+    'image-bg': staticTokens.colorBlack,
     'image-panel-border': customTokens.colorWhiteTint10,
-    'image-tint': customTokens.colorBlackTint40,
-    'image-tint-strong': customTokens.colorBlackTint50,
-    'image-tint-heavy': customTokens.colorBlackTint60,
+    'image-tint': staticTokens.colorBlackTint40,
+    'image-tint-strong': staticTokens.colorBlackTint50,
+    'image-tint-heavy': staticTokens.colorBlackTint60,
+    'image-fg': staticTokens.colorWhite,
+    'image-fg-secondary': staticTokens.colorWhiteTint80,
+    'image-fg-tertiary': staticTokens.colorWhiteTint60,
 
     'side-menu': customTokens.colorNavy,
     'side-menu-shadow': customTokens.colorWhiteTint10,
@@ -54,7 +68,8 @@ export const getSemanticTokens = (colors) => {
     'overlay-tint-heavy': customTokens.colorNavyTint80,
     'unread-tint': customTokens.colorAccentTint10,
     'unread-tint-hover': customTokens.colorAccentTint20,
-    'badge-text': customTokens.colorBlack,
+    'badge-text': staticTokens.colorBlack,
+    'badge-icon': staticTokens.colorWhite,
 
     'chrome-ui': customTokens.colorAccent,
     'chrome-ui-hover': customTokens.colorAccent40,
@@ -63,6 +78,7 @@ export const getSemanticTokens = (colors) => {
     'chrome-ui-fg': customTokens.colorBlack,
     'chrome-ui-fg-secondary': customTokens.colorBlackTint80,
     'chrome-ui-fg-tertiary': customTokens.colorBlackTint60,
+    'chrome-ui-toggle': staticTokens.colorWhite,
     'chrome-danger': customTokens.colorRed30,
     'chrome-success': customTokens.colorGreen30,
     'chrome-education': customTokens.colorPurple30,
@@ -81,6 +97,7 @@ export const getSemanticTokens = (colors) => {
     'content-ui-fg': customTokens.colorWhite,
     'content-ui-fg-secondary': customTokens.colorNavy40,
     'content-ui-fg-tertiary': customTokens.colorNavy60,
+    'content-ui-toggle': staticTokens.colorWhite,
     'content-danger': customTokens.colorRed70,
     'content-success': customTokens.colorGreen70,
     'content-education': customTokens.colorPurple70,
@@ -92,11 +109,23 @@ export const getSemanticTokens = (colors) => {
     'content-yellow': customTokens.colorYellow70,
     'content-green': customTokens.colorGreen70,
 
+    'color-ui': staticTokens.colorBlack,
+    'color-ui-hover': staticTokens.colorBlackTint90,
+    'color-ui-pressed': staticTokens.colorBlackTint80,
+    'color-ui-focus': staticTokens.colorBlack,
+    'color-ui-fg': staticTokens.colorWhite,
     'color-ui-fg-secondary': customTokens.colorGray40,
     'color-ui-fg-tertiary': customTokens.colorGray60,
+    'color-ui-toggle': staticTokens.colorWhite,
 
+    'image-ui': staticTokens.colorWhite,
+    'image-ui-hover': staticTokens.colorWhiteTint90,
+    'image-ui-pressed': staticTokens.colorWhiteTint80,
+    'image-ui-accent': staticTokens.colorWhite,
+    'image-ui-fg': staticTokens.colorBlack,
     'image-ui-fg-secondary': customTokens.colorNavy60,
     'image-ui-fg-tertiary': customTokens.colorNavy40,
+    'image-ui-toggle': staticTokens.colorWhite,
 
     'danger-hover': customTokens.colorRed60,
     'danger-pressed': customTokens.colorRed70,
