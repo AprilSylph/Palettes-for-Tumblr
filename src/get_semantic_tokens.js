@@ -23,10 +23,12 @@ export const getSemanticTokens = (colors) => {
     'chrome-tint': customTokens.colorWhiteOnDarkTint5,
     'chrome-tint-strong': customTokens.colorWhiteOnDarkTint10,
     'chrome-tint-heavy': customTokens.colorWhiteOnDarkTint15,
-    'chrome-mobile': customTokens.colorNavy,
+    'chrome-mobile': customTokens.colorNavy, // seems completely unused?
+
+    // over top-menu (use: button in community setting header)
     'chrome-fg': customTokens.colorWhiteOnDark,
-    'chrome-fg-secondary': customTokens.colorNavy40,
-    'chrome-fg-tertiary': customTokens.colorNavy60,
+    'chrome-fg-secondary': customTokens.colorWhiteOnDarkTint60,
+    'chrome-fg-tertiary': customTokens.colorWhiteOnDarkTint40,
 
     // use: unread count
     accent: customTokens.colorAccent,
@@ -45,15 +47,18 @@ export const getSemanticTokens = (colors) => {
     'content-tint': isDark(customTokens.colorWhite) ? staticTokens.colorWhiteTint5 : staticTokens.colorBlackTint5,
     'content-tint-strong': isDark(customTokens.colorWhite) ? staticTokens.colorWhiteTint10 : staticTokens.colorBlackTint10,
     'content-tint-heavy': isDark(customTokens.colorWhite) ? staticTokens.colorWhiteTint15 : staticTokens.colorBlackTint15,
-    'content-mobile-container': customTokens.colorNavy3,
+    'content-mobile-container': customTokens.colorNavy3, // seems completely unused?
+
     'content-fg': customTokens.colorBlack,
-    'content-fg-secondary': customTokens.colorNavy60,
-    'content-fg-tertiary': customTokens.colorNavy40,
+    'content-fg-secondary': customTokens.colorBlackTint60,
+    'content-fg-tertiary': customTokens.colorBlackTint40,
 
     'color-panel-border': customTokens.colorTransparent,
     'color-tint': staticTokens.colorBlackTint10,
     'color-tint-strong': staticTokens.colorBlackTint15,
     'color-tint-heavy': staticTokens.colorBlackTint20,
+
+    // over e.g. brand-purple (use: "create your own community" on tagged page)
     'color-fg': staticTokens.colorBlack,
     'color-fg-secondary': staticTokens.colorBlackTint80,
     'color-fg-tertiary': staticTokens.colorBlackTint60,
@@ -83,9 +88,11 @@ export const getSemanticTokens = (colors) => {
     'tool-tip': isDark(customTokens.colorWhite) ? staticTokens.colorWhite : staticTokens.colorBlack,
     'tool-tip-text': isDark(customTokens.colorWhite) ? staticTokens.colorBlack : staticTokens.colorWhite,
 
+    // use: settings page change password backdrop
     'overlay-tint': customTokens.colorNavyTint20,
     'overlay-tint-strong': customTokens.colorNavyTint60,
     'overlay-tint-heavy': customTokens.colorNavyTint80,
+
     'unread-tint': customTokens.colorAccentTint10,
     'unread-tint-hover': customTokens.colorAccentTint20,
     'badge-text': staticTokens.colorBlack,
@@ -112,10 +119,13 @@ export const getSemanticTokens = (colors) => {
     'chrome-yellow': isDark(customTokens.colorNavy) ? customTokens.colorYellow30 : customTokens.colorYellow70,
     'chrome-green': isDark(customTokens.colorNavy) ? customTokens.colorGreen30 : customTokens.colorGreen70,
 
-    'content-ui': customTokens.colorNavy,
-    'content-ui-hover': customTokens.colorNavy90,
-    'content-ui-pressed': customTokens.colorNavy80,
+    // over content-panel (use: post button on drafts)
+    'content-ui': customTokens.colorAccent,
+    'content-ui-hover': customTokens.colorAccent40,
+    'content-ui-pressed': customTokens.colorAccent30,
     'content-ui-focus': customTokens.colorAccent,
+
+    // unknown use
     'content-ui-fg': customTokens.colorWhite,
     'content-ui-fg-secondary': customTokens.colorNavy40,
     'content-ui-fg-tertiary': customTokens.colorNavy60,
@@ -133,6 +143,7 @@ export const getSemanticTokens = (colors) => {
     'content-yellow': isDark(customTokens.colorWhite) ? customTokens.colorYellow30 : customTokens.colorYellow70,
     'content-green': isDark(customTokens.colorWhite) ? customTokens.colorGreen30 : customTokens.colorGreen70,
 
+    // over e.g. brand-purple (use: "create your own community" on tagged page)
     'color-ui': staticTokens.colorBlack,
     'color-ui-hover': staticTokens.colorBlackTint90,
     'color-ui-pressed': staticTokens.colorBlackTint80,
@@ -142,13 +153,16 @@ export const getSemanticTokens = (colors) => {
     'color-ui-fg-tertiary': staticTokens.colorGray60,
     'color-ui-toggle': staticTokens.colorWhite,
 
+    // use: community invite button
     'image-ui': staticTokens.colorWhite,
     'image-ui-hover': staticTokens.colorWhiteTint90,
     'image-ui-pressed': staticTokens.colorWhiteTint80,
     'image-ui-accent': staticTokens.colorWhite,
+
+    // use: boop modal? I don't know.
     'image-ui-fg': staticTokens.colorBlack,
-    'image-ui-fg-secondary': customTokens.colorNavy60,
-    'image-ui-fg-tertiary': customTokens.colorNavy40,
+    'image-ui-fg-secondary': staticTokens.colorGray60,
+    'image-ui-fg-tertiary': staticTokens.colorGray40,
     'image-ui-toggle': staticTokens.colorWhite,
 
     // over content-panel/modal (use: community moderate post modal confirm)
