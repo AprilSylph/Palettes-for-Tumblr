@@ -50,7 +50,7 @@ for (const { id, name, builtIn } of paletteData) {
       ...currentPaletteData,
       'deprecated-accent': currentPaletteData.accent
     };
-    delete currentPaletteData.accent;
+    // delete currentPaletteData.accent;
   }
   const currentPaletteSystemData = builtInPaletteSystem[id];
 

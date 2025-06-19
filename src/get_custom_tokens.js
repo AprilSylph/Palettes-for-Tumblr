@@ -14,6 +14,7 @@ const rootColorKeys = [
   'blue',
   'purple',
   'pink',
+  'accent',
   'deprecated-accent',
   'secondary-accent'
 ];

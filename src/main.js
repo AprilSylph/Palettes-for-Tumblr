@@ -24,7 +24,7 @@ const applyCurrentPalette = async function () {
       ...currentPaletteData,
       'deprecated-accent': currentPaletteData.accent
     };
-    delete currentPaletteData.accent;
+    // delete currentPaletteData.accent;
   }
 
   const currentPaletteSystemData =

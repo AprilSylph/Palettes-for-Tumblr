@@ -43,7 +43,8 @@
     "blue": "82, 158, 204",
     "purple": "167, 125, 194",
     "pink": "239, 113, 200",
-    "accent": "82, 158, 204",
+    "deprecated-accent": "82, 158, 204",
+    "accent": "0, 184, 255",
     "secondary-accent": "71, 87, 109",
     "follow": "43, 76, 104"
   },
@@ -59,7 +60,8 @@
     "blue": "0, 184, 255",
     "purple": "124, 92, 255",
     "pink": "255, 98, 206",
-    "accent": "127, 127, 127",
+    "deprecated-accent": "127, 127, 127",
+    "accent": "102, 117, 134",
     "secondary-accent": "221, 221, 221",
     "follow": "209, 227, 235"
   },
@@ -75,7 +77,8 @@
     "blue": "103, 255, 56",
     "purple": "103, 255, 56",
     "pink": "103, 255, 56",
-    "accent": "103, 255, 56",
+    "deprecated-accent": "103, 255, 56",
+    "accent": "1, 207, 53",
     "secondary-accent": "20, 96, 26",
     "follow": "20, 96, 26"
   },
@@ -107,7 +110,8 @@
     "blue": "0, 184, 255",
     "purple": "124, 92, 255",
     "pink": "255, 98, 206",
-    "accent": "124, 92, 255",
+    "deprecated-accent": "124, 92, 255",
+    "accent": "0, 184, 255",
     "secondary-accent": "255, 73, 48",
     "follow": "208, 208, 208"
   },
@@ -155,7 +159,8 @@
     "blue": "0, 0, 0",
     "purple": "0, 0, 0",
     "pink": "0, 0, 0",
-    "accent": "150, 150, 150",
+    "deprecated-accent": "150, 150, 150",
+    "accent": "0, 0, 0",
     "secondary-accent": "208, 208, 208",
     "follow": "208, 208, 208"
   },
@@ -171,7 +176,8 @@
     "blue": "12, 121, 249",
     "purple": "179, 2, 255",
     "pink": "255, 0, 144",
-    "accent": "207, 67, 237",
+    "deprecated-accent": "207, 67, 237",
+    "accent": "124, 92, 255",
     "secondary-accent": "45, 27, 57",
     "follow": "6, 29, 74"
   },
@@ -187,7 +193,8 @@
     "blue": "0, 88, 252",
     "purple": "117, 8, 135",
     "pink": "255, 0, 144",
-    "accent": "2, 77, 255",
+    "deprecated-accent": "2, 77, 255",
+    "accent": "232, 215, 58",
     "secondary-accent": "255, 251, 205",
     "follow": "255, 251, 205"
   },
@@ -203,6 +210,7 @@
     "blue": "99, 167, 209",
     "purple": "176, 138, 200",
     "pink": "130, 141, 149",
+    "accent": "99, 167, 209",
     "deprecated-accent": "99, 167, 209",
     "secondary-accent": "245, 245, 245",
     "follow": "243, 248, 251"
@@ -219,6 +227,7 @@
     "blue": "82, 158, 204",
     "purple": "167, 125, 194",
     "pink": "116, 128, 137",
+    "accent": "82, 158, 204",
     "deprecated-accent": "82, 158, 204",
     "secondary-accent": "229, 231, 234",
     "follow": "243, 248, 251"
@@ -235,6 +244,7 @@
     "blue": "99, 166, 208",
     "purple": "176, 138, 199",
     "pink": "130, 141, 148",
+    "accent": "247, 37, 0",
     "deprecated-accent": "247, 37, 0",
     "secondary-accent": "245, 245, 245",
     "follow": "243, 248, 251"
