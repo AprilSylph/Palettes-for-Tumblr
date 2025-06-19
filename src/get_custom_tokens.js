@@ -1,26 +1,30 @@
 import Color from './lib/color.min.js';
 
+const camelCase = (kebabCase) => kebabCase.replace(/-./g, (match) => match[1].toUpperCase());
+
+const rootColorKeys = [
+  'black',
+  'white',
+  'white-on-dark',
+  'navy',
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'blue',
+  'purple',
+  'pink',
+  'deprecated-accent',
+  'secondary-accent'
+];
+
+const increments = [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100];
+
 export const getCustomTokens = (colors) => {
   const result = {};
 
-  [
-    'navy',
-    'blue',
-    'purple',
-    'pink',
-    'red',
-    'orange',
-    'yellow',
-    'green',
-    'black',
-    'white',
-    'white-on-dark',
-    'secondary-accent',
-    'deprecated-accent'
-  ].forEach((colorNameKebab) => {
+  rootColorKeys.forEach((colorNameKebab) => {
     if (!colors[colorNameKebab]) return;
-
-    const camelCase = (kebabCase) => kebabCase.replace(/-./g, (match) => match[1].toUpperCase());
 
     const key = camelCase(`color-${(colorNameKebab)}`);
     const color = `rgba(${colors[colorNameKebab]}, 1)`;
@@ -30,8 +34,6 @@ export const getCustomTokens = (colors) => {
     const toWhite = new Color(color).range('white', { space: 'srgb' });
     const toBlack = new Color(color).range('black', { space: 'srgb' });
     const format = { format: 'rgba_number', precision: 4 };
-
-    const increments = [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100];
 
     if (colorNameKebab === 'navy') {
       increments.forEach((num) => {
