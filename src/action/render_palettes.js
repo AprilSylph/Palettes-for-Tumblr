@@ -6,16 +6,24 @@ const getInstalledPalettes = async function () {
   return data;
 };
 
-const writeSelected = async function ({ target: { value } }) {
-  browser.storage.local.set({ currentPalette: value });
-};
-
-const renderPalettes = async function () {
-  const paletteSelect = document.getElementById('palette');
-  paletteSelect.addEventListener('input', writeSelected);
+const renderPalettes = async function (id, storageKey) {
+  const paletteSelect = document.getElementById(id);
+  paletteSelect.addEventListener('input', ({ target: { value } }) => {
+    paletteSelect.dataset.value = value;
+    browser.storage.local.set({ [storageKey]: value });
+  });
 
   const installedPalettes = await getInstalledPalettes();
-  const { currentPalette } = await browser.storage.local.get('currentPalette');
+  const { [storageKey]: currentPalette = '' } = await browser.storage.local.get(storageKey);
+
+  paletteSelect.dataset.value = currentPalette;
+  if (id === 'palette') {
+    paletteSelect.append(Object.assign(document.createElement('option'), {
+      value: 'prefers-color-scheme',
+      textContent: 'Automatic Light/Dark Mode',
+      selected: currentPalette === 'prefers-color-scheme'
+    }));
+  }
 
   for (const [label, options] of installedPalettes) {
     const optgroup = Object.assign(document.createElement('optgroup'), { label });
@@ -50,6 +58,8 @@ const renderPalettes = async function () {
   }));
 };
 
-renderPalettes();
+renderPalettes('palette', 'currentPalette');
+renderPalettes('palette-light', 'currentLightPalette');
+renderPalettes('palette-dark', 'currentDarkPalette');
 
 document.getElementById('manage-palettes').addEventListener('click', () => browser.runtime.openOptionsPage());

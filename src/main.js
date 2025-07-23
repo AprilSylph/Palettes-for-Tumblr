@@ -5,8 +5,18 @@ const removeCssVariable = ([property]) => document.documentElement.style.removeP
 
 let appliedPaletteEntries = [];
 
+const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
 const applyCurrentPalette = async function () {
-  const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
+  let {
+    currentPalette = '',
+    currentLightPalette = '',
+    currentDarkPalette = ''
+  } = await browser.storage.local.get(['currentPalette', 'currentLightPalette', 'currentDarkPalette']);
+
+  if (currentPalette === 'prefers-color-scheme') {
+    currentPalette = darkModeQuery.matches ? currentDarkPalette : currentLightPalette;
+  }
 
   if (!currentPalette) {
     appliedPaletteEntries.forEach(removeCssVariable);
@@ -68,15 +78,17 @@ const onStorageChanged = async function (changes, areaName) {
     return;
   }
 
-  const { currentPalette, fontFamily, customFontFamily, fontSize } = changes;
+  const { currentPalette, currentLightPalette, currentDarkPalette, fontFamily, customFontFamily, fontSize } = changes;
 
-  if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
+  if (currentPalette || currentLightPalette || currentDarkPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
     applyCurrentPalette();
   }
 
   if (fontFamily || customFontFamily) applyFontFamily();
   if (fontSize) applyFontSize();
 };
+
+darkModeQuery.addEventListener('change', applyCurrentPalette);
 
 applyCurrentPalette();
 applyFontFamily();
