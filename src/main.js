@@ -63,11 +63,7 @@ const applyFontSize = async function () {
   document.documentElement.style.setProperty('--base-font-size', fontSize);
 };
 
-const onStorageChanged = async function (changes, areaName) {
-  if (areaName !== 'local') {
-    return;
-  }
-
+const onStorageChanged = async function (changes) {
   const { currentPalette, fontFamily, customFontFamily, fontSize } = changes;
 
   if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
@@ -81,4 +77,4 @@ const onStorageChanged = async function (changes, areaName) {
 applyCurrentPalette();
 applyFontFamily();
 applyFontSize();
-browser.storage.onChanged.addListener(onStorageChanged);
+browser.storage.local.onChanged.addListener(onStorageChanged);
