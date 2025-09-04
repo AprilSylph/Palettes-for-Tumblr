@@ -13,11 +13,7 @@ export default [
    * - `react`
    * - `typescript-eslint`
    */
-  ...neostandard({
-    env: ['browser', 'jquery', 'webextensions'],
-    ignores: ['src/lib/**'],
-    semi: true,
-  }),
+  ...neostandard({ env: ['browser', 'webextensions'], ignores: ['src/lib/**'], semi: true }),
 
   /**
    * Use recommended `import-x` lint rules. Additionally, prevent cyclical imports.
