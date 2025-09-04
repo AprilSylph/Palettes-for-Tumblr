@@ -4,11 +4,9 @@
     "es2021": true,
     "webextensions": true
   },
-  "extends": [
-    "semistandard"
-  ],
   "parserOptions": {
-    "ecmaVersion": 2022
+    "ecmaVersion": 2022,
+    "sourceType": "module"
   },
   "rules": {
   },
