@@ -1,8 +1,9 @@
+/* Force .glass .coverInner to respect the --navy variable set in CSS */
 [role="dialog"][aria-modal="true"] [style^="background-color: rgba("][style$="0.85);"][tabindex="-1"] {
   background-color: rgba(var(--navy), 0.85) !important;
 }
 
-/* disable post font override from the blog view's use of true blue variables */
+/* Disable post font override from the blog view's use of True Blue variables */
 :root[style*="--font-family"] div[style*="--font-family"][style*="--blog-title-color"] {
   --font-family: unset !important;
   --font-family-modern: unset !important;
