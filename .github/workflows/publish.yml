@@ -23,8 +23,8 @@ jobs:
       - name: Lint WebExtension
         run: npm test --ignore-scripts
 
-      - name: Publish WebExtension
-        run: npm run sign-webextension
+      - name: Sign WebExtension
+        run: npx web-ext sign
         env:
           WEB_EXT_API_KEY: ${{ secrets.WEB_EXT_API_KEY }}
           WEB_EXT_API_SECRET: ${{ secrets.WEB_EXT_API_SECRET }}
