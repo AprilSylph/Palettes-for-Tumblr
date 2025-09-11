@@ -5,8 +5,7 @@
   "scripts": {
     "test": "web-ext lint",
     "posttest": "eslint src/",
-    "build": "web-ext build",
-    "update-palette-system-data": "node dev/update-palette-system-data.js"
+    "build": "web-ext build"
   },
   "devDependencies": {
     "chrome-webstore-upload-cli": "^3.3.2",

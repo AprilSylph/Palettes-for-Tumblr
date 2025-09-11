@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { launch } from 'puppeteer';
 import fs from 'node:fs/promises';
 
