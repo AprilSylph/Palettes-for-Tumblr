@@ -22,7 +22,7 @@ jobs:
         run: npm test --ignore-scripts
 
       - name: Build WebExtension
-        run: npm run build-webextension
+        run: npm run build
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
