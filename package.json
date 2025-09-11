@@ -6,7 +6,6 @@
     "test": "web-ext lint",
     "posttest": "eslint src/",
     "build": "web-ext build",
-    "webstore-upload": "chrome-webstore-upload upload --source=src/ --auto-publish",
     "update-palette-system-data": "node dev/update-palette-system-data.js"
   },
   "devDependencies": {
