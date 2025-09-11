@@ -3,7 +3,8 @@
   "repository": "github:AprilSylph/Palettes-for-Tumblr",
   "type": "module",
   "scripts": {
-    "test": "eslint . && web-ext lint",
+    "test": "web-ext lint",
+    "posttest": "eslint src/",
     "lint-webextension": "web-ext lint",
     "build-webextension": "web-ext build",
     "sign-webextension": "web-ext sign",
