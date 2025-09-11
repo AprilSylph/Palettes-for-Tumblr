@@ -12,8 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js Environment
-        uses: actions/setup-node@v4.4.0
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
@@ -21,7 +21,7 @@ jobs:
         run: npm ci
 
       - name: Lint WebExtension
-        run: npm run lint-webextension
+        run: npm test --ignore-scripts
 
       - name: Publish WebExtension
         run: npm run sign-webextension
