@@ -16,6 +16,9 @@
 :root:not([style*="--accent-fg"])[style*="--navy"] {
   --accent-fg: rgb(var(--navy));
 }
+:root:not([style*="--chrome"])[style*="--navy"] {
+  --chrome: rgb(var(--navy));
+}
 :root:not([style*="--content-panel"])[style*="--white"] {
   --content-panel: rgb(var(--white));
 }
