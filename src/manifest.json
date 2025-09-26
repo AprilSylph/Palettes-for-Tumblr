@@ -43,7 +43,7 @@
     "matches": [ "*://www.tumblr.com/*" ]
   }],
 
-	"minimum_chrome_version": "103",
+	"minimum_chrome_version": "111",
   "browser_specific_settings": {
     "gecko": {
       "id": "{04b5e1e9-3044-41fd-be51-e8915008ad16}",
