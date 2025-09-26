@@ -44,10 +44,10 @@
   --chrome-ui: rgb(var(--deprecated-accent));
 }
 :root:not([style*="--chrome-ui-hover"])[style*="--deprecated-accent"][style*="--white-on-dark"] {
-  --chrome-ui-hover: color-mix(in srgb, rgb(var(--deprecated-accent)) 100%, rgb(var(--white-on-dark)) 25%);
+  --chrome-ui-hover: color-mix(in srgb, rgb(var(--deprecated-accent)), rgb(var(--white-on-dark)) 20%);
 }
 :root:not([style*="--chrome-ui-pressed"])[style*="--deprecated-accent"][style*="--navy"] {
-  --chrome-ui-pressed: color-mix(in srgb, rgb(var(--deprecated-accent)) 90%, rgb(var(--navy)) 10%);
+  --chrome-ui-pressed: color-mix(in srgb, rgb(var(--deprecated-accent)), rgb(var(--navy)) 10%);
 }
 :root:not([style*="--chrome-ui-focus"])[style*="--deprecated-accent"] {
   --chrome-ui-focus: rgb(var(--deprecated-accent));
