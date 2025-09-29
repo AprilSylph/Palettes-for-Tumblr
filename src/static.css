@@ -10,11 +10,51 @@
 }
 
 /* Port old CSS variables to new design system tokens */
-:root[style*="--white"]:not([style*="--content-panel"]) { --content-panel: rgb(var(--white)); }
-:root[style*="--black"]:not([style*="--content-tint"]) { --content-tint: rgba(var(--black), 0.07); }
-:root[style*="--black"]:not([style*="--content-tint-strong"]) { --content-tint-strong: rgba(var(--black), 0.13); }
-:root[style*="--black"]:not([style*="--content-tint-heavy"]) { --content-tint-heavy: rgba(var(--black), 0.25); }
-:root[style*="--black"]:not([style*="--content-fg"]) { --content-fg: rgb(var(--black)); }
-:root[style*="--black"]:not([style*="--content-fg-secondary"]) { --content-fg-secondary: rgba(var(--black), 0.65); }
-:root[style*="--black"]:not([style*="--content-fg-tertiary"]) { --content-fg-tertiary: rgba(var(--black), 0.4); }
-:root[style*="--white"]:not([style*="--modal"]) { --modal: rgb(var(--white)); }
+:root:not([style*="--accent"])[style*="--deprecated-accent"] {
+  --accent: rgb(var(--deprecated-accent));
+}
+:root:not([style*="--accent-fg"])[style*="--navy"] {
+  --accent-fg: rgb(var(--navy));
+}
+:root:not([style*="--chrome"])[style*="--navy"] {
+  --chrome: rgb(var(--navy));
+}
+:root:not([style*="--content-panel"])[style*="--white"] {
+  --content-panel: rgb(var(--white));
+}
+:root:not([style*="--content-tint"])[style*="--black"] {
+  --content-tint: rgba(var(--black), 0.07);
+}
+:root:not([style*="--content-tint-strong"])[style*="--black"] {
+  --content-tint-strong: rgba(var(--black), 0.13);
+}
+:root:not([style*="--content-tint-heavy"])[style*="--black"] {
+  --content-tint-heavy: rgba(var(--black), 0.25);
+}
+:root:not([style*="--content-fg"])[style*="--black"] {
+  --content-fg: rgb(var(--black));
+}
+:root:not([style*="--content-fg-secondary"])[style*="--black"] {
+  --content-fg-secondary: rgba(var(--black), 0.65);
+}
+:root:not([style*="--content-fg-tertiary"])[style*="--black"] {
+  --content-fg-tertiary: rgba(var(--black), 0.4);
+}
+:root:not([style*="--modal"])[style*="--white"] {
+  --modal: rgb(var(--white));
+}
+:root:not([style*="--chrome-ui"])[style*="--deprecated-accent"] {
+  --chrome-ui: rgb(var(--deprecated-accent));
+}
+:root:not([style*="--chrome-ui-hover"])[style*="--deprecated-accent"][style*="--white-on-dark"] {
+  --chrome-ui-hover: color-mix(in srgb, rgb(var(--deprecated-accent)), rgb(var(--white-on-dark)) 20%);
+}
+:root:not([style*="--chrome-ui-pressed"])[style*="--deprecated-accent"][style*="--navy"] {
+  --chrome-ui-pressed: color-mix(in srgb, rgb(var(--deprecated-accent)), rgb(var(--navy)) 10%);
+}
+:root:not([style*="--chrome-ui-focus"])[style*="--deprecated-accent"] {
+  --chrome-ui-focus: rgb(var(--deprecated-accent));
+}
+:root:not([style*="--chrome-ui-fg"])[style*="--navy"] {
+  --chrome-ui-fg: rgb(var(--navy));
+}
