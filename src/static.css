@@ -16,7 +16,9 @@
 :root:not([style*="--accent"])[style*="--deprecated-accent"] {
   --accent: rgb(var(--deprecated-accent));
   --accent-fg: rgb(var(--navy));
+  --accent-fg-light: rgb(var(--white-on-dark));
   --accent-hover: color-mix(in srgb, rgb(var(--deprecated-accent)), rgb(var(--white-on-dark)) 20%);
+  --accent-pressed: color-mix(in srgb, rgb(var(--deprecated-accent)), rgb(var(--white-on-dark)) 40%);
   --accent-tint: rgba(var(--deprecated-accent), 0.1);
   --accent-tint-strong: rgba(var(--deprecated-accent), 0.2);
   --accent-tint-heavy: rgba(var(--deprecated-accent), 0.3);
