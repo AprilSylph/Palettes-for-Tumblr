@@ -8,10 +8,10 @@
     "build": "web-ext build"
   },
   "devDependencies": {
-    "chrome-webstore-upload-cli": "^3.4.0",
-    "eslint": "^9.36.0",
+    "chrome-webstore-upload-cli": "^3.5.0",
+    "eslint": "^9.39.0",
     "neostandard": "^0.12.2",
-    "puppeteer": "^24.22.3",
+    "puppeteer": "^24.27.0",
     "web-ext": "^8.10.0"
   },
   "dependencies": {
