@@ -5,7 +5,6 @@ import fs from 'node:fs/promises';
 
 try {
   const browser = await launch({ browser: 'firefox', headless: false });
-  await new Promise(resolve => setTimeout(resolve, 5000));
   const page = await browser.newPage();
   await page.goto('https://www.tumblr.com/');
 
