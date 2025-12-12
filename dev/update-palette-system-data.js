@@ -30,17 +30,28 @@ try {
     if (key === 'snowBright') key = 'nuclearWhite';
 
     const styleElement = await page.waitForSelector('#root style');
-    const data = await styleElement.evaluate((el) => {
+    const { light, dark } = await styleElement.evaluate((el) => {
       const rootRuleStyle = [...el.sheet.cssRules].find((rule) => rule.selectorText === ':root').style;
 
-      const keys = [...rootRuleStyle];
-      const entries = keys
-        .map((key) => [key, rootRuleStyle.getPropertyValue(key)])
-        .filter(([key, value]) => key.startsWith('--') && /rgba\(\d/.test(value));
-      return Object.fromEntries(entries.map(([key, value]) => [key.replace(/^--/, ''), value]));
+      const darkModeRules = [...el.sheet.cssRules].find((rule) => rule.conditionText === '(prefers-color-scheme: dark)')?.cssRules;
+      const darkModeRootRuleStyle = darkModeRules && [...darkModeRules].find((rule) => rule.selectorText === ':root').style;
+
+      const processStyleRule = rootRuleStyle => {
+        if (!rootRuleStyle) return;
+        const keys = [...rootRuleStyle];
+        const entries = keys
+          .map((key) => [key, rootRuleStyle.getPropertyValue(key)])
+          .filter(([key, value]) => key.startsWith('--') && /rgba\(\d/.test(value));
+        return Object.fromEntries(entries.map(([key, value]) => [key.replace(/^--/, ''), value]));
+      };
+
+      return {
+        light: processStyleRule(rootRuleStyle),
+        dark: processStyleRule(darkModeRootRuleStyle),
+      };
     });
 
-    allData[key] = data;
+    allData[key] = dark && key === 'darkMode' ? dark : light;
 
     await page.keyboard.down('Shift');
     await page.keyboard.press('KeyP');
@@ -49,7 +60,7 @@ try {
 
   await browser.close();
 
-  await fs.writeFile('src/palette_system_data.json', JSON.stringify(allData, null, 2), {
+  await fs.writeFile('src/palette_system_data.json', JSON.stringify(allData, null, 2) + '\n', {
     encoding: 'utf8',
     flag: 'w+'
   });
