@@ -1,4 +1,4 @@
-import { dom } from './dom.js';
+import { div, style } from './dom.js';
 
 const load = (url) => fetch(browser.runtime.getURL(url));
 
@@ -7,7 +7,7 @@ const builtInPalettes = await load('/palette_data.json').then((response) => resp
 const builtInPaletteSystem = await load('/palette_system_data.json').then((response) => response.json());
 const staticCss = await load('/static.css').then((response) => response.text());
 
-document.head.append(dom('style', null, null, staticCss.replaceAll(/^:root/gm, '.column')));
+document.head.append(style({}, [staticCss.replaceAll(/^:root/gm, '.column')]));
 
 const storageObject = await browser.storage.local.get();
 
@@ -29,20 +29,20 @@ const paletteSystemKeys = Object.keys(builtInPaletteSystem.trueBlue);
 
 const createSwatches = () => [
   ...paletteKeys.map((key) =>
-    dom('div', { class: 'swatch', style: `background: rgba(var(--${key}))` }, null, [key])
+    div({ class: 'swatch', style: `background: rgba(var(--${key}))` }, [key])
   ),
   ...paletteSystemKeys.map((key) =>
-    dom('div', { class: 'swatch', style: `background: var(--${key}, var(--error))` }, null, [key])
+    div({ class: 'swatch', style: `background: var(--${key}, var(--error))` }, [key])
   )
 ];
 
 containerElement.replaceChildren(...paletteData.map(({ id, name, builtIn }) => {
-  const nativeColumn = dom('div', { class: 'column' }, null, [
-    dom('div', { class: 'swatch header' }, null, [name]),
+  const nativeColumn = div({ class: 'column' }, [
+    div({ class: 'swatch header' }, [name]),
     ...createSwatches()
   ]);
-  const previewColumn = dom('div', { class: 'column' }, null, [
-    dom('div', { class: 'swatch header' }, null, [builtIn ? '(simulated)' : name]),
+  const previewColumn = div({ class: 'column' }, [
+    div({ class: 'swatch header' }, [builtIn ? '(simulated)' : name]),
     ...createSwatches()
   ]);
 
@@ -65,5 +65,5 @@ containerElement.replaceChildren(...paletteData.map(({ id, name, builtIn }) => {
       value && previewColumn.style.setProperty(`--${property}`, value)
   );
 
-  return dom('div', { class: 'columns' }, null, builtIn ? [nativeColumn, previewColumn] : [previewColumn]);
+  return div({ class: 'columns' }, builtIn ? [nativeColumn, previewColumn] : [previewColumn]);
 }));
