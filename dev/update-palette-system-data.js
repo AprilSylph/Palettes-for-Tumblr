@@ -49,7 +49,7 @@ try {
 
   await browser.close();
 
-  await fs.writeFile('src/palette_system_data.json', JSON.stringify(allData, null, 2), {
+  await fs.writeFile('src/palette_system_data.json', JSON.stringify(allData, null, 2) + '\n', {
     encoding: 'utf8',
     flag: 'w+'
   });
