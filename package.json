@@ -12,7 +12,7 @@
     "eslint": "^9.39.2",
     "neostandard": "^0.12.2",
     "puppeteer": "^24.33.0",
-    "web-ext": "^8.10.0"
+    "web-ext": "^9.2.0"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
