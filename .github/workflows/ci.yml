@@ -9,11 +9,37 @@ on:
       - package*.json
       - eslint.config.js
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-slim
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - if: ${{ github.event_name == 'pull_request' }}
+        name: Upload artifact (pull_request)
+        uses: actions/upload-artifact@v6
+        with:
+          name: Palettes for Tumblr (#${{ github.event.pull_request.number }})
+          path: src/**
+
+      - id: get_short_sha
+        if: ${{ github.event_name != 'pull_request' }}
+        name: Get abbreviated commit SHA
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - if: ${{ steps.get_short_sha.outcome == 'success' }}
+        name: Upload artifact (push, workflow_dispatch)
+        uses: actions/upload-artifact@v6
+        with:
+          name: Palettes for Tumblr (${{ github.ref_name }} ${{ steps.get_short_sha.outputs.SHORT_SHA }})
+          path: src/**
   test:
     name: Test
     runs-on: ubuntu-slim
