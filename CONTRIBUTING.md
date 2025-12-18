@@ -24,3 +24,9 @@ If you make changes, be sure to reload the temporary addon.
 - **`npm test --ignore-scripts`**: Runs only the addon linter. Only reports syntax and WebExtension API errors.
 - **`npm run autofix`**: Automatically fixes any style errors.
 - **`npm run build`**: Creates an unsigned ZIP of the addon.
+
+### Style guide
+
+[![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-F7DF1E?logo=javascript&style=for-the-badge)](https://github.com/neostandard/neostandard)
+
+This project's JavaScript style is enforced by linting. Use **`npm run autofix`** to format your code prior to commit.
