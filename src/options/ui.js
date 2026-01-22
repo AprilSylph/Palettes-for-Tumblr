@@ -4,7 +4,7 @@ import { getTimestamp } from './modules/datetime.js';
 
 const { getURL } = browser.runtime;
 const getBuiltInPaletteList = fetch(getURL('/palettes.json')).then(response => response.json());
-const getBuiltInPalettes = fetch(getURL('/paletteData.json')).then(response => response.json());
+const getBuiltInPalettes = fetch(getURL('/palette_data.json')).then(response => response.json());
 
 const toCamelCase = string => string
   .replace(/\W/g, ' ')

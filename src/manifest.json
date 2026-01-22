@@ -1,23 +1,23 @@
 {
-	"manifest_version": 3,
-	"name": "Palettes for Tumblr",
-	"version": "2.0.0",
+  "manifest_version": 3,
+  "name": "Palettes for Tumblr",
+  "version": "2.0.4",
 
-	"description": "Colour scheme manager for Tumblr",
-	"icons": {
+  "description": "Colour scheme manager for Tumblr",
+  "icons": {
     "16": "icons/16.png",
     "48": "icons/48.png",
     "128": "icons/128.png"
   },
 
-	"action": {
+  "action": {
     "default_icon": {
       "16": "icons/16.png",
       "48": "icons/48.png",
       "128": "icons/128.png"
     },
-		"default_popup": "action/popup.html"
-	},
+    "default_popup": "action/popup.html"
+  },
 
   "content_scripts": [
     {
@@ -28,25 +28,26 @@
         "main.js"
       ],
       "css": [
-        "peepr_shadow.css"
+        "static.css"
       ]
     }
   ],
-	"homepage_url": "https://github.com/AprilSylph/Palettes-for-Tumblr#readme",
+  "homepage_url": "https://github.com/AprilSylph/Palettes-for-Tumblr#readme",
   "options_ui": {
     "page": "options/ui.html",
     "open_in_tab": true
   },
   "permissions": [ "storage" ],
   "web_accessible_resources": [{
-    "resources": [ "*.json" ],
+    "resources": [ "*.json", "*.js" ],
     "matches": [ "*://www.tumblr.com/*" ]
   }],
 
-	"minimum_chrome_version": "103",
+  "minimum_chrome_version": "111",
   "browser_specific_settings": {
     "gecko": {
       "id": "{04b5e1e9-3044-41fd-be51-e8915008ad16}",
+      "data_collection_permissions": { "required": ["none"] },
       "strict_min_version": "128.0"
     },
     "gecko_android": {

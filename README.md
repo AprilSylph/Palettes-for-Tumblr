@@ -1,4 +1,4 @@
-# Palettes for Tumblr [![CI](https://github.com/AprilSylph/Palettes-for-Tumblr/actions/workflows/ci.yml/badge.svg)](https://github.com/AprilSylph/Palettes-for-Tumblr/actions/workflows/ci.yml)
+# Palettes for Tumblr [![CI](https://github.com/AprilSylph/Palettes-for-Tumblr/actions/workflows/ci.yml/badge.svg)](https://github.com/AprilSylph/Palettes-for-Tumblr/actions/workflows/ci.yml) [![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-F7DF1E?logo=javascript)](https://github.com/neostandard/neostandard)
 A colour scheme manager for Tumblr!
 
 ## Features
@@ -8,8 +8,10 @@ A colour scheme manager for Tumblr!
 
 ## Screenshots
 
-![](https://github.com/AprilSylph/Palettes-for-Tumblr/raw/76fcb149660ff151764038a643dc4dbb8a2176f5/assets/screenshots/Firefox/Screenshot%202022-03-01%20at%205.02.48%20pm.png) | ![](https://github.com/AprilSylph/Palettes-for-Tumblr/raw/76fcb149660ff151764038a643dc4dbb8a2176f5/assets/screenshots/Firefox/Screenshot%202022-03-01%20at%205.16.38%20pm.png)
--- | --
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AprilSylph/Palettes-for-Tumblr/refs/heads/master/assets/screenshots/dark.png">
+  <img src="https://raw.githubusercontent.com/AprilSylph/Palettes-for-Tumblr/refs/heads/master/assets/screenshots/light.png">
+</picture>
 
 ## Installation
 - [Get this extension for Firefox](https://addons.mozilla.org/addon/palettes-for-tumblr/)
@@ -17,8 +19,6 @@ A colour scheme manager for Tumblr!
 
 ## Usage
 Once you've installed the addon, click the addon icon in the browser toolbar to open its configuration. The addon can be configured from any page, but will only affect [www.tumblr.com](https://www.tumblr.com/).
-
-This addon only affects pages updated to use Tumblr's new web interface. This means Tumblr pages that do not usually offer the "Change Palette" button will not be affected.
 
 ### Change Palette
 This dropdown allows you to override Tumblr's colour scheme. You can choose a palette provided by Tumblr, a palette provided by the addon, or any custom palettes you've defined.

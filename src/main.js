@@ -1,5 +1,5 @@
-const paletteData = fetch(browser.runtime.getURL('/paletteData.json')).then(response => response.json());
-const paletteSystemData = fetch(browser.runtime.getURL('/paletteSystemData.json')).then(response => response.json());
+const paletteData = fetch(browser.runtime.getURL('/palette_data.json')).then(response => response.json());
+const paletteSystemData = fetch(browser.runtime.getURL('/palette_system_data.json')).then(response => response.json());
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
@@ -52,6 +52,10 @@ const applyFontFamily = async function () {
     '--font-family-modern',
     fontFamily === 'custom' ? customFontFamily : fontFamily
   );
+  const { fontWeightOverride } = await import(browser.runtime.getURL('/override_font_weight.js'));
+  document.getElementById('palettes-for-tumblr-override')?.remove();
+  (fontFamily === 'custom' ? customFontFamily : fontFamily) &&
+    document.documentElement.append(fontWeightOverride);
 };
 
 const applyFontSize = async function () {
@@ -59,11 +63,7 @@ const applyFontSize = async function () {
   document.documentElement.style.setProperty('--base-font-size', fontSize);
 };
 
-const onStorageChanged = async function (changes, areaName) {
-  if (areaName !== 'local') {
-    return;
-  }
-
+const onStorageChanged = async function (changes) {
   const { currentPalette, fontFamily, customFontFamily, fontSize } = changes;
 
   if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
@@ -77,4 +77,4 @@ const onStorageChanged = async function (changes, areaName) {
 applyCurrentPalette();
 applyFontFamily();
 applyFontSize();
-browser.storage.onChanged.addListener(onStorageChanged);
+browser.storage.local.onChanged.addListener(onStorageChanged);

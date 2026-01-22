@@ -1,3 +1,0 @@
-[role="dialog"][aria-modal="true"] [style^="background-color: rgba("][style$="0.85);"][tabindex="-1"] {
-  background-color: rgba(var(--navy), 0.85) !important;
-}
