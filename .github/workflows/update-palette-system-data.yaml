@@ -25,7 +25,7 @@ jobs:
         run: dev/update-palette-system-data.js
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           title: 'chore: Update Palette System Data'
           commit-message: update palette system data
