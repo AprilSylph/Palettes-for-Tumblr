@@ -17,13 +17,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
       - name: Run update script
-        run: npm run update-palette-system-data
+        run: dev/update-palette-system-data.js
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
