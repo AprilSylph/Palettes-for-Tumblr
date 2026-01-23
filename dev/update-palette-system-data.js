@@ -4,7 +4,7 @@ import { launch } from 'puppeteer';
 import fs from 'node:fs/promises';
 
 try {
-  const browser = await launch({ browser: 'firefox', headless: false });
+  const browser = await launch({ browser: 'firefox', headless: !!process.env.GITHUB_ACTIONS });
   const page = await browser.newPage();
   await page.goto('https://www.tumblr.com/');
 
