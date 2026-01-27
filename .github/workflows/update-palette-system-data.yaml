@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: "0 0 1 * *" # monthly
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   update-palette-system-data:
     name: Update Palette System Data
