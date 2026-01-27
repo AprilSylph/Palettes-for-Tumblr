@@ -1411,7 +1411,7 @@
     "chrome-fg-secondary": "rgba(102, 117, 134, 1)",
     "chrome-fg-tertiary": "rgba(153, 163, 174, 1)",
     "content-panel": "rgba(255, 255, 255, 1)",
-    "content-panel-border": "rgba(242, 244, 245, 1)",
+    "content-panel-border": "rgba(229, 232, 235, 1)",
     "content-tint": "rgba(0, 25, 53, 0.05)",
     "content-tint-strong": "rgba(0, 25, 53, 0.1)",
     "content-tint-heavy": "rgba(0, 25, 53, 0.15)",

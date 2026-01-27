@@ -25,6 +25,7 @@
 }
 :root:not([style*="--content-panel"])[style*="--white"] {
   --content-panel: rgb(var(--white));
+  --content-panel-border: transparent;
   --content-tint: rgba(var(--black), 0.07);
   --content-tint-strong: rgba(var(--black), 0.13);
   --content-tint-heavy: rgba(var(--black), 0.25);
