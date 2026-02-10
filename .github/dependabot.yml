@@ -19,7 +19,8 @@ updates:
         update-types:
           - "minor"
           - "patch"
-    labels: [ ]
+    labels:
+      - "bot"
   - package-ecosystem: "github-actions"
     commit-message:
       prefix: "ci"
@@ -32,4 +33,5 @@ updates:
         update-types:
           - "minor"
           - "patch"
-    labels: [ ]
+    labels:
+      - "bot"
