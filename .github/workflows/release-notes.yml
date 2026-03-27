@@ -6,8 +6,8 @@ permissions:
   contents: read
 
 jobs:
-  create:
-    name: Create
+  generate:
+    name: Generate
     runs-on: ubuntu-slim
     steps:
       - name: Checkout
@@ -15,8 +15,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Print release notes
-        run: |
-          echo "\`\`\`md" >> $GITHUB_STEP_SUMMARY
-          git log $(git describe --tags --abbrev=0)..HEAD --reverse --pretty --format="- %h **%an** %s" --follow src/ >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+
+      - name: Generate release notes
+        run: dev/release-notes.js >> $GITHUB_STEP_SUMMARY
+        env:
+          GITHUB_API_URL: ${{ github.api_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
