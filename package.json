@@ -14,7 +14,7 @@
     "eslint": "^9.39.2",
     "eslint-plugin-import-x": "^4.16.2",
     "neostandard": "^0.13.0",
-    "puppeteer": "^24.37.2",
+    "puppeteer": "^24.41.0",
     "web-ext": "^10.1.0"
   },
   "dependencies": {
