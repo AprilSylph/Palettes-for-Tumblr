@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { launch } from 'puppeteer';
 import fs from 'node:fs/promises';
+import { launch } from 'puppeteer';
 
 try {
   const browser = await launch({ browser: 'firefox', headless: !!process.env.GITHUB_ACTIONS });
