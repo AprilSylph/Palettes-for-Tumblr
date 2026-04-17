@@ -1,13 +1,12 @@
-import neostandard, { plugins } from 'neostandard';
+/** @see https://github.com/un-ts/eslint-plugin-import-x#readme */ import { importX } from 'eslint-plugin-import-x';
+/** @see https://github.com/neostandard/neostandard#readme      */ import neostandard, { plugins } from 'neostandard';
 
 export default [
   /**
-   * Semistandard style guide, via neostandard package.
-   * @see https://github.com/neostandard/neostandard?tab=readme-ov-file#readme
+   * Semistandard style guide.
    *
    * Includes the following plugins and makes them available for use:
    * - `@stylistic`
-   * - `import-x`
    * - `n`
    * - `promise`
    * - `react`
@@ -16,9 +15,20 @@ export default [
   ...neostandard({ env: ['browser', 'webextensions'], ignores: ['src/lib/**'], semi: true }),
 
   /**
-   * Use recommended `import-x` lint rules. Additionally, prevent cyclical imports.
+   * Enable plugin `import-x` and use its recommended config.
    * @see https://github.com/un-ts/eslint-plugin-import-x/blob/master/src/config/flat/recommended.ts
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-cycle.md
    */
-  { rules: { ...plugins['import-x'].flatConfigs.recommended.rules, 'import-x/no-cycle': 'error' } },
+  importX.configs['flat/recommended'],
+
+  /**
+   * Prevent cyclical imports; enforce alphabetical imports.
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-cycle.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/order.md
+   */
+  {
+    rules: {
+      'import-x/no-cycle': 'error',
+      'import-x/order': ['warn', { alphabetize: { order: 'asc', caseInsensitive: true } }],
+    },
+  },
 ];
