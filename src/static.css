@@ -13,6 +13,11 @@
 :root:not([style*="--chrome"])[style*="--navy"] {
   --chrome: rgb(var(--navy));
 }
+:root:not([style*="--chrome-fg"])[style*="--white-on-dark"] {
+  --chrome-fg: rgb(var(--white-on-dark));
+  --chrome-fg-secondary: rgba(var(--white-on-dark), 0.65);
+  --chrome-fg-tertiary: rgba(var(--white-on-dark), 0.4);
+}
 :root:not([style*="--accent"])[style*="--deprecated-accent"] {
   --accent: rgb(var(--deprecated-accent));
   --accent-fg: rgb(var(--navy));
