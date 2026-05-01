@@ -12,6 +12,7 @@
 /* Port old CSS variables to new design system tokens */
 :root:not([style*="--chrome"])[style*="--navy"] {
   --chrome: rgb(var(--navy));
+  --chrome-mobile: rgb(var(--navy));
   --chrome-panel: color-mix(in srgb, rgb(var(--navy)), rgb(var(--white-on-dark)) 7%);
   --chrome-panel-border: rgba(var(--white-on-dark), 0.07);
 }
