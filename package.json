@@ -10,7 +10,7 @@
     "build": "web-ext build"
   },
   "devDependencies": {
-    "chrome-webstore-upload-cli": "^3.5.0",
+    "chrome-webstore-upload-cli": "^4.0.1",
     "eslint": "^9.39.2",
     "eslint-plugin-import-x": "^4.17.1",
     "neostandard": "^0.13.0",
