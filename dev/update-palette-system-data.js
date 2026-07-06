@@ -15,7 +15,7 @@ try {
       const privacyAgreeButton = await frame.$('.cmp__dialog-footer button.cmp-components-button.white-space-normal.is-primary');
       privacyAgreeButton?.evaluate((element) => {
         // let evaluate function call return cleanly before iframe context is invalidated
-        requestAnimationFrame(() => element.click());
+        setTimeout(() => element.click(), 0);
       });
     })
   );
