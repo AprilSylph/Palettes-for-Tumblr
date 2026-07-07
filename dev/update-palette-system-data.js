@@ -13,7 +13,10 @@ try {
   await Promise.all(
     page.frames().map(async (frame) => {
       const privacyAgreeButton = await frame.$('.cmp__dialog-footer button.cmp-components-button.white-space-normal.is-primary');
-      privacyAgreeButton?.click();
+      privacyAgreeButton?.evaluate((element) => {
+        // let evaluate function call return cleanly before iframe context is invalidated
+        setTimeout(() => element.click(), 0);
+      });
     })
   );
   await page.waitForSelector(':root:not(:has(#cmp-app-container iframe))');
