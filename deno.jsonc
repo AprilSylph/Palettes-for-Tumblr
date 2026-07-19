@@ -1,0 +1,31 @@
+{
+  "tasks": {
+    "test": "web-ext lint && deno lint",
+    "start": "web-ext run",
+    "build": "web-ext build",
+    "update-palette-data": "deno -A dev/update-palette-system-data.js",
+    "release-notes": "deno -A dev/release-notes.js"
+  },
+  "exclude": ["src/lib/**"],
+  "lint": {
+    "rules": {
+      "exclude": ["no-window", "no-window-prefix"]
+    }
+  },
+  "fmt": { "exclude": ["*"] }, // disabled
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
+  },
+  "nodeModulesDir": "auto",
+  "allowScripts": {
+    "allow": ["npm:puppeteer"],
+    "deny": ["npm:unrs-resolver"]
+  },
+  "imports": {
+    "chrome-webstore-upload-cli": "npm:chrome-webstore-upload-cli@^4.0.1",
+    "normalize.css": "npm:normalize.css@^8.0.1",
+    "puppeteer": "npm:puppeteer@^25.3.0",
+    "web-ext": "npm:web-ext@^10.5.0",
+    "webextension-polyfill": "npm:webextension-polyfill@^0.12.0"
+  }
+}

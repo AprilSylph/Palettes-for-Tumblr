@@ -1,10 +1,7 @@
-#!/usr/bin/env node
-
-import fs from 'node:fs/promises';
 import { launch } from 'puppeteer';
 
 try {
-  const browser = await launch({ browser: 'firefox', headless: !!process.env.GITHUB_ACTIONS });
+  const browser = await launch({ browser: 'firefox', headless: !!Deno.env.get('GITHUB_ACTIONS') });
   const page = await browser.newPage();
   await page.goto('https://www.tumblr.com/');
 
@@ -21,7 +18,7 @@ try {
   );
   await page.waitForSelector(':root:not(:has(#cmp-app-container iframe))');
 
-  const allData = await fs.readFile('src/palette_system_data.json').then(JSON.parse).catch(() => ({}));
+  const allData = await Deno.readTextFile('src/palette_system_data.json').then(JSON.parse).catch(() => ({}));
 
   for (let i = 0; i < 12; i++) {
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -63,10 +60,7 @@ try {
 
   await browser.close();
 
-  await fs.writeFile('src/palette_system_data.json', JSON.stringify(allData, null, 2) + '\n', {
-    encoding: 'utf8',
-    flag: 'w+'
-  });
+  await Deno.writeTextFile('src/palette_system_data.json', JSON.stringify(allData, null, 2) + '\n');
 
   console.log(`wrote data for ${Object.keys(allData).length} palettes`);
 } catch (e) {

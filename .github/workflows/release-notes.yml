@@ -15,13 +15,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v6
+      - name: Setup Deno environment
+        uses: denoland/setup-deno@v2
         with:
-          node-version: lts/*
+          cache: true
 
       - name: Generate release notes
-        run: dev/release-notes.js >> $GITHUB_STEP_SUMMARY
+        run: deno run release-notes >> $GITHUB_STEP_SUMMARY
         env:
           GITHUB_API_URL: ${{ github.api_url }}
           GITHUB_REPOSITORY: ${{ github.repository }}

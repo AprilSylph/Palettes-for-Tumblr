@@ -47,13 +47,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v6
+      - name: Setup Deno environment
+        uses: denoland/setup-deno@v2
         with:
-          node-version: lts/*
+          cache: true
 
       - name: Install dependencies
-        run: npm ci
+        run: deno ci
 
       - name: Run tests
-        run: npm test
+        run: deno run test

@@ -1,3 +1,3 @@
 /.github/workflows    @AprilSylph @marcustyphoon
-/package-lock.json    @AprilSylph @marcustyphoon
-/package.json         @AprilSylph @marcustyphoon
+/deno.jsonc           @AprilSylph @marcustyphoon
+/deno.lock            @AprilSylph @marcustyphoon
