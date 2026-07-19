@@ -4,9 +4,18 @@ const setCssVariable = ([property, value]) => document.documentElement.style.set
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
 let appliedPaletteEntries = [];
+let paletteIsOverridden = false;
+
+const interceptPaletteShortcut = function (event) {
+  if (!paletteIsOverridden || !event.shiftKey || event.key !== 'P') return;
+
+  event.preventDefault();
+  event.stopImmediatePropagation();
+};
 
 const applyCurrentPalette = async function () {
   const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
+  paletteIsOverridden = Boolean(currentPalette);
 
   if (!currentPalette) {
     appliedPaletteEntries.forEach(removeCssVariable);
@@ -66,6 +75,7 @@ const applyFontSize = async function () {
 const onStorageChanged = async function (changes) {
   const { currentPalette, fontFamily, customFontFamily, fontSize } = changes;
 
+  if (currentPalette) paletteIsOverridden = Boolean(currentPalette.newValue);
   if (currentPalette || Object.keys(changes).some(key => key.startsWith('palette:'))) {
     applyCurrentPalette();
   }
@@ -77,4 +87,5 @@ const onStorageChanged = async function (changes) {
 applyCurrentPalette();
 applyFontFamily();
 applyFontSize();
+window.addEventListener('keydown', interceptPaletteShortcut, true);
 browser.storage.local.onChanged.addListener(onStorageChanged);
