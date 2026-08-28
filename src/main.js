@@ -3,7 +3,25 @@ const paletteSystemData = fetch(browser.runtime.getURL('/palette_system_data.jso
 const setCssVariable = ([property, value]) => document.documentElement.style.setProperty(`--${property}`, value);
 const removeCssVariable = ([property]) => document.documentElement.style.removeProperty(`--${property}`);
 
+const documentInteractive = new Promise((resolve) =>
+  document.readyState === 'loading'
+    ? document.addEventListener('readystatechange', resolve, { once: true })
+    : resolve()
+);
+
 let appliedPaletteEntries = [];
+
+const themeColorElement = Object.assign(document.createElement('meta'), { name: 'theme-color' });
+themeColorElement.dataset.palettesForTumblr = '';
+
+const applyThemeColor = themeColor => documentInteractive.then(() => {
+  if (themeColor) {
+    themeColorElement.content = `rgb(${themeColor})`;
+    document.head.prepend(themeColorElement);
+  } else {
+    themeColorElement.remove();
+  }
+});
 
 const applyCurrentPalette = async function () {
   const { currentPalette = '' } = await browser.storage.local.get('currentPalette');
@@ -11,6 +29,7 @@ const applyCurrentPalette = async function () {
   if (!currentPalette) {
     appliedPaletteEntries.forEach(removeCssVariable);
     appliedPaletteEntries = [];
+    applyThemeColor(undefined);
     return;
   }
 
@@ -38,6 +57,8 @@ const applyCurrentPalette = async function () {
     .forEach(removeCssVariable);
 
   appliedPaletteEntries = currentPaletteEntries;
+
+  applyThemeColor(currentPaletteData.navy);
 };
 
 const applyFontFamily = async function () {
