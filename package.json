@@ -11,9 +11,9 @@
   },
   "devDependencies": {
     "chrome-webstore-upload-cli": "^4.0.1",
-    "eslint": "^9.39.2",
+    "eslint": "^10.12.0",
     "eslint-plugin-import-x": "^4.17.1",
-    "neostandard": "^0.13.0",
+    "neostandard": "^0.14.1",
     "puppeteer": "^25.12.0",
     "web-ext": "^10.8.0"
   },
