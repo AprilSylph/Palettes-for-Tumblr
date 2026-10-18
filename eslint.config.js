@@ -1,7 +1,14 @@
 /** @see https://github.com/un-ts/eslint-plugin-import-x#readme */ import { importX } from 'eslint-plugin-import-x';
-/** @see https://github.com/neostandard/neostandard#readme      */ import neostandard from 'neostandard';
+/** @see https://github.com/neostandard/neostandard#readme      */ import { neostandard, resolveIgnoresFromGitignore } from 'neostandard';
 
 export default [
+  /**
+   * Ignore vendored and gitignored files completely.
+   * @see https://eslint.org/docs/latest/use/configure/configuration-files#globally-ignore-files-with-ignores
+   * @see https://github.com/neostandard/neostandard#resolveignoresfromgitignore
+   */
+  { ignores: ['src/lib/**', ...resolveIgnoresFromGitignore()] },
+
   /**
    * Semistandard style guide.
    *
@@ -12,7 +19,11 @@ export default [
    * - `react`
    * - `typescript-eslint`
    */
-  ...neostandard({ env: ['browser', 'webextensions'], ignores: ['src/lib/**'], semi: true }),
+  ...neostandard({
+    env: ['browser', 'webextensions'],
+    globals: { name: 'off' },
+    semi: true,
+  }),
 
   /**
    * Enable plugin `import-x` and use its recommended config.
