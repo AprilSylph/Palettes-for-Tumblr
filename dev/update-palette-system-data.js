@@ -21,7 +21,8 @@ try {
   );
   await page.waitForSelector(':root:not(:has(#cmp-app-container iframe))');
 
-  const allData = await fs.readFile('src/palette_system_data.json').then(JSON.parse).catch(() => ({}));
+  const allPaletteData = await fs.readFile('src/palette_data.json').then(JSON.parse).catch(() => ({}));
+  const allPaletteSystemData = await fs.readFile('src/palette_system_data.json').then(JSON.parse).catch(() => ({}));
 
   for (let i = 0; i < 12; i++) {
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -43,9 +44,21 @@ try {
         if (!rootRuleStyle) return;
         const keys = [...rootRuleStyle];
         const entries = keys
-          .map((key) => [key, rootRuleStyle.getPropertyValue(key)])
-          .filter(([key, value]) => key.startsWith('--') && /rgba\(\d/.test(value));
-        return Object.fromEntries(entries.map(([key, value]) => [key.replace(/^--/, ''), value]));
+          .map((key) => [key, rootRuleStyle.getPropertyValue(key)]);
+        const paletteData = Object.fromEntries(
+          entries
+            .filter(([key, value]) => key.startsWith('--') && /^\d+,/.test(value))
+            .map(([key, value]) => [
+              key.replace(/^--/, '').replace('deprecated-accent', 'accent'),
+              value,
+            ])
+        );
+        const paletteSystemData = Object.fromEntries(
+          entries
+            .filter(([key, value]) => key.startsWith('--') && /rgba\(\d/.test(value))
+            .map(([key, value]) => [key.replace(/^--/, ''), value])
+        );
+        return { paletteData, paletteSystemData };
       };
 
       return {
@@ -54,7 +67,10 @@ try {
       };
     });
 
-    allData[key] = dark && key === 'darkMode' ? dark : light;
+    const { paletteData, paletteSystemData } = dark && key === 'darkMode' ? dark : light;
+
+    allPaletteData[key] = paletteData;
+    allPaletteSystemData[key] = paletteSystemData;
 
     await page.keyboard.down('Shift');
     await page.keyboard.press('KeyP');
@@ -63,12 +79,16 @@ try {
 
   await browser.close();
 
-  await fs.writeFile('src/palette_system_data.json', JSON.stringify(allData, null, 2) + '\n', {
+  await fs.writeFile('src/palette_data.json', JSON.stringify(allPaletteData, null, 2) + '\n', {
+    encoding: 'utf8',
+    flag: 'w+'
+  });
+  await fs.writeFile('src/palette_system_data.json', JSON.stringify(allPaletteSystemData, null, 2) + '\n', {
     encoding: 'utf8',
     flag: 'w+'
   });
 
-  console.log(`wrote data for ${Object.keys(allData).length} palettes`);
+  console.log(`wrote data for ${Object.keys(allPaletteData).length} palettes`);
 } catch (e) {
   console.log(e);
 }
